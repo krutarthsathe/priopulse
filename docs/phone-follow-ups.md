@@ -130,7 +130,7 @@ disabled in the outbound request; ElevenLabs retention follows your account sett
 
 ## 5. Use the app
 
-1. Open **Patients**, **Calls & Review**, or a patient profile.
+1. Open **Calls & Review** directly to view activity without a passcode. Public activity omits phone numbers, transcripts, note content, and provider identifiers. Open **Patients** or a patient profile to unlock protected details and actions.
 2. Enter the shared passcode. It creates an eight-hour HttpOnly access cookie; the
    passcode is not saved to browser storage.
 3. Choose a patient from the ranked queue and select a receiving demo phone.
