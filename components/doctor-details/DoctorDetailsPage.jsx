@@ -1,747 +1,247 @@
 'use client';
-import {useEffect,useState} from 'react';
+import {useEffect, useState} from 'react';
+import Link from 'next/link';
 import DashboardShell from '../DashboardShell';
-import TreatmentRows from './TreatmentRows';
-import treatmentText from './treatment-text.json';
-import {directoryProfile} from './profiles';
-export default function DoctorDetailsPage({initialDoctor,requestedId}) {
- const [profile,setProfile]=useState(initialDoctor);
- const [loaded,setLoaded]=useState(Boolean(initialDoctor));
- const [search,setSearch]=useState('');
- const [page,setPage]=useState(0);
- const [pageSize,setPageSize]=useState(8);
- const [dense,setDense]=useState(true);
- const [notice,setNotice]=useState('');
- const [rowMenu,setRowMenu]=useState(null);
- const [period,setPeriod]=useState('Today');
- const [periodOpen,setPeriodOpen]=useState(false);
- const recordCount=treatmentText.filter(text=>text.toLowerCase().includes(search.toLowerCase().trim())).length;
- useEffect(()=>{
-  setProfile(initialDoctor);setLoaded(Boolean(initialDoctor));setSearch('');setPage(0);
-  if(!initialDoctor){try {const saved=JSON.parse(sessionStorage.getItem('priopulse-added-doctors')||'[]');const doctor=saved.find(doctor=>doctor.id===requestedId);if(doctor)setProfile(directoryProfile(doctor));}catch{}setLoaded(true);}
- },[initialDoctor,requestedId]);
- useEffect(()=>{
-  const close=()=>setRowMenu(null);
-  const key=e=>{if(e.key==='Escape'){close();setPeriodOpen(false);}};
-  document.addEventListener('keydown',key);window.addEventListener('resize',close);window.addEventListener('scroll',close,true);
-  return ()=>{document.removeEventListener('keydown',key);window.removeEventListener('resize',close);window.removeEventListener('scroll',close,true);};
- },[]);
- function handleClick(e) {
-  const button=e.target.closest('button');
-  if(!e.target.closest('[data-treatment-menu], .row-btn'))setRowMenu(null);
-  if(!e.target.closest('[data-dropdown]'))setPeriodOpen(false);
-  if(!button)return;
-  if(button.closest('.doc-card'))e.preventDefault();
-  if(button.hasAttribute('data-dropdown-trigger'))setPeriodOpen(current=>!current);
-  else if(button.dataset.value){setPeriod(button.dataset.value);setPeriodOpen(false);}
-  else if(button.classList.contains('row-btn')){const r=button.getBoundingClientRect();setRowMenu({text:button.closest('tr').innerText.trim().replace(/\s+/g,' '),left:Math.max(8,Math.min(r.right-280,window.innerWidth-288)),top:Math.max(8,Math.min(r.bottom+6,window.innerHeight-150))});}
-  else if(!['Previous','Next'].includes(button.getAttribute('aria-label')) && !button.closest('[data-treatment-menu]')){setNotice('This action is not connected in the demo.');}
- }
- const doctor=profile;
- if(!doctor)return <DashboardShell search={search} setSearch={setSearch} setPage={setPage}><main id="main-content" className="pt-16 ml-0 lg:ml-64 min-h-dvh"><div className="p-6"><h1 className="text-lg font-semibold">{loaded?'Doctor not found':'Loading doctor…'}</h1><a href="/doctors" className="text-primary inline-block mt-3">Back to doctors</a></div></main></DashboardShell>;
- return <DashboardShell search={search} setSearch={setSearch} setPage={setPage} searchLabel="Search patient treatments" searchPlaceholder="Search patient treatments…"><div className="doctor-details-page" onClick={handleClick}>
-<main id="main-content" className="pt-16 pb-6 min-h-dvh ml-0 lg:ml-64 transition-all duration-300">
-<div className="p-4 lg:p-6 space-y-5">
+import DoctorAvatar from '../doctors/DoctorAvatar';
+import {WEEK_DAYS, availabilityToday, formatDate, initials, readAddedDoctors} from '../../lib/doctors';
+import {useTodayIndex} from '../../lib/use-today-index';
+import '../doctors/doctors.css';
+import './doctor-profile.css';
 
-<div className="flex flex-wrap items-start justify-between gap-4">
-<div className="flex items-center gap-3">
-<a aria-label="Back to doctors" className="w-9 h-9 rounded-xl border border-border flex items-center justify-center text-muted hover:border-primary/50 hover:text-primary hover:bg-primary/5 transition-colors flex-shrink-0" href="/doctors">
-<i className="ph ph-arrow-left text-base"></i>
-</a>
-<div className="w-10 h-10 rounded-xl bg-primary-soft flex items-center justify-center flex-shrink-0">
-<i className="ph ph-stethoscope text-primary text-lg"></i>
-</div>
-<div>
-<h1 className="text-lg font-semibold text-heading leading-tight">{"Doctor Details"}</h1>
-<p className="text-xs text-faint mt-0.5">
-<a className="hover:text-primary transition-colors" href="/doctors">{"Doctors"}</a>
-<i className="ph ph-caret-right text-[10px] mx-1"></i>{doctor.name ?? "—"}</p>
-</div>
-</div>
-<div className="flex flex-wrap items-center gap-2">
-<a className="h-9 px-4 rounded-xl border border-border text-text hover:border-primary/50 hover:text-primary hover:bg-primary/5 text-sm font-medium flex items-center gap-2 transition-colors no-underline" href="#">
-<i className="ph ph-pencil-simple text-base"></i>
-<span className="hidden sm:inline">{"Edit Profile"}</span>
-</a>
-<a className="h-9 px-4 rounded-xl bg-primary hover:bg-primary-strong text-on-primary text-sm font-medium flex items-center gap-2 transition-colors" href="#">
-<i className="ph ph-calendar-plus text-base"></i>{"\n              Schedule Appointment\n            "}</a>
-</div>
-</div>
+const TREATMENT_STATUSES = ['Scheduled', 'Ongoing', 'Follow-up', 'Completed'];
+const STATUS_TONES = {Scheduled: 'info', Ongoing: 'primary', 'Follow-up': 'warning', Completed: 'muted'};
+const PAGE_SIZE = 6;
 
-<div className="grid grid-cols-12 gap-4 items-start">
+export default function DoctorDetailsPage({initialDoctor, requestedId}) {
+  const [addedDoctor, setAddedDoctor] = useState(null);
+  const [lookupDone, setLookupDone] = useState(false);
+  useEffect(() => {
+    if (initialDoctor) return;
+    setAddedDoctor(readAddedDoctors().find((doctor) => doctor.id === requestedId) ?? null);
+    setLookupDone(true);
+  }, [initialDoctor, requestedId]);
 
-<aside className="col-span-12 md:col-span-4 lg:col-span-3 3xl:col-span-2 md:sticky md:top-20 self-start w-full max-md:order-1">
-<div className="dash-panel w-full flex flex-col">
+  const doctor = initialDoctor ?? addedDoctor;
+  if (doctor) return <DoctorProfile key={doctor.id} doctor={doctor} />;
+  return (
+    <DashboardShell>
+      <main id="main-content" className="pt-16 pb-6 min-h-dvh ml-0 lg:ml-64">
+        <div className="p-4 lg:p-6">
+          <div className="dash-panel dp-missing">
+            <i className={lookupDone ? 'ph ph-user-circle-dashed' : 'ph ph-spinner'} aria-hidden="true" />
+            <h1>{lookupDone ? 'Doctor not found' : 'Loading doctor…'}</h1>
+            {lookupDone && <p>This profile may have been removed or the link is out of date.</p>}
+            <Link href="/doctors" className="dl-primary"><i className="ph ph-arrow-left" />Back to doctors</Link>
+          </div>
+        </div>
+      </main>
+    </DashboardShell>
+  );
+}
 
-<div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3.5 border-b border-border-subtle">
-<div className="flex items-center gap-2.5">
-<span className="dash-icon-chip is-info">
-<i className="ph ph-clock-clockwise"></i>
-</span>
-<div>
-<h2 className="dash-title">{"Recent Doctors"}</h2>
-<p className="text-[11px] text-faint">{"6 recently viewed"}</p>
-</div>
-</div>
-<div className="relative" data-dropdown="">
-<button type="button" data-dropdown-trigger="" aria-haspopup="true" aria-expanded={periodOpen} className="dash-period-btn">
-<span data-dropdown-label="">{period}</span>
-<i className="ph ph-caret-down text-[10px] ml-0.5"></i>
-</button>
-<div data-dropdown-menu="" role="menu" className={"absolute right-0 top-full mt-1 z-30 min-w-[140px] p-1 bg-w1 border border-border rounded-xl shadow-lg " + (periodOpen ? "" : "hidden")}>
-<button data-value="Today" className="block w-full text-left px-2.5 py-1.5 text-xs rounded-lg text-text hover:bg-primary/5 transition-colors">{"Today"}</button>
-<button data-value="This Week" className="block w-full text-left px-2.5 py-1.5 text-xs rounded-lg text-text hover:bg-primary/5 transition-colors">{"This Week"}</button>
-<button data-value="This Month" className="block w-full text-left px-2.5 py-1.5 text-xs rounded-lg text-text hover:bg-primary/5 transition-colors">{"This Month"}</button>
-</div>
-</div>
-</div>
+function DoctorProfile({doctor}) {
+  const todayIndex = useTodayIndex();
+  const today = availabilityToday(doctor, todayIndex);
+  const [search, setSearch] = useState('');
+  const [status, setStatus] = useState('all');
+  const [page, setPage] = useState(0);
+  const [notice, setNotice] = useState('');
+  const onLeave = doctor.status === 'On Leave';
+  const surname = doctor.name.replace(/^Dr\.?\s+/, '').split(' ').at(-1);
 
-<div className="p-3 space-y-2 overflow-y-auto flex-1 max-h-[calc(100vh-9rem)]">
+  const query = search.toLowerCase().trim();
+  const matching = doctor.treatments.filter((row) => !query || [row.patient, row.id, row.condition, row.plan].join(' ').toLowerCase().includes(query));
+  const statusCounts = Object.fromEntries(TREATMENT_STATUSES.map((value) => [value, matching.filter((row) => row.status === value).length]));
+  const rows = status === 'all' ? matching : matching.filter((row) => row.status === status);
+  const pageCount = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+  const currentPage = Math.min(page, pageCount - 1);
+  const visibleRows = rows.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE);
+  const notConnected = (action) => setNotice(`${action} is not connected in this demo.`);
 
-<a href="/doctor-details?id=michael-patel-pulmonology" aria-current={doctor.id === "michael-patel-pulmonology" ? "page" : undefined} className={"doc-card block " + (doctor.id === "michael-patel-pulmonology" ? "ring-1 ring-primary/20 !border-primary/30" : "")}>
-<div className="flex items-start justify-between gap-2.5">
-<img src="/assets/images/doctor4.png" alt="" className="doc-card-avatar" />
-<div className="flex items-center gap-0.5 shrink-0 mt-0.5">
-<button className="doc-icon-btn" aria-label="Call">
-<i className="ph ph-phone text-sm"></i>
-</button>
-<button className="doc-icon-btn" aria-label="Message">
-<i className="ph ph-chat-circle text-sm"></i>
-</button>
-</div>
-</div>
-<div className="flex justify-between items-end mt-2">
-<div className="flex-1 min-w-0">
-<p className="text-[13px] font-semibold text-heading leading-tight truncate">{"Dr. Michael Patel"}</p>
-<p className="text-[11px] text-faint mt-0.5">{"Pulmonology"}</p>
-</div>
-<span className="w-6 h-6 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors border border-primary/20">
-<i className="ph ph-arrow-up-right text-[11px]"></i>
-</span>
-</div>
-</a>
+  const contact = [
+    {icon: 'ph-phone', label: 'Phone', value: doctor.phone, href: doctor.phone && `tel:${doctor.phone.replace(/[^\d+]/g, '')}`},
+    {icon: 'ph-envelope-simple', label: 'Email', value: doctor.email, href: doctor.email && `mailto:${doctor.email}`},
+    {icon: 'ph-map-pin', label: 'Location', value: doctor.location},
+    {icon: 'ph-door-open', label: 'Office', value: doctor.room},
+  ].filter((item) => item.value);
 
-<a href="/doctor-details?id=olivia-martin" aria-current={doctor.id === "olivia-martin" ? "page" : undefined} className={"doc-card block " + (doctor.id === "olivia-martin" ? "ring-1 ring-primary/20 !border-primary/30" : "")}>
-<div className="flex items-start justify-between gap-2.5">
-<div className="relative">
-<img src="/assets/images/doctor.png" alt="" className="doc-card-avatar" />
-<span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-primary border-2 border-w1"></span>
-</div>
-<div className="flex items-center gap-0.5 shrink-0 mt-0.5">
-<button className="doc-icon-btn" aria-label="Call">
-<i className="ph ph-phone text-sm"></i>
-</button>
-<button className="doc-icon-btn" aria-label="Message">
-<i className="ph ph-chat-circle text-sm"></i>
-</button>
-</div>
-</div>
-<div className="flex justify-between items-end mt-2">
-<div className="flex-1 min-w-0">
-<p className="text-[13px] font-semibold text-heading leading-tight truncate">{"Dr. Olivia Martin"}</p>
-<p className="text-[11px] text-faint mt-0.5">{"Cardiologist"}</p>
-</div>
-<span className="w-6 h-6 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors border border-primary/20">
-<i className="ph ph-arrow-up-right text-[11px]"></i>
-</span>
-</div>
-</a>
+  const kpis = [
+    {icon: 'ph-users-three', label: 'Patients treated', value: doctor.patients ? doctor.patients.toLocaleString('en-US') : '—', note: 'Since joining PrioPulse'},
+    {icon: 'ph-calendar-check', label: 'Upcoming visits', value: doctor.treatments.filter((row) => row.status === 'Scheduled').length, note: 'Scheduled patient treatments'},
+    {icon: 'ph-timer', label: 'Avg. response time', value: doctor.avgResponseMinutes === null ? '—' : `${doctor.avgResponseMinutes} min`, note: 'To nurse and patient messages'},
+    {icon: 'ph-currency-dollar', label: 'Consultation fee', value: doctor.fee === null ? '—' : `$${doctor.fee}`, note: 'Per standard visit'},
+  ];
 
-<a href="/doctor-details?id=david-wilson-internal-medicine" aria-current={doctor.id === "david-wilson-internal-medicine" ? "page" : undefined} className={"doc-card block " + (doctor.id === "david-wilson-internal-medicine" ? "ring-1 ring-primary/20 !border-primary/30" : "")}>
-<div className="flex items-start justify-between gap-2.5">
-<img src="/assets/images/doctor7.png" alt="" className="doc-card-avatar" />
-<div className="flex items-center gap-0.5 shrink-0 mt-0.5">
-<button className="doc-icon-btn" aria-label="Call"><i className="ph ph-phone text-sm"></i></button>
-<button className="doc-icon-btn" aria-label="Message"><i className="ph ph-chat-circle text-sm"></i></button>
-</div>
-</div>
-<div className="flex justify-between items-end mt-2">
-<div className="flex-1 min-w-0">
-<p className="text-[13px] font-semibold text-heading leading-tight truncate">{"Dr. David Wilson"}</p>
-<p className="text-[11px] text-faint mt-0.5">{"Internal Medicine"}</p>
-</div>
-<span className="w-6 h-6 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors border border-primary/20">
-<i className="ph ph-arrow-up-right text-[11px]"></i>
-</span>
-</div>
-</a>
+  return (
+    <DashboardShell search={search} setSearch={setSearch} setPage={setPage} searchLabel="Search patient treatments" searchPlaceholder="Search this doctor's patients…">
+      <main id="main-content" className="pt-16 pb-6 min-h-dvh ml-0 lg:ml-64 transition-all duration-300">
+        <div className="p-4 lg:p-6 dp-page">
+          <nav className="dp-breadcrumb" aria-label="Breadcrumb">
+            <Link href="/doctors"><i className="ph ph-arrow-left" />Doctors</Link>
+            <i className="ph ph-caret-right" aria-hidden="true" />
+            <span aria-current="page">{doctor.name}</span>
+          </nav>
 
-<a href="/doctor-details?id=kevin-lee-nephrology" aria-current={doctor.id === "kevin-lee-nephrology" ? "page" : undefined} className={"doc-card block " + (doctor.id === "kevin-lee-nephrology" ? "ring-1 ring-primary/20 !border-primary/30" : "")}>
-<div className="flex items-start justify-between gap-2.5">
-<img src="/assets/images/doctor9.png" alt="" className="doc-card-avatar" />
-<div className="flex items-center gap-0.5 shrink-0 mt-0.5">
-<button className="doc-icon-btn" aria-label="Call"><i className="ph ph-phone text-sm"></i></button>
-<button className="doc-icon-btn" aria-label="Message"><i className="ph ph-chat-circle text-sm"></i></button>
-</div>
-</div>
-<div className="flex justify-between items-end mt-2">
-<div className="flex-1 min-w-0">
-<p className="text-[13px] font-semibold text-heading leading-tight truncate">{"Dr. Kevin Lee"}</p>
-<p className="text-[11px] text-faint mt-0.5">{"Nephrology"}</p>
-</div>
-<span className="w-6 h-6 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors border border-primary/20">
-<i className="ph ph-arrow-up-right text-[11px]"></i>
-</span>
-</div>
-</a>
+          <section className="dp-hero" aria-label="Doctor profile">
+            <div className="dp-hero-art" aria-hidden="true"><i className="ph ph-stethoscope" /></div>
+            <div className="dp-identity">
+              <div className="dp-avatar"><DoctorAvatar doctor={doctor} /></div>
+              <div>
+                <span className="dp-kicker">HEART INSTITUTE · {doctor.department.toUpperCase()}</span>
+                <h1>{doctor.name}</h1>
+                <p className="dp-title">{doctor.title}</p>
+                <div className="dp-meta">
+                  {doctor.experienceYears !== null && <span><i className="ph ph-briefcase" />{doctor.experienceYears} years experience</span>}
+                  <span><i className="ph ph-translate" />{doctor.languages.join(', ')}</span>
+                  {doctor.joined && <span><i className="ph ph-calendar-check" />Joined {formatDate(doctor.joined, {month: 'short', year: 'numeric'})}</span>}
+                </div>
+                <div className="dp-badges">
+                  <span className={onLeave ? 'dp-badge dp-badge-leave' : 'dp-badge dp-badge-active'}><span />{onLeave ? `On leave${doctor.leaveUntil ? ` until ${formatDate(doctor.leaveUntil, {month: 'short', day: 'numeric'})}` : ''}` : 'Active'}</span>
+                  <span className="dp-badge">{doctor.employment}</span>
+                  {!onLeave && today.state !== 'unknown' && <span className="dp-badge"><i className={today.state === 'available' ? 'ph ph-clock' : 'ph ph-moon'} />{today.label}</span>}
+                </div>
+              </div>
+            </div>
+            <div className="dp-hero-side">
+              <div className="dp-hero-actions">
+                <button type="button" className="dp-btn-light" disabled={onLeave} title={onLeave ? 'Unavailable while on leave' : undefined} onClick={() => notConnected('Booking')}><i className="ph ph-calendar-plus" />Book appointment</button>
+                <button type="button" className="dp-btn-ghost" onClick={() => notConnected('Messaging')}><i className="ph ph-chat-circle-dots" />Message</button>
+              </div>
+            </div>
+          </section>
 
-<a href="/doctor-details?id=michael-patel-urology" aria-current={doctor.id === "michael-patel-urology" ? "page" : undefined} className={"doc-card block " + (doctor.id === "michael-patel-urology" ? "ring-1 ring-primary/20 !border-primary/30" : "")}>
-<div className="flex items-start justify-between gap-2.5">
-<img src="/assets/images/doctor11.png" alt="" className="doc-card-avatar" />
-<div className="flex items-center gap-0.5 shrink-0 mt-0.5">
-<button className="doc-icon-btn" aria-label="Call"><i className="ph ph-phone text-sm"></i></button>
-<button className="doc-icon-btn" aria-label="Message"><i className="ph ph-chat-circle text-sm"></i></button>
-</div>
-</div>
-<div className="flex justify-between items-end mt-2">
-<div className="flex-1 min-w-0">
-<p className="text-[13px] font-semibold text-heading leading-tight truncate">{"Dr. Michael Patel"}</p>
-<p className="text-[11px] text-faint mt-0.5">{"Urology"}</p>
-</div>
-<span className="w-6 h-6 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors border border-primary/20">
-<i className="ph ph-arrow-up-right text-[11px]"></i>
-</span>
-</div>
-</a>
+          <section className="dp-kpis" aria-label="Key figures">
+            {kpis.map((kpi) => (
+              <div key={kpi.label} className="dash-panel dp-kpi">
+                <div><span>{kpi.label}</span><i className={`ph ${kpi.icon}`} aria-hidden="true" /></div>
+                <strong>{kpi.value}</strong>
+                <p>{kpi.note}</p>
+              </div>
+            ))}
+          </section>
 
-<a href="/doctor-details?id=samantha-taylor-surgery" aria-current={doctor.id === "samantha-taylor-surgery" ? "page" : undefined} className={"doc-card block " + (doctor.id === "samantha-taylor-surgery" ? "ring-1 ring-primary/20 !border-primary/30" : "")}>
-<div className="flex items-start justify-between gap-2.5">
-<img src="/assets/images/doctor13.png" alt="" className="doc-card-avatar" />
-<div className="flex items-center gap-0.5 shrink-0 mt-0.5">
-<button className="doc-icon-btn" aria-label="Call"><i className="ph ph-phone text-sm"></i></button>
-<button className="doc-icon-btn" aria-label="Message"><i className="ph ph-chat-circle text-sm"></i></button>
-</div>
-</div>
-<div className="flex justify-between items-end mt-2">
-<div className="flex-1 min-w-0">
-<p className="text-[13px] font-semibold text-heading leading-tight truncate">{"Dr. Samantha Taylor"}</p>
-<p className="text-[11px] text-faint mt-0.5">{"Surgery"}</p>
-</div>
-<span className="w-6 h-6 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors border border-primary/20">
-<i className="ph ph-arrow-up-right text-[11px]"></i>
-</span>
-</div>
-</a>
-</div>
-</div>
-</aside>
+          <div className="dp-layout">
+            <aside className="dp-sidebar">
+              <section className="dash-panel dp-card">
+                <h2 className="dp-card-title"><i className="ph ph-address-book" />Contact</h2>
+                <ul className="dp-contact">
+                  {contact.map((item) => (
+                    <li key={item.label}>
+                      <span className="dp-contact-icon"><i className={`ph ${item.icon}`} aria-hidden="true" /></span>
+                      <div><small>{item.label}</small>{item.href ? <a href={item.href}>{item.value}</a> : <p>{item.value}</p>}</div>
+                    </li>
+                  ))}
+                  {!contact.length && <li className="dp-muted">No contact details yet.</li>}
+                </ul>
+              </section>
 
-<section className="col-span-12 md:col-span-8 lg:col-span-9 3xl:col-span-10 flex flex-col gap-4 min-w-0 max-md:order-0">
+              <section className="dash-panel dp-card">
+                <h2 className="dp-card-title"><i className="ph ph-calendar-dots" />Weekly schedule</h2>
+                {onLeave && <p className="dp-leave-note"><i className="ph ph-airplane-tilt" />Appointments are paused{doctor.leaveUntil ? ` until ${formatDate(doctor.leaveUntil, {month: 'long', day: 'numeric'})}` : ''}.</p>}
+                {doctor.availability.length ? (
+                  <ul className="dp-schedule">
+                    {WEEK_DAYS.map((day, index) => {
+                      const hours = doctor.availability.find((entry) => entry.day === day)?.hours;
+                      return (
+                        <li key={day} className={index === todayIndex ? 'dp-today' : undefined} aria-current={index === todayIndex ? 'date' : undefined}>
+                          <span>{day}{index === todayIndex && <em>Today</em>}</span>
+                          <strong className={hours ? undefined : 'dp-off'}>{hours ?? 'Off'}</strong>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : <p className="dp-muted">Schedule not set yet.</p>}
+              </section>
+            </aside>
 
-<div className="grid grid-cols-12 gap-4 items-start">
+            <div className="dp-main">
+              <section className="dash-panel dp-card">
+                <h2 className="dp-card-title"><i className="ph ph-user-focus" />About Dr. {surname}</h2>
+                <p className="dp-bio">{doctor.bio}</p>
+                {doctor.expertise.length > 0 && <>
+                  <h3 className="dp-subtitle">Areas of expertise</h3>
+                  <div className="dp-tags">{doctor.expertise.map((item) => <span key={item}>{item}</span>)}</div>
+                </>}
+                <dl className="dp-facts">
+                  <div><dt>Heart team</dt><dd>{doctor.department}</dd></div>
+                  <div><dt>Role</dt><dd>{doctor.title}</dd></div>
+                  <div><dt>Employment</dt><dd>{doctor.employment}</dd></div>
+                  <div><dt>Member since</dt><dd>{formatDate(doctor.joined)}</dd></div>
+                </dl>
+              </section>
 
-<div className="col-span-12 3xl:col-span-7 dash-panel overflow-hidden">
+              <div className="dp-split">
+                <section className="dash-panel dp-card">
+                  <h2 className="dp-card-title"><i className="ph ph-graduation-cap" />Education</h2>
+                  {doctor.education.length ? (
+                    <ol className="dp-timeline">
+                      {[...doctor.education].reverse().map((item) => (
+                        <li key={`${item.degree}-${item.year}`}><span className="dp-year">{item.year}</span><div><strong>{item.degree}</strong><p>{item.institution}</p></div></li>
+                      ))}
+                    </ol>
+                  ) : <p className="dp-muted">Education history not added yet.</p>}
+                </section>
+                <section className="dash-panel dp-card">
+                  <h2 className="dp-card-title"><i className="ph ph-seal-check" />Certifications</h2>
+                  {doctor.certifications.length ? (
+                    <ul className="dp-certs">{doctor.certifications.map((item) => <li key={item}><i className="ph-fill ph-check-circle" aria-hidden="true" />{item}</li>)}</ul>
+                  ) : <p className="dp-muted">No certifications on file yet.</p>}
+                </section>
+              </div>
 
-<div className="h-20 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent relative">
-<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/15 to-transparent"></div>
-</div>
-<div className="px-5 pb-5 -mt-10">
-<div className="flex flex-wrap items-end gap-4">
+              <section className="dash-panel dp-card dp-treatments">
+                <div className="dp-treatments-head">
+                  <h2 className="dp-card-title"><i className="ph ph-clipboard-text" />Patient treatments<span className="dp-count">{doctor.treatments.length}</span></h2>
+                  <div className="dl-field"><i className="ph ph-magnifying-glass" /><input type="search" placeholder="Search patients or conditions…" aria-label="Search patient treatments" value={search} onChange={(e) => {setSearch(e.target.value); setPage(0);}} /></div>
+                </div>
+                <div className="dl-segments dp-status-filter" role="group" aria-label="Filter treatments by status">
+                  <button type="button" aria-pressed={status === 'all'} onClick={() => {setStatus('all'); setPage(0);}}>All<small>{matching.length}</small></button>
+                  {TREATMENT_STATUSES.map((value) => <button key={value} type="button" aria-pressed={status === value} onClick={() => {setStatus(value); setPage(0);}}>{value}<small>{statusCounts[value]}</small></button>)}
+                </div>
 
-<div className="relative flex-shrink-0">
-<img src={doctor.image} alt={doctor.name} className="w-38 h-38 rounded-2xl object-cover object-top ring-4 ring-secondary/40 bg-primary-soft" />
-<span className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-primary-soft border-2 border-w1 flex items-center justify-center">
-<i className="ph ph-stethoscope text-primary text-[10px]"></i>
-</span>
-</div>
+                {visibleRows.length ? (
+                  <div className="dp-table-wrap">
+                    <table className="dp-table">
+                      <thead><tr><th scope="col">Patient</th><th scope="col">Condition</th><th scope="col">Treatment plan</th><th scope="col">Date</th><th scope="col">Status</th></tr></thead>
+                      <tbody>
+                        {visibleRows.map((row) => (
+                          <tr key={row.id}>
+                            <td><div className="dp-patient"><PatientAvatar row={row} /><div><strong>{row.patient}</strong><small>{row.id} · {row.age} yrs · {row.gender === 'male' ? 'Male' : 'Female'}</small></div></div></td>
+                            <td>{row.condition}</td>
+                            <td className="dp-plan">{row.plan}</td>
+                            <td className="dp-date"><strong>{formatDate(row.date)}</strong><small>{row.time}</small></td>
+                            <td><span className={`dp-status dp-status-${STATUS_TONES[row.status]}`}>{row.status}</span></td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <div className="dl-empty"><i className="ph ph-clipboard" /><h3>{doctor.treatments.length ? 'No treatments match' : 'No treatments recorded yet'}</h3><p>{doctor.treatments.length ? 'Try a different search or status.' : 'Treatments will appear here once patients are assigned.'}</p></div>
+                )}
 
-<div className="flex-1 min-w-0 pb-1">
-<div className="flex flex-wrap items-center gap-2 mb-1.5">
-<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary/10 text-primary border border-primary/20">
-<span className="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>{doctor.status ?? "—"}</span>
-<span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-subtle text-muted border border-border">{doctor.employment ?? "—"}</span>
-</div>
-<h2 className="text-xl font-bold text-heading leading-tight">{doctor.name ?? "—"}</h2>
-<p className="text-sm text-muted mt-0.5">{doctor.headline ?? "—"}</p>
-</div>
+                {rows.length > PAGE_SIZE && (
+                  <div className="dp-pagination">
+                    <span>{currentPage * PAGE_SIZE + 1}–{Math.min((currentPage + 1) * PAGE_SIZE, rows.length)} of {rows.length}</span>
+                    <div>
+                      <button type="button" className="dl-page-btn" aria-label="Previous page" disabled={currentPage === 0} onClick={() => setPage(currentPage - 1)}><i className="ph ph-caret-left" /></button>
+                      {Array.from({length: pageCount}, (_, index) => <button key={index} type="button" className="dl-page-btn" aria-label={`Page ${index + 1}`} aria-current={index === currentPage ? 'page' : undefined} onClick={() => setPage(index)}>{index + 1}</button>)}
+                      <button type="button" className="dl-page-btn" aria-label="Next page" disabled={currentPage >= pageCount - 1} onClick={() => setPage(currentPage + 1)}><i className="ph ph-caret-right" /></button>
+                    </div>
+                  </div>
+                )}
+              </section>
+            </div>
+          </div>
+        </div>
+      </main>
+      {notice && <div role="status" className="fixed bottom-4 right-4 z-50 max-w-sm bg-w1 border border-border p-4 rounded-xl shadow-lg text-sm"><button aria-label="Dismiss message" onClick={() => setNotice('')} className="float-right ml-3">×</button>{notice}</div>}
+    </DashboardShell>
+  );
+}
 
-<div className="flex items-center gap-1.5 pb-1 flex-shrink-0">
-<div className="flex items-center gap-0.5">
-<i className="ph-fill ph-star text-warning text-sm"></i>
-<i className="ph-fill ph-star text-warning text-sm"></i>
-<i className="ph-fill ph-star text-warning text-sm"></i>
-<i className="ph-fill ph-star text-warning text-sm"></i>
-<i className="ph-fill ph-star-half text-warning text-sm"></i>
-</div>
-<span className="text-sm font-semibold text-heading">{doctor.rating ?? "—"}</span>
-<span className="text-[11px] text-faint">{"/5.0"}</span>
-</div>
-</div>
-
-<div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 pt-4 border-t border-border-subtle">
-<div className="flex items-center gap-2.5">
-<span className="w-8 h-8 rounded-xl bg-subtle flex items-center justify-center flex-shrink-0 text-muted">
-<i className="ph ph-phone text-sm"></i>
-</span>
-<div className="min-w-0">
-<p className="text-[10px] text-faint uppercase tracking-wide font-medium">{"Phone"}</p>
-<p className="text-sm font-medium text-text truncate">{doctor.phone ?? "—"}</p>
-</div>
-</div>
-<div className="flex items-center gap-2.5">
-<span className="w-8 h-8 rounded-xl bg-subtle flex items-center justify-center flex-shrink-0 text-muted">
-<i className="ph ph-envelope text-sm"></i>
-</span>
-<div className="min-w-0">
-<p className="text-[10px] text-faint uppercase tracking-wide font-medium">{"Email"}</p>
-<p className="text-sm font-medium text-text truncate">{doctor.email ?? "—"}</p>
-</div>
-</div>
-<div className="flex items-center gap-2.5">
-<span className="w-8 h-8 rounded-xl bg-subtle flex items-center justify-center flex-shrink-0 text-muted">
-<i className="ph ph-map-pin text-sm"></i>
-</span>
-<div className="min-w-0">
-<p className="text-[10px] text-faint uppercase tracking-wide font-medium">{"Location"}</p>
-<p className="text-sm font-medium text-text truncate">{doctor.location ?? "—"}</p>
-</div>
-</div>
-</div>
-
-<div className="flex items-center gap-2 mt-4">
-<button className="flex-1 h-9 rounded-xl bg-primary hover:bg-primary-strong text-on-primary text-xs font-semibold inline-flex items-center justify-center gap-1.5 shadow-sm transition-colors">
-<i className="ph ph-phone-call text-sm"></i>{"Call\n                    "}</button>
-<button className="flex-1 h-9 rounded-xl border border-primary text-primary hover:bg-primary-soft text-xs font-semibold inline-flex items-center justify-center gap-1.5 transition-colors">
-<i className="ph ph-chat-circle-dots text-sm"></i>{"Chat\n                    "}</button>
-<button className="h-9 w-9 rounded-xl border border-border text-muted hover:border-primary/50 hover:text-primary hover:bg-primary/5 inline-flex items-center justify-center transition-colors flex-shrink-0" aria-label="More options">
-<i className="ph ph-dots-three-vertical text-sm"></i>
-</button>
-</div>
-</div>
-</div>
-
-<div className="col-span-12 3xl:col-span-5 dash-panel p-5 flex flex-col gap-5">
-
-<div className="flex items-start justify-between gap-3">
-<div className="flex items-start gap-2.5">
-<span className="dash-icon-chip">
-<i className="ph ph-stethoscope"></i>
-</span>
-<div>
-<h2 className="dash-title">{"Doctor Summary"}</h2>
-<p className="dash-subtitle mt-0.5">{"Trusted expert providing quality care and patient treatment."}</p>
-</div>
-</div>
-<span className="text-[10px] font-semibold text-primary bg-primary/10 border border-primary/20 px-2.5 py-1 rounded-full flex-shrink-0">{doctor.qualifications ?? "—"}</span>
-</div>
-
-<div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-
-<div className="bg-subtle rounded-xl p-3 flex flex-col gap-1.5">
-<div className="flex items-center gap-1.5 text-[11px] text-muted">
-<i className="ph-fill ph-diamond text-[8px] text-primary"></i>{"\n                      Education\n                    "}</div>
-<p className="text-xl font-bold text-heading leading-none">{doctor.gpa ?? "—"}<span className="text-xs text-muted font-medium">{"GPA"}</span>
-</p>
-<p className="text-[10px] text-muted truncate">{doctor.education ?? "—"}</p>
-<div className="h-1 rounded-full bg-border overflow-hidden mt-1">
-<div className="h-full w-[78%] bg-primary rounded-full"></div>
-</div>
-<p className="text-[10px] text-primary">{doctor.id === "olivia-martin" ? "↑ 3.82 avg semester" : "—"}</p>
-</div>
-
-<div className="bg-subtle rounded-xl p-3 flex flex-col gap-1.5">
-<div className="flex items-center gap-1.5 text-[11px] text-muted">
-<i className="ph-fill ph-diamond text-[8px] text-warning"></i>{"\n                      Experience\n                    "}</div>
-<p className="text-xl font-bold text-heading leading-none">{doctor.experience ?? "—"}<span className="text-xs text-muted font-medium">{"Years"}</span>
-</p>
-<p className="text-[10px] text-muted truncate">{doctor.treatmentSummary ?? "—"}</p>
-<div className="h-1 rounded-full bg-border overflow-hidden mt-1">
-<div className="h-full w-[60%] bg-warning rounded-full"></div>
-</div>
-<p className="text-[10px] text-warning">{doctor.id === "olivia-martin" ? "↑ 55.8% performance" : "—"}</p>
-</div>
-
-<div className="bg-subtle rounded-xl p-3 flex flex-col gap-1.5">
-<div className="flex items-center gap-1.5 text-[11px] text-muted">
-<i className="ph-fill ph-diamond text-[8px] text-info"></i>{"\n                      Rating\n                    "}</div>
-<p className="text-xl font-bold text-heading leading-none">{doctor.rating ?? "—"}<span className="text-xs text-muted font-medium">{"/5.0"}</span>
-</p>
-<p className="text-[10px] text-muted truncate">{"Average patient rating"}</p>
-<div className="h-1 rounded-full bg-border overflow-hidden mt-1">
-<div className="h-full w-[96%] bg-info rounded-full"></div>
-</div>
-<p className="text-[10px] text-info">{doctor.id === "olivia-martin" ? "↑ 96% satisfaction" : "—"}</p>
-</div>
-</div>
-
-<div className="grid grid-cols-2 gap-3 pt-4 border-t border-border-subtle">
-<div className="flex items-center gap-2">
-<span className="w-7 h-7 rounded-lg bg-primary-soft flex items-center justify-center flex-shrink-0">
-<i className="ph ph-hospital text-primary text-xs"></i>
-</span>
-<div>
-<p className="text-[10px] text-faint">{"Department"}</p>
-<p className="text-xs font-semibold text-heading">{doctor.department ?? "—"}</p>
-</div>
-</div>
-<div className="flex items-center gap-2">
-<span className="w-7 h-7 rounded-lg bg-warning/10 flex items-center justify-center flex-shrink-0">
-<i className="ph ph-currency-dollar text-warning text-xs"></i>
-</span>
-<div>
-<p className="text-[10px] text-faint">{"Consultation Fee"}</p>
-<p className="text-xs font-semibold text-heading">{doctor.fee ?? "—"}</p>
-</div>
-</div>
-<div className="flex items-center gap-2">
-<span className="w-7 h-7 rounded-lg bg-info/10 flex items-center justify-center flex-shrink-0">
-<i className="ph ph-calendar-blank text-info text-xs"></i>
-</span>
-<div>
-<p className="text-[10px] text-faint">{"Joined"}</p>
-<p className="text-xs font-semibold text-heading">{doctor.joined ?? "—"}</p>
-</div>
-</div>
-<div className="flex items-center gap-2">
-<span className="w-7 h-7 rounded-lg bg-danger/10 flex items-center justify-center flex-shrink-0">
-<i className="ph ph-heartbeat text-danger text-xs"></i>
-</span>
-<div>
-<p className="text-[10px] text-faint">{"Specialty"}</p>
-<p className="text-xs font-semibold text-heading">{doctor.specialty ?? "—"}</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<div className="dash-panel p-0 overflow-hidden">
-
-<div className="flex flex-wrap items-center justify-between gap-3 p-4 md:p-5 border-b border-border-subtle">
-<div className="flex items-center gap-2.5">
-<span className="dash-icon-chip">
-<i className="ph ph-users-three"></i>
-</span>
-<div>
-<h2 className="dash-title">{"Patient Treatment"}</h2>
-<p className="dash-subtitle mt-0.5">{"Sample treatment records"}</p>
-</div>
-</div>
-<div className="flex items-center gap-2 flex-shrink-0">
-
-<div className="relative hidden sm:block">
-<i className="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-faint text-sm pointer-events-none"></i>
-<input type="text" placeholder="Search patients…" className="h-9 w-44 pl-9 pr-3 rounded-xl bg-subtle border border-transparent text-sm text-text placeholder:text-faint focus:outline-none focus:border-primary/40 focus:bg-w1 transition-colors" aria-label="Search treatments" value={search} onChange={e => {setSearch(e.target.value);setPage(0);}} />
-</div>
-<button type="button" className="h-9 px-4 rounded-xl bg-primary hover:bg-primary-strong text-on-primary text-xs font-medium flex items-center gap-1.5 transition-colors">
-<i className="ph ph-plus text-sm"></i>{"\n                    Schedule\n                  "}</button>
-</div>
-</div>
-
-<div className="overflow-x-auto">
-<table className="w-full min-w-[860px] text-sm">
-<thead>
-<tr className="text-left text-[11px] font-semibold text-muted bg-subtle border-b border-border-subtle">
-<th className="px-4 py-3 rounded-none">
-<button type="button" className="inline-flex items-center gap-1 hover:text-text transition-colors">{"\n                          Date | Time\n                          "}<span className="inline-flex flex-col leading-none text-faint">
-<i className="ph-fill ph-caret-up text-[7px]"></i>
-<i className="ph-fill ph-caret-down text-[7px]"></i>
-</span>
-</button>
-</th>
-<th className="px-4 py-3">
-<button type="button" className="inline-flex items-center gap-1 hover:text-text transition-colors">{"\n                          Patient\n                          "}<span className="inline-flex flex-col leading-none text-faint">
-<i className="ph-fill ph-caret-up text-[7px]"></i>
-<i className="ph-fill ph-caret-down text-[7px]"></i>
-</span>
-</button>
-</th>
-<th className="px-4 py-3">
-<button type="button" className="inline-flex items-center gap-1 hover:text-text transition-colors">{"\n                          Condition\n                          "}<span className="inline-flex flex-col leading-none text-faint">
-<i className="ph-fill ph-caret-up text-[7px]"></i>
-<i className="ph-fill ph-caret-down text-[7px]"></i>
-</span>
-</button>
-</th>
-<th className="px-4 py-3">
-<button type="button" className="inline-flex items-center gap-1 hover:text-text transition-colors">{"\n                          Treatment Plan\n                          "}<span className="inline-flex flex-col leading-none text-faint">
-<i className="ph-fill ph-caret-up text-[7px]"></i>
-<i className="ph-fill ph-caret-down text-[7px]"></i>
-</span>
-</button>
-</th>
-<th className="px-4 py-3">
-<button type="button" className="inline-flex items-center gap-1 hover:text-text transition-colors">{"\n                          Status\n                          "}<span className="inline-flex flex-col leading-none text-faint">
-<i className="ph-fill ph-caret-up text-[7px]"></i>
-<i className="ph-fill ph-caret-down text-[7px]"></i>
-</span>
-</button>
-</th>
-<th className="px-4 py-3 text-right">{"Action"}</th>
-</tr>
-</thead>
-<TreatmentRows rows={[{text:"22 Apr, 25 06:42 am Jane Cooper ID #PT-0012 Arrhythmia Medication + Monitoring Scheduled",content:(<tr className="hover:bg-primary/[0.02] transition-colors group">
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<p className="text-text font-medium text-[13px]">{"22 Apr, 25"}</p>
-<p className="text-[11px] text-faint">{"06:42 am"}</p>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<div className="flex items-center gap-2.5">
-<img src="/assets/images/user1.png" className="w-8 h-8 rounded-xl object-cover ring-1 ring-border" alt="" />
-<div>
-<p className="text-[13px] font-medium text-text">{"Jane Cooper"}</p>
-<p className="text-[10px] text-faint">{"ID #PT-0012"}</p>
-</div>
-</div>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Arrhythmia"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Medication + Monitoring"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-danger/30 text-danger bg-danger-soft">
-<span className="w-1.5 h-1.5 rounded-full bg-danger inline-block"></span>{"Scheduled\n                        "}</span>
-</td>
-<td className={"px-4  text-right" + (dense ? " py-2" : " py-4")}>
-<button type="button" className="row-btn w-7 h-7 rounded-lg flex items-center justify-center text-faint hover:text-text hover:bg-subtle transition-colors ml-auto opacity-0 group-hover:opacity-100" aria-label="Row actions" aria-haspopup="menu" aria-expanded="false">
-<i className="ph ph-dots-three-vertical text-sm"></i>
-</button>
-</td>
-</tr>)},{text:"12 Feb, 25 07:38 am Ronald Richards ID #PT-0058 Coronary Artery Disease Angioplasty Completed",content:(<tr className="hover:bg-primary/[0.02] transition-colors group">
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<p className="text-text font-medium text-[13px]">{"12 Feb, 25"}</p>
-<p className="text-[11px] text-faint">{"07:38 am"}</p>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<div className="flex items-center gap-2.5">
-<img src="/assets/images/user2.png" className="w-8 h-8 rounded-xl object-cover ring-1 ring-border" alt="" />
-<div>
-<p className="text-[13px] font-medium text-text">{"Ronald Richards"}</p>
-<p className="text-[10px] text-faint">{"ID #PT-0058"}</p>
-</div>
-</div>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Coronary Artery Disease"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Angioplasty"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-primary/30 text-primary bg-primary-soft">
-<span className="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>{"Completed\n                        "}</span>
-</td>
-<td className={"px-4  text-right" + (dense ? " py-2" : " py-4")}>
-<button type="button" className="row-btn w-7 h-7 rounded-lg flex items-center justify-center text-faint hover:text-text hover:bg-subtle transition-colors ml-auto opacity-0 group-hover:opacity-100" aria-label="Row actions">
-<i className="ph ph-dots-three-vertical text-sm"></i>
-</button>
-</td>
-</tr>)},{text:"07 Dec, 24 01:34 pm Bessie Cooper ID #PT-0103 Hypertension Lifestyle + Drugs Scheduled",content:(<tr className="bg-primary-soft/30 hover:bg-primary-soft/50 transition-colors group">
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<p className="text-text font-medium text-[13px]">{"07 Dec, 24"}</p>
-<p className="text-[11px] text-faint">{"01:34 pm"}</p>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<div className="flex items-center gap-2.5">
-<img src="/assets/images/user3.png" className="w-8 h-8 rounded-xl object-cover ring-1 ring-border" alt="" />
-<div>
-<p className="text-[13px] font-medium text-text">{"Bessie Cooper"}</p>
-<p className="text-[10px] text-faint">{"ID #PT-0103"}</p>
-</div>
-</div>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Hypertension"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Lifestyle + Drugs"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-danger/30 text-danger bg-danger-soft">
-<span className="w-1.5 h-1.5 rounded-full bg-danger inline-block"></span>{"Scheduled\n                        "}</span>
-</td>
-<td className={"px-4  text-right" + (dense ? " py-2" : " py-4")}>
-<button type="button" className="row-btn w-7 h-7 rounded-lg flex items-center justify-center text-faint hover:text-text hover:bg-subtle transition-colors ml-auto opacity-0 group-hover:opacity-100" aria-label="Row actions">
-<i className="ph ph-dots-three-vertical text-sm"></i>
-</button>
-</td>
-</tr>)},{text:"22 Nov, 24 01:55 pm Courtney Henry ID #PT-0077 Valve Disorder Surgery Ongoing",content:(<tr className="hover:bg-primary/[0.02] transition-colors group">
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<p className="text-text font-medium text-[13px]">{"22 Nov, 24"}</p>
-<p className="text-[11px] text-faint">{"01:55 pm"}</p>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<div className="flex items-center gap-2.5">
-<img src="/assets/images/user4.png" className="w-8 h-8 rounded-xl object-cover ring-1 ring-border" alt="" />
-<div>
-<p className="text-[13px] font-medium text-text">{"Courtney Henry"}</p>
-<p className="text-[10px] text-faint">{"ID #PT-0077"}</p>
-</div>
-</div>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Valve Disorder"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Surgery"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-warning/30 text-warning bg-warning-soft">
-<span className="w-1.5 h-1.5 rounded-full bg-warning inline-block"></span>{"Ongoing\n                        "}</span>
-</td>
-<td className={"px-4  text-right" + (dense ? " py-2" : " py-4")}>
-<button type="button" className="row-btn w-7 h-7 rounded-lg flex items-center justify-center text-faint hover:text-text hover:bg-subtle transition-colors ml-auto opacity-0 group-hover:opacity-100" aria-label="Row actions">
-<i className="ph ph-dots-three-vertical text-sm"></i>
-</button>
-</td>
-</tr>)},{text:"17 Sep, 24 05:36 pm Arlene McCoy ID #PT-0209 Heart Murmur Echocardiogram Completed",content:(<tr className="hover:bg-primary/[0.02] transition-colors group">
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<p className="text-text font-medium text-[13px]">{"17 Sep, 24"}</p>
-<p className="text-[11px] text-faint">{"05:36 pm"}</p>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<div className="flex items-center gap-2.5">
-<img src="/assets/images/user5.png" className="w-8 h-8 rounded-xl object-cover ring-1 ring-border" alt="" />
-<div>
-<p className="text-[13px] font-medium text-text">{"Arlene McCoy"}</p>
-<p className="text-[10px] text-faint">{"ID #PT-0209"}</p>
-</div>
-</div>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Heart Murmur"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Echocardiogram"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-primary/30 text-primary bg-primary-soft">
-<span className="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>{"Completed\n                        "}</span>
-</td>
-<td className={"px-4  text-right" + (dense ? " py-2" : " py-4")}>
-<button type="button" className="row-btn w-7 h-7 rounded-lg flex items-center justify-center text-faint hover:text-text hover:bg-subtle transition-colors ml-auto opacity-0 group-hover:opacity-100" aria-label="Row actions">
-<i className="ph ph-dots-three-vertical text-sm"></i>
-</button>
-</td>
-</tr>)},{text:"13 Aug, 24 04:02 am Brooklyn Simmons ID #PT-0318 Arrhythmia Medication + Monitoring Ongoing",content:(<tr className="hover:bg-primary/[0.02] transition-colors group">
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<p className="text-text font-medium text-[13px]">{"13 Aug, 24"}</p>
-<p className="text-[11px] text-faint">{"04:02 am"}</p>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<div className="flex items-center gap-2.5">
-<img src="/assets/images/user6.png" className="w-8 h-8 rounded-xl object-cover ring-1 ring-border" alt="" />
-<div>
-<p className="text-[13px] font-medium text-text">{"Brooklyn Simmons"}</p>
-<p className="text-[10px] text-faint">{"ID #PT-0318"}</p>
-</div>
-</div>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Arrhythmia"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Medication + Monitoring"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-warning/30 text-warning bg-warning-soft">
-<span className="w-1.5 h-1.5 rounded-full bg-warning inline-block"></span>{"Ongoing\n                        "}</span>
-</td>
-<td className={"px-4  text-right" + (dense ? " py-2" : " py-4")}>
-<button type="button" className="row-btn w-7 h-7 rounded-lg flex items-center justify-center text-faint hover:text-text hover:bg-subtle transition-colors ml-auto opacity-0 group-hover:opacity-100" aria-label="Row actions">
-<i className="ph ph-dots-three-vertical text-sm"></i>
-</button>
-</td>
-</tr>)},{text:"13 Aug, 24 04:02 am Darrell Steward ID #PT-0441 Arrhythmia Medication + Monitoring Ongoing",content:(<tr className="hover:bg-primary/[0.02] transition-colors group">
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<p className="text-text font-medium text-[13px]">{"13 Aug, 24"}</p>
-<p className="text-[11px] text-faint">{"04:02 am"}</p>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<div className="flex items-center gap-2.5">
-<img src="/assets/images/user7.png" className="w-8 h-8 rounded-xl object-cover ring-1 ring-border" alt="" />
-<div>
-<p className="text-[13px] font-medium text-text">{"Darrell Steward"}</p>
-<p className="text-[10px] text-faint">{"ID #PT-0441"}</p>
-</div>
-</div>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Arrhythmia"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Medication + Monitoring"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-warning/30 text-warning bg-warning-soft">
-<span className="w-1.5 h-1.5 rounded-full bg-warning inline-block"></span>{"Ongoing\n                        "}</span>
-</td>
-<td className={"px-4  text-right" + (dense ? " py-2" : " py-4")}>
-<button type="button" className="row-btn w-7 h-7 rounded-lg flex items-center justify-center text-faint hover:text-text hover:bg-subtle transition-colors ml-auto opacity-0 group-hover:opacity-100" aria-label="Row actions">
-<i className="ph ph-dots-three-vertical text-sm"></i>
-</button>
-</td>
-</tr>)},{text:"01 Jun, 24 02:02 am Eleanor Pena ID #PT-0512 Hypertension Angioplasty Follow-up",content:(<tr className="hover:bg-primary/[0.02] transition-colors group">
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<p className="text-text font-medium text-[13px]">{"01 Jun, 24"}</p>
-<p className="text-[11px] text-faint">{"02:02 am"}</p>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<div className="flex items-center gap-2.5">
-<img src="/assets/images/user8.png" className="w-8 h-8 rounded-xl object-cover ring-1 ring-border" alt="" />
-<div>
-<p className="text-[13px] font-medium text-text">{"Eleanor Pena"}</p>
-<p className="text-[10px] text-faint">{"ID #PT-0512"}</p>
-</div>
-</div>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Hypertension"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="text-[13px] text-text">{"Angioplasty"}</span>
-</td>
-<td className={"px-4 " + (dense ? " py-2" : " py-4")}>
-<span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-info/30 text-info bg-info-soft">
-<span className="w-1.5 h-1.5 rounded-full bg-info inline-block"></span>{"Follow-up\n                        "}</span>
-</td>
-<td className={"px-4  text-right" + (dense ? " py-2" : " py-4")}>
-<button type="button" className="row-btn w-7 h-7 rounded-lg flex items-center justify-center text-faint hover:text-text hover:bg-subtle transition-colors ml-auto opacity-0 group-hover:opacity-100" aria-label="Row actions">
-<i className="ph ph-dots-three-vertical text-sm"></i>
-</button>
-</td>
-</tr>)}]} search={search} page={page} pageSize={pageSize} />
-</table>
-</div>
-
-<div className="flex flex-wrap items-center justify-between gap-3 px-4 md:px-5 py-3.5 border-t border-border-subtle bg-subtle/40">
-<label className="inline-flex items-center gap-2 cursor-pointer">
-<span className="relative inline-flex h-5 w-9">
-<input id="dense-toggle" type="checkbox" className="peer sr-only" checked={dense} onChange={e => setDense(e.target.checked)} />
-<span className="absolute inset-0 rounded-full bg-border peer-checked:bg-primary transition-colors"></span>
-<span className="absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-w1 peer-checked:translate-x-4 transition-transform"></span>
-</span>
-<span className="text-xs text-text">{"Dense"}</span>
-</label>
-<div className="flex flex-wrap items-center gap-3 text-xs text-muted">
-<span className="flex flex-wrap items-center gap-2">{"\n                    Rows per page:\n                    "}<span className="relative">
-<select className="h-8 pl-2.5 pr-7 rounded-lg bg-w1 border border-border text-xs text-text appearance-none focus:outline-none focus:border-primary transition-colors" aria-label="Rows per page" value={pageSize} onChange={e => {setPageSize(Number(e.target.value));setPage(0);}}>
-<option value={8}>{"08"}</option>
-<option value={16}>{"16"}</option>
-<option value={32}>{"32"}</option>
-</select>
-<i className="ph ph-caret-down absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-faint pointer-events-none"></i>
-</span>
-</span>
-<span className="font-medium text-text">{recordCount ? page * pageSize + 1 : 0}–{Math.min((page + 1) * pageSize,recordCount)}</span>
-<span className="text-faint">of {recordCount}</span>
-<div className="flex items-center gap-1">
-<button aria-label="Previous" className="w-7 h-7 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors" disabled={page === 0} onClick={() => setPage(page - 1)}>
-<i className="ph ph-caret-left text-xs"></i>
-</button>
-<button aria-label="Next" className="w-7 h-7 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors" disabled={(page + 1) * pageSize >= recordCount} onClick={() => setPage(page + 1)}>
-<i className="ph ph-caret-right text-xs"></i>
-</button>
-</div>
-</div>
-</div>
-</div>
-</section>
-</div>
-</div>
-</main>{rowMenu&&<div data-treatment-menu role="dialog" aria-label="Treatment details" className="fixed z-50 w-[280px] bg-w1 border border-border rounded-xl p-4 shadow-lg text-sm" style={{left:rowMenu.left,top:rowMenu.top}}><button aria-label="Close treatment details" className="float-right ml-2" onClick={()=>setRowMenu(null)}>×</button>{rowMenu.text}</div>}
-{notice&&<div role="status" className="fixed bottom-4 right-4 z-50 max-w-sm bg-w1 border border-border rounded-xl p-4 shadow-lg text-sm"><button aria-label="Dismiss message" className="float-right ml-3" onClick={()=>setNotice('')}>×</button>{notice}</div>}
-</div></DashboardShell>;
+function PatientAvatar({row}) {
+  const [failed, setFailed] = useState(false);
+  if (failed) return <span className="dp-patient-photo doc-avatar-fallback" aria-hidden="true">{initials(row.patient)}</span>;
+  return <img className="dp-patient-photo" src={row.photo} alt="" loading="lazy" onError={() => setFailed(true)} />;
 }
