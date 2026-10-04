@@ -48,7 +48,7 @@ export default function Navigation() { return <>
 </button>
 <div className="hidden mt-1 ml-9 space-y-0.5" data-nav-menu="">
 <a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="patients" href="/patients">{"All Patients"}</a>
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="patient-details" href="#">{"Patient Details"}</a>
+<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="patient-details" href="/patient-details">{"Patient Details"}</a>
 </div>
 </div>
 <a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="appointments" href="#">
@@ -268,7 +268,7 @@ export default function Navigation() { return <>
 </button>
 <div className="nav-text hidden mt-1 ml-9 flex flex-col gap-0.5" data-nav-menu="">
 <a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="patients" href="/patients">{"\n          All Patients\n        "}</a>
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="patient-details" href="#">{"\n          Patient Details\n        "}</a>
+<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="patient-details" href="/patient-details">{"\n          Patient Details\n        "}</a>
 </div>
 </div>
 <a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="appointments" href="#">

@@ -28,7 +28,7 @@ case 0: return (<tr className="group border-b border-border-subtle hover:bg-prim
 <button aria-label="Call" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
 <i className="ph ph-phone text-sm"></i>
 </button>
-<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="#">
+<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="/patient-details">
 <i className="ph ph-eye text-sm"></i>
 </a>
 <button data-row-more="" aria-label="More" aria-expanded="false" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
@@ -65,7 +65,7 @@ case 1: return (<tr className="group border-b border-border-subtle hover:bg-prim
 <button aria-label="Call" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
 <i className="ph ph-phone text-sm"></i>
 </button>
-<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="#">
+<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="/patient-details">
 <i className="ph ph-eye text-sm"></i>
 </a>
 <button data-row-more="" aria-label="More" aria-expanded="false" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
@@ -102,7 +102,7 @@ case 2: return (<tr className="group border-b border-border-subtle hover:bg-prim
 <button aria-label="Call" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
 <i className="ph ph-phone text-sm"></i>
 </button>
-<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="#">
+<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="/patient-details">
 <i className="ph ph-eye text-sm"></i>
 </a>
 <button data-row-more="" aria-label="More" aria-expanded="false" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
@@ -139,7 +139,7 @@ case 3: return (<tr className="group border-b border-border-subtle hover:bg-prim
 <button aria-label="Call" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
 <i className="ph ph-phone text-sm"></i>
 </button>
-<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="#">
+<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="/patient-details">
 <i className="ph ph-eye text-sm"></i>
 </a>
 <button data-row-more="" aria-label="More" aria-expanded="false" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
@@ -176,7 +176,7 @@ case 4: return (<tr className="group border-b border-border-subtle hover:bg-prim
 <button aria-label="Call" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
 <i className="ph ph-phone text-sm"></i>
 </button>
-<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="#">
+<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="/patient-details">
 <i className="ph ph-eye text-sm"></i>
 </a>
 <button data-row-more="" aria-label="More" aria-expanded="false" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
@@ -213,7 +213,7 @@ case 5: return (<tr className="group hover:bg-primary/[0.03] transition-colors">
 <button aria-label="Call" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
 <i className="ph ph-phone text-sm"></i>
 </button>
-<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="#">
+<a className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center" href="/patient-details">
 <i className="ph ph-eye text-sm"></i>
 </a>
 <button data-row-more="" aria-label="More" aria-expanded="false" className="opacity-0 group-hover:opacity-100 w-8 h-8 rounded-xl border border-border bg-w1 text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center">
