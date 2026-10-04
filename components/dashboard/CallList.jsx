@@ -34,37 +34,55 @@ function Movement({ patient, baseRank, entered }) {
   return <span className={`pd-move ${delta > 0 ? 'up' : 'down'}`}>{delta > 0 ? `▲ ${delta}` : `▼ ${-delta}`}</span>;
 }
 
-export default function CallList({ onStartCall, callBusy, rows, baseRanks, baseTop, statuses, onOutcome, onUndo, onOpen, search, setSearch, listSize, versionLabel, totalPatients }) {
+export default function CallList({ onStartCall, callBusy, rows, allRanked, baseRanks, baseTop, statuses, onOutcome, onUndo, onOpen, search, setSearch, listSize, versionLabel, totalPatients }) {
   const query = search.trim().toLowerCase();
   const matches = patient => !query || `${patient.id} ${patient.reasons.map(r => r.label).join(' ')}`.toLowerCase().includes(query);
-  const visible = rows.filter(matches);
   const [view, setView] = useState('open');
-  const open = visible.filter(p => !statuses.get(p.id)?.done), done = visible.filter(p => statuses.get(p.id)?.done);
-  const doneTotal = rows.filter(p => statuses.get(p.id)?.done).length, openTotal = rows.length - doneTotal;
-  const shown = view === 'open' ? open : done;
+  const groupOf = patient => statuses.get(patient.id)?.group;
+  // Call back and Completed look across every patient, so nobody drops out of view if the list size changes.
+  const lists = {
+    open: rows.filter(p => !groupOf(p)),
+    callback: allRanked.filter(p => groupOf(p) === 'callback'),
+    done: allRanked.filter(p => groupOf(p) === 'done'),
+    all: allRanked,
+  };
+  const shown = lists[view].filter(matches);
   const slideRef = useRowSlide(view + '|' + shown.map(p => p.id).join());
+  const VIEWS = [['open', 'To call'], ['callback', 'Call back'], ['done', 'Completed'], ['all', 'All patients']];
+  const subtitle = {
+    open: `Top ${listSize} of ${totalPatients} patients, ranked by ${versionLabel}. Arrows compare with standard scoring.`,
+    callback: 'Patients who did not answer or could not be reached today. Try them again, or escalate anyone unreachable.',
+    done: 'Patients reached today.',
+    all: `Every patient, ranked by ${versionLabel}. Patients below #${listSize} are not on today’s call list.`,
+  }[view];
+  const empty = {
+    open: 'Everyone on today’s list has an outcome. Check Call back for anyone still to reach.',
+    callback: 'Nobody needs a call back. Patients marked No answer or Unreachable appear here.',
+    done: 'No patients reached yet today.',
+    all: 'No patients to show.',
+  }[view];
 
   const row = patient => {
     const status = statuses.get(patient.id);
-    return <tr key={patient.id} ref={slideRef(patient.id)}>
+    const offList = patient.rank > listSize;
+    return <tr key={patient.id} ref={slideRef(patient.id)} className={offList ? 'is-off-list' : ''}>
       <td><span className="pd-rank">#{patient.rank}</span><Movement patient={patient} baseRank={baseRanks.get(patient.id)} entered={!isImported(patient) && !baseTop.has(patient.id)} /></td>
       <td><button type="button" className="pd-patient" onClick={() => onOpen(patient)} aria-label={`Open quick view for ${patient.id}`}>
         <PatientPhoto patient={patient} thumbnail className="hf-patient-photo" />
-        <span><strong>{patient.id}{isImported(patient) && <span className="pd-tag new">NEW</span>}</strong><span>{patient.age} yrs · {patient.sex === 1 ? 'M' : 'F'}</span></span>
+        <span><strong>{patient.id}{isImported(patient) && <span className="pd-tag new">NEW</span>}{offList && <span className="pd-tag off">not on today’s list</span>}</strong><span>{patient.age} yrs · {patient.sex === 1 ? 'M' : 'F'}</span></span>
       </button></td>
-      <td><div className="pd-chips">{reasonChips(patient).map(chip => <span key={chip.key} className={`pd-chip ${chip.tone}`}>{chip.text} <strong>+{chip.points}</strong></span>)}{!patient.reasons.length && <span className="pd-chip">No scoring conditions</span>}</div></td>
+      <td><div className="pd-chips">{reasonChips(patient).map(chip => <span key={chip.key} className={`pd-chip ${chip.tone}`}>{chip.text} <strong>+{chip.points}</strong></span>)}{!reasonChips(patient).length && <span className="pd-chip">No scoring conditions</span>}</div></td>
       <td className="pd-hide-sm"><span className="pd-score">{patient.score}</span></td>
       <td><div className="pd-outcomes"><button type="button" className="pd-outcome pd-call-start" disabled={callBusy} aria-label={`Start follow-up call for ${patient.id}`} title={callBusy ? 'Another call is in progress' : 'Start follow-up call'} onClick={() => onStartCall(patient)}><i className="ph ph-phone-outgoing" /></button><span className="pd-outcome-divider" aria-hidden="true" />{OUTCOMES.map(outcome => <button key={outcome.action} type="button" className={`pd-outcome ${outcome.tone}`} aria-pressed={status?.action === outcome.action} aria-label={`${outcome.label}: ${patient.id}`} title={`Log manual outcome: ${outcome.label}`} onClick={() => onOutcome(patient, outcome.action)}><i className={`ph ${outcome.icon}`} /></button>)}</div>
-        {status && <span className="pd-status">{status.status} · {formatTime(status.at)} · <button type="button" className="pd-link" onClick={() => onUndo(patient)} aria-label={`Undo ${status.label} for ${patient.id}`}>Undo</button></span>}</td>
+        {status && <span className={`pd-status ${status.group === 'callback' ? 'is-callback' : ''}`}>{status.label} · {status.status} · {formatTime(status.at)} · <button type="button" className="pd-link" onClick={() => onUndo(patient)} aria-label={`Undo ${status.label} for ${patient.id}`}>Undo</button></span>}</td>
     </tr>;
   };
 
   return <section className="hf-card pd-calls" aria-labelledby="calls-heading">
     <div className="pd-panel-head">
-      <div><h2 id="calls-heading">Today's call list</h2><p>Top {listSize} of {totalPatients} patients, ranked by {versionLabel}. Arrows compare with standard scoring.</p></div>
+      <div><h2 id="calls-heading">{view === 'all' ? 'All patients' : 'Today’s call list'}</h2><p>{subtitle}</p></div>
       <div className="pd-tabs" role="tablist" aria-label="Call list view">
-        <button type="button" role="tab" aria-selected={view === 'open'} aria-pressed={view === 'open'} onClick={() => setView('open')}>To call <strong>{openTotal}</strong></button>
-        <button type="button" role="tab" aria-selected={view === 'done'} aria-pressed={view === 'done'} onClick={() => setView('done')}>Completed <strong>{doneTotal}</strong></button>
+        {VIEWS.map(([key, label]) => <button key={key} type="button" role="tab" aria-selected={view === key} aria-pressed={view === key} className={key === 'callback' && lists.callback.length ? 'has-callbacks' : ''} onClick={() => setView(key)}>{key === 'callback' && <i className="ph ph-phone-incoming" />}{label} <strong>{lists[key].length}</strong></button>)}
       </div>
       <input aria-label="Filter call list" placeholder="Search ID or reason…" value={search} onChange={e => setSearch(e.target.value)} />
     </div>
@@ -73,6 +91,6 @@ export default function CallList({ onStartCall, callBusy, rows, baseRanks, baseT
       <tbody>
         {shown.map(row)}
       </tbody>
-    </table>{!shown.length && <p className="pd-empty">{query ? `No patients match "${search}" here.` : view === 'open' ? 'Everyone on today’s list has been reached or escalated.' : 'No completed calls yet today. Patients you reach, or mark unreachable, move here.'}</p>}</div>
+    </table>{!shown.length && <p className="pd-empty">{query ? `No patients match "${search}" here.` : empty}</p>}</div>
   </section>;
 }

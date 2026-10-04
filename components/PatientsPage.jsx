@@ -11,6 +11,7 @@ import { todaysCallStatus, versionName, formatTime } from './dashboard/helpers';
 import { TodayStrip } from './dashboard/KpiStrip';
 import CallList from './dashboard/CallList';
 import AgentPanel from './dashboard/AgentPanel';
+import { DecisionLine } from './dashboard/AgentStory';
 import QuickView from './dashboard/QuickView';
 import CompareDrawer from './dashboard/CompareDrawer';
 import ImportDrawer from './dashboard/ImportDrawer';
@@ -120,6 +121,8 @@ export default function PatientsPage() {
 
         {override && <div className="pd-banner" role="status"><span><strong>Custom scoring in use.</strong> The call list uses your settings instead of the agent’s {versionName(agent.current.version).toLowerCase()}.</span><span className="pd-shift-actions"><button className="pd-btn pd-btn-sm" onClick={() => openAgent('scoring')}>Edit scoring</button><button className="pd-btn pd-btn-sm" onClick={() => setOverride(null)}>Go back to the agent’s scoring</button></span></div>}
 
+        <DecisionLine allEvents={agent.allEvents} patientCount={dataset.patients.length} onOpen={() => openAgent('tests')} />
+
         <TodayStrip listSize={listSize} setListSize={setListSize} calls={calls} version={override ? 'manual' : agent.current.version} change={change} onDetails={() => openAgent()} />
 
         <section className="hf-card call-queue-panel" aria-labelledby="phone-heading">
@@ -128,7 +131,7 @@ export default function PatientsPage() {
           <CallAccess /><CallAlerts /><CallSetupHelp />
         </section>
 
-        <CallList onStartCall={patient => setCallPatient(patient.id)} callBusy={!!activeCall || !!pendingCall} rows={rows} baseRanks={baseRanks} baseTop={baseTop} statuses={statuses} onOutcome={logOutcome} onUndo={undoOutcome} onOpen={openPatient} search={search} setSearch={setSearch} listSize={listSize} versionLabel={versionLabel} totalPatients={patients.length} />
+        <CallList onStartCall={patient => setCallPatient(patient.id)} callBusy={!!activeCall || !!pendingCall} rows={rows} allRanked={ranked} baseRanks={baseRanks} baseTop={baseTop} statuses={statuses} onOutcome={logOutcome} onUndo={undoOutcome} onOpen={openPatient} search={search} setSearch={setSearch} listSize={listSize} versionLabel={versionLabel} totalPatients={patients.length} />
 
         <footer className="hf-caption">Ranks who to call first; it does not diagnose. Not a validated clinical tool. Confirmed phone calls and reviewed notes are shared through Supabase; manual outcome buttons and scoring changes stay in this browser. Dataset: Chicco &amp; Jurman, Heart Failure Clinical Records (2020), <a href="https://doi.org/10.24432/C5Z89R">UCI Machine Learning Repository</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</footer>
         {notice && <div className="hf-notice" role="status">{notice.text ?? notice}{notice.undo && statuses.has(notice.undo.id) && <button className="pd-link" onClick={() => undoOutcome(notice.undo)}>Undo</button>}<button aria-label="Dismiss message" onClick={() => setNotice('')}>×</button></div>}
@@ -139,7 +142,7 @@ export default function PatientsPage() {
         </dialog>
     </main>
     {selected && <QuickView patient={selected} rule={rule} versionLabel={versionLabel} history={selectedHistory} status={statuses.get(selected.id)} onOutcome={logOutcome} onUndo={undoOutcome} onClose={() => setSelectedId(null)} />}
-    {panel === 'agent' && <AgentPanel tab={agentTab} setTab={setAgentTab} onClose={() => setPanel(null)} onCompare={() => setPanel('compare')} agent={agent} override={override} graded={dataset.patients} droppedRows={dataset.droppedRows}
+    {panel === 'agent' && <AgentPanel tab={agentTab} setTab={setAgentTab} onClose={() => setPanel(null)} onCompare={() => setPanel('compare')} onOpenPatient={openPatient} agent={agent} override={override} graded={dataset.patients} droppedRows={dataset.droppedRows}
       scoring={{ rule, agentRule: agent.current.rule, agentVersion: agent.current.version, override, onChange: editScoring, onReset: () => { setOverride(null); setNotice('Back to the agent’s scoring.'); } }}
       tests={{ kpi: { listSize, reached, heldOut, rounds, version: override ? 'manual' : agent.current.version }, findings: { final: agent.final, current: agent.current, reached: { oldest: baseline.score.full }, protocol } }}
       safety={{ patients, rule, listSize, events: agent.events, droppedRows: dataset.droppedRows }} />}
