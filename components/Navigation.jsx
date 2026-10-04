@@ -36,7 +36,6 @@ export default function Navigation() { const showAudit = canViewAuditLog(useCurr
 </button>
 <div className="hidden mt-1 ml-9 space-y-0.5" data-nav-menu="">
 <a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="doctors" href="/doctors">{"All Doctors"}</a>
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="doctor-details" href="/doctor-details">{"Doctor Details"}</a>
 <a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="doctor-schedule" href="#">{"Doctor Schedule"}</a>
 <a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="doctor-edit-profile" href="#">{"Edit Profile"}</a>
 </div>
@@ -97,7 +96,6 @@ export default function Navigation() { const showAudit = canViewAuditLog(useCurr
 </button>
 <div className="nav-text hidden mt-1 ml-9 flex flex-col gap-0.5" data-nav-menu="">
 <a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="doctors" href="/doctors">{"\n          All Doctors\n        "}</a>
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="doctor-details" href="/doctor-details">{"\n          Doctor Details\n        "}</a>
 <a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="doctor-schedule" href="#">{"\n          Doctor Schedule\n        "}</a>
 <a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="doctor-edit-profile" href="#">{"\n          Edit Profile\n        "}</a>
 </div>

@@ -1,0 +1,3961 @@
+[
+  {
+    "id": "marcus-bennett",
+    "name": "Dr. Marcus Bennett",
+    "gender": "male",
+    "image": "/assets/images/doctor.png",
+    "specialty": "Heart Failure",
+    "department": "Heart Failure",
+    "title": "Heart Failure Specialist",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 1660,
+    "experienceYears": 16,
+    "avgResponseMinutes": 34,
+    "fee": 190,
+    "joined": "2014-11-27",
+    "phone": "(217) 555-0727",
+    "email": "marcus.bennett@priopulse.com",
+    "location": "PrioPulse Heart Institute · Main Campus, Springfield, IL",
+    "room": "Heart Failure Clinic · Room 205",
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "bio": "Dr. Bennett has worked in heart failure care for 16 years and joined the PrioPulse Heart Institute in 2014. Special focus on helping patients with heart failure stay stable at home through close follow-up and clear medication plans. Known for explaining results clearly and involving families in every decision.",
+    "expertise": [
+      "Heart failure with reduced EF",
+      "Heart failure with preserved EF",
+      "GDMT optimisation",
+      "Remote monitoring",
+      "Diuretic management"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Northwestern University Feinberg School of Medicine",
+        "year": 2006
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Cedars-Sinai Medical Center",
+        "year": 2009
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Massachusetts General Hospital",
+        "year": 2012
+      },
+      {
+        "degree": "Fellowship – Advanced Heart Failure & Transplant Cardiology",
+        "institution": "Cleveland Clinic",
+        "year": 2013
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Internal Medicine – Advanced Heart Failure & Transplant Cardiology",
+      "Advanced Cardiovascular Life Support (ACLS)",
+      "Fellow, American College of Cardiology (FACC)"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Sat",
+        "hours": "09:00 – 13:00"
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1001",
+        "patient": "William Brooks",
+        "gender": "male",
+        "age": 71,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-10-15",
+        "time": "16:30",
+        "condition": "Acute decompensated heart failure",
+        "plan": "Post-discharge 7-day review",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1003",
+        "patient": "Michael Turner",
+        "gender": "male",
+        "age": 68,
+        "photo": "https://randomuser.me/api/portraits/med/men/13.jpg",
+        "date": "2026-10-15",
+        "time": "08:00",
+        "condition": "Acute decompensated heart failure",
+        "plan": "Post-discharge 7-day review",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1002",
+        "patient": "George Ramirez",
+        "gender": "male",
+        "age": 58,
+        "photo": "https://randomuser.me/api/portraits/med/men/74.jpg",
+        "date": "2026-10-12",
+        "time": "11:15",
+        "condition": "Cardiorenal syndrome",
+        "plan": "Diuretic + kidney function plan",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1010",
+        "patient": "Thomas Reed",
+        "gender": "male",
+        "age": 73,
+        "photo": "https://randomuser.me/api/portraits/med/men/21.jpg",
+        "date": "2026-09-29",
+        "time": "16:00",
+        "condition": "Cardiorenal syndrome",
+        "plan": "Diuretic + kidney function plan",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1007",
+        "patient": "Robert Hughes",
+        "gender": "male",
+        "age": 68,
+        "photo": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "date": "2026-09-05",
+        "time": "11:00",
+        "condition": "Heart failure (preserved EF)",
+        "plan": "Diuretic review + follow-up call",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1009",
+        "patient": "Arthur Perry",
+        "gender": "male",
+        "age": 84,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-08-27",
+        "time": "13:15",
+        "condition": "Hyperkalemia on heart failure therapy",
+        "plan": "Potassium binder + lab follow-up",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1005",
+        "patient": "Henry Coleman",
+        "gender": "male",
+        "age": 79,
+        "photo": "https://randomuser.me/api/portraits/med/men/13.jpg",
+        "date": "2026-08-19",
+        "time": "11:00",
+        "condition": "Hyperkalemia on heart failure therapy",
+        "plan": "Potassium binder + lab follow-up",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1008",
+        "patient": "Daniel Foster",
+        "gender": "male",
+        "age": 70,
+        "photo": "https://randomuser.me/api/portraits/med/men/31.jpg",
+        "date": "2026-08-06",
+        "time": "08:45",
+        "condition": "Fluid overload",
+        "plan": "Daily weights + diuretic adjustment",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1004",
+        "patient": "Grace Okafor",
+        "gender": "female",
+        "age": 76,
+        "photo": "https://randomuser.me/api/portraits/med/women/23.jpg",
+        "date": "2026-07-08",
+        "time": "10:30",
+        "condition": "Heart failure (preserved EF)",
+        "plan": "Diuretic review + follow-up call",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1006",
+        "patient": "Joseph Price",
+        "gender": "male",
+        "age": 78,
+        "photo": "https://randomuser.me/api/portraits/med/men/72.jpg",
+        "date": "2026-07-02",
+        "time": "10:30",
+        "condition": "Heart failure (preserved EF)",
+        "plan": "Diuretic review + follow-up call",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "robert-hale",
+    "name": "Dr. Robert Hale",
+    "gender": "male",
+    "image": "/assets/images/doctor17.png",
+    "specialty": "General Cardiology",
+    "department": "General Cardiology",
+    "title": "Chief of Cardiology",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 3330,
+    "experienceYears": 30,
+    "avgResponseMinutes": 29,
+    "fee": 260,
+    "joined": "2021-01-10",
+    "phone": "(217) 555-0734",
+    "email": "robert.hale@priopulse.com",
+    "location": "PrioPulse Heart Institute · Main Campus, Springfield, IL",
+    "room": "Cardiology Clinic · Room 428",
+    "languages": [
+      "English",
+      "French"
+    ],
+    "bio": "Dr. Hale has worked in cardiology for 30 years and joined the PrioPulse Heart Institute in 2021. Special focus on catching heart disease early and keeping long-term conditions well controlled. Known for explaining results clearly and involving families in every decision.",
+    "expertise": [
+      "Chest pain evaluation",
+      "Hypertension",
+      "Valve disease follow-up",
+      "Heart failure screening",
+      "Lipid management"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "University of Pennsylvania Perelman School of Medicine",
+        "year": 1991
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Mayo Clinic",
+        "year": 1994
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Mount Sinai Hospital",
+        "year": 1997
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "Advanced Cardiovascular Life Support (ACLS)",
+      "Fellow, American College of Cardiology (FACC)"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1011",
+        "patient": "Ruth Watson",
+        "gender": "female",
+        "age": 62,
+        "photo": "https://randomuser.me/api/portraits/med/women/61.jpg",
+        "date": "2026-10-19",
+        "time": "15:00",
+        "condition": "Mitral regurgitation",
+        "plan": "Surveillance echocardiogram",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1013",
+        "patient": "Linda Bailey",
+        "gender": "female",
+        "age": 76,
+        "photo": "https://randomuser.me/api/portraits/med/women/23.jpg",
+        "date": "2026-10-13",
+        "time": "08:15",
+        "condition": "Palpitations",
+        "plan": "Holter monitor",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1012",
+        "patient": "Sandra James",
+        "gender": "female",
+        "age": 65,
+        "photo": "https://randomuser.me/api/portraits/med/women/14.jpg",
+        "date": "2026-10-07",
+        "time": "14:15",
+        "condition": "Hypertensive heart disease",
+        "plan": "Medication adjustment",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1015",
+        "patient": "Frank Patterson",
+        "gender": "male",
+        "age": 61,
+        "photo": "https://randomuser.me/api/portraits/med/men/23.jpg",
+        "date": "2026-09-26",
+        "time": "08:00",
+        "condition": "Mitral regurgitation",
+        "plan": "Surveillance echocardiogram",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1014",
+        "patient": "Grace Okafor",
+        "gender": "female",
+        "age": 68,
+        "photo": "https://randomuser.me/api/portraits/med/women/23.jpg",
+        "date": "2026-08-29",
+        "time": "10:15",
+        "condition": "Palpitations",
+        "plan": "Holter monitor",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1019",
+        "patient": "Helen Ward",
+        "gender": "female",
+        "age": 63,
+        "photo": "https://randomuser.me/api/portraits/med/women/53.jpg",
+        "date": "2026-08-21",
+        "time": "15:15",
+        "condition": "Mitral regurgitation",
+        "plan": "Surveillance echocardiogram",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1016",
+        "patient": "James Carter",
+        "gender": "male",
+        "age": 55,
+        "photo": "https://randomuser.me/api/portraits/med/men/91.jpg",
+        "date": "2026-08-18",
+        "time": "13:15",
+        "condition": "Stable angina",
+        "plan": "Stress test + anti-anginal therapy",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1020",
+        "patient": "Evelyn Bryant",
+        "gender": "female",
+        "age": 75,
+        "photo": "https://randomuser.me/api/portraits/med/women/0.jpg",
+        "date": "2026-08-16",
+        "time": "14:15",
+        "condition": "Hypertensive heart disease",
+        "plan": "Medication adjustment",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1017",
+        "patient": "Edward Sullivan",
+        "gender": "male",
+        "age": 45,
+        "photo": "https://randomuser.me/api/portraits/med/men/69.jpg",
+        "date": "2026-07-28",
+        "time": "10:15",
+        "condition": "New heart murmur",
+        "plan": "Echocardiogram",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1018",
+        "patient": "Carol Kelly",
+        "gender": "female",
+        "age": 57,
+        "photo": "https://randomuser.me/api/portraits/med/women/9.jpg",
+        "date": "2026-07-20",
+        "time": "13:00",
+        "condition": "Hypertensive heart disease",
+        "plan": "Medication adjustment",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "kevin-tran",
+    "name": "Dr. Kevin Tran",
+    "gender": "male",
+    "image": "/assets/images/doctor6.png",
+    "specialty": "Interventional Cardiology",
+    "department": "Interventional Cardiology",
+    "title": "Interventional Cardiologist",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 1000,
+    "experienceYears": 9,
+    "avgResponseMinutes": 15,
+    "fee": 155,
+    "joined": "2020-03-10",
+    "phone": "(217) 555-0347",
+    "email": "kevin.tran@priopulse.com",
+    "location": "PrioPulse Heart Institute · Main Campus, Springfield, IL",
+    "room": "Cardiac Catheterization Lab · Room 312",
+    "languages": [
+      "English",
+      "Vietnamese"
+    ],
+    "bio": "Dr. Tran has worked in interventional cardiology for 9 years and joined the PrioPulse Heart Institute in 2020. Special focus on fast, minimally invasive treatment for blocked arteries and failing valves. Known for explaining results clearly and involving families in every decision.",
+    "expertise": [
+      "Coronary angioplasty & stenting",
+      "Acute MI (STEMI) care",
+      "Structural heart procedures",
+      "Radial-access catheterization"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Emory University School of Medicine",
+        "year": 2013
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Stanford Health Care",
+        "year": 2016
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Mount Sinai Hospital",
+        "year": 2019
+      },
+      {
+        "degree": "Fellowship – Interventional Cardiology",
+        "institution": "NYU Langone Health",
+        "year": 2020
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Internal Medicine – Interventional Cardiology",
+      "Advanced Cardiovascular Life Support (ACLS)"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1021",
+        "patient": "William Brooks",
+        "gender": "male",
+        "age": 48,
+        "photo": "https://randomuser.me/api/portraits/med/men/48.jpg",
+        "date": "2026-10-22",
+        "time": "12:30",
+        "condition": "Multi-vessel coronary disease",
+        "plan": "Heart team review",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1022",
+        "patient": "Anil Kapoor",
+        "gender": "male",
+        "age": 64,
+        "photo": "https://randomuser.me/api/portraits/med/men/23.jpg",
+        "date": "2026-10-18",
+        "time": "11:45",
+        "condition": "In-stent restenosis",
+        "plan": "Repeat angioplasty",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1023",
+        "patient": "Rosa Delgado",
+        "gender": "female",
+        "age": 56,
+        "photo": "https://randomuser.me/api/portraits/med/women/43.jpg",
+        "date": "2026-10-17",
+        "time": "08:00",
+        "condition": "Post-PCI follow-up",
+        "plan": "Dual antiplatelet review",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1030",
+        "patient": "Peter Myers",
+        "gender": "male",
+        "age": 78,
+        "photo": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "date": "2026-09-28",
+        "time": "10:30",
+        "condition": "Unstable angina",
+        "plan": "Coronary angiogram",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1026",
+        "patient": "Charles Bennett",
+        "gender": "male",
+        "age": 46,
+        "photo": "https://randomuser.me/api/portraits/med/men/80.jpg",
+        "date": "2026-09-08",
+        "time": "09:45",
+        "condition": "Post-PCI follow-up",
+        "plan": "Dual antiplatelet review",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1024",
+        "patient": "Mei Huang",
+        "gender": "female",
+        "age": 66,
+        "photo": "https://randomuser.me/api/portraits/med/women/4.jpg",
+        "date": "2026-09-02",
+        "time": "08:15",
+        "condition": "Multi-vessel coronary disease",
+        "plan": "Heart team review",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1027",
+        "patient": "Sandra James",
+        "gender": "female",
+        "age": 45,
+        "photo": "https://randomuser.me/api/portraits/med/women/64.jpg",
+        "date": "2026-08-03",
+        "time": "11:30",
+        "condition": "In-stent restenosis",
+        "plan": "Repeat angioplasty",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1025",
+        "patient": "Elizabeth Cooper",
+        "gender": "female",
+        "age": 56,
+        "photo": "https://randomuser.me/api/portraits/med/women/62.jpg",
+        "date": "2026-07-16",
+        "time": "16:00",
+        "condition": "In-stent restenosis",
+        "plan": "Repeat angioplasty",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1028",
+        "patient": "Priya Shah",
+        "gender": "female",
+        "age": 86,
+        "photo": "https://randomuser.me/api/portraits/med/women/83.jpg",
+        "date": "2026-07-16",
+        "time": "08:15",
+        "condition": "Unstable angina",
+        "plan": "Coronary angiogram",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1029",
+        "patient": "Samuel Ade",
+        "gender": "male",
+        "age": 51,
+        "photo": "https://randomuser.me/api/portraits/med/men/36.jpg",
+        "date": "2026-07-01",
+        "time": "15:00",
+        "condition": "Multi-vessel coronary disease",
+        "plan": "Heart team review",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "nicholas-powell",
+    "name": "Dr. Nicholas Powell",
+    "gender": "male",
+    "image": "/assets/images/doctor18.png",
+    "specialty": "Heart Failure",
+    "department": "Heart Failure",
+    "title": "Director, Advanced Heart Failure Program",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 2440,
+    "experienceYears": 22,
+    "avgResponseMinutes": 35,
+    "fee": 220,
+    "joined": "2015-12-15",
+    "phone": "(217) 555-0131",
+    "email": "nicholas.powell@priopulse.com",
+    "location": "PrioPulse Heart Institute · Main Campus, Springfield, IL",
+    "room": "Heart Failure Clinic · Room 204",
+    "languages": [
+      "English"
+    ],
+    "bio": "With 22 years in heart failure care, Dr. Powell serves as our director, advanced heart failure program. Special focus on helping patients with heart failure stay stable at home through close follow-up and clear medication plans. Works closely with heart failure nurses and follow-up teams so nothing falls through the cracks between visits.",
+    "expertise": [
+      "Heart failure with reduced EF",
+      "Heart failure with preserved EF",
+      "GDMT optimisation",
+      "Remote monitoring",
+      "Diuretic management"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Vanderbilt University School of Medicine",
+        "year": 1998
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "UCLA Medical Center",
+        "year": 2001
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Massachusetts General Hospital",
+        "year": 2004
+      },
+      {
+        "degree": "Fellowship – Advanced Heart Failure & Transplant Cardiology",
+        "institution": "NYU Langone Health",
+        "year": 2005
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Internal Medicine – Advanced Heart Failure & Transplant Cardiology",
+      "Advanced Cardiovascular Life Support (ACLS)",
+      "Fellow, American College of Cardiology (FACC)"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Sat",
+        "hours": "09:00 – 13:00"
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1033",
+        "patient": "Susan Richardson",
+        "gender": "female",
+        "age": 50,
+        "photo": "https://randomuser.me/api/portraits/med/women/11.jpg",
+        "date": "2026-10-22",
+        "time": "12:30",
+        "condition": "Cardiorenal syndrome",
+        "plan": "Diuretic + kidney function plan",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1031",
+        "patient": "Joseph Price",
+        "gender": "male",
+        "age": 85,
+        "photo": "https://randomuser.me/api/portraits/med/men/23.jpg",
+        "date": "2026-10-06",
+        "time": "15:00",
+        "condition": "Heart failure (reduced EF)",
+        "plan": "GDMT titration + remote monitoring",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1032",
+        "patient": "Patricia Morgan",
+        "gender": "female",
+        "age": 75,
+        "photo": "https://randomuser.me/api/portraits/med/women/61.jpg",
+        "date": "2026-10-06",
+        "time": "13:15",
+        "condition": "Fluid overload",
+        "plan": "Daily weights + diuretic adjustment",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1038",
+        "patient": "Daniel Foster",
+        "gender": "male",
+        "age": 66,
+        "photo": "https://randomuser.me/api/portraits/med/men/82.jpg",
+        "date": "2026-10-01",
+        "time": "14:00",
+        "condition": "Acute decompensated heart failure",
+        "plan": "Post-discharge 7-day review",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1037",
+        "patient": "William Brooks",
+        "gender": "male",
+        "age": 71,
+        "photo": "https://randomuser.me/api/portraits/med/men/13.jpg",
+        "date": "2026-08-31",
+        "time": "10:00",
+        "condition": "Hyperkalemia on heart failure therapy",
+        "plan": "Potassium binder + lab follow-up",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1036",
+        "patient": "Anil Kapoor",
+        "gender": "male",
+        "age": 69,
+        "photo": "https://randomuser.me/api/portraits/med/men/23.jpg",
+        "date": "2026-08-08",
+        "time": "12:15",
+        "condition": "Heart failure (reduced EF)",
+        "plan": "GDMT titration + remote monitoring",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1040",
+        "patient": "Michael Turner",
+        "gender": "male",
+        "age": 47,
+        "photo": "https://randomuser.me/api/portraits/med/men/30.jpg",
+        "date": "2026-07-30",
+        "time": "12:45",
+        "condition": "Fluid overload",
+        "plan": "Daily weights + diuretic adjustment",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1039",
+        "patient": "Joyce Sanders",
+        "gender": "female",
+        "age": 89,
+        "photo": "https://randomuser.me/api/portraits/med/women/4.jpg",
+        "date": "2026-07-27",
+        "time": "14:15",
+        "condition": "Fluid overload",
+        "plan": "Daily weights + diuretic adjustment",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1034",
+        "patient": "Rosa Delgado",
+        "gender": "female",
+        "age": 77,
+        "photo": "https://randomuser.me/api/portraits/med/women/14.jpg",
+        "date": "2026-07-24",
+        "time": "14:00",
+        "condition": "Heart failure (reduced EF)",
+        "plan": "GDMT titration + remote monitoring",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1035",
+        "patient": "Mei Huang",
+        "gender": "female",
+        "age": 62,
+        "photo": "https://randomuser.me/api/portraits/med/women/53.jpg",
+        "date": "2026-07-15",
+        "time": "09:00",
+        "condition": "Hyperkalemia on heart failure therapy",
+        "plan": "Potassium binder + lab follow-up",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "david-collins",
+    "name": "Dr. David Collins",
+    "gender": "male",
+    "image": "/assets/images/doctor15.png",
+    "specialty": "Electrophysiology",
+    "department": "Electrophysiology",
+    "title": "Cardiac Electrophysiologist",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 2270,
+    "experienceYears": 18,
+    "avgResponseMinutes": 31,
+    "fee": 200,
+    "joined": "2023-07-20",
+    "phone": "(217) 555-0689",
+    "email": "david.collins@priopulse.com",
+    "location": "PrioPulse Heart Institute · Main Campus, Springfield, IL",
+    "room": "Heart Rhythm Center · Room 301",
+    "languages": [
+      "English",
+      "Tagalog"
+    ],
+    "bio": "With 18 years in cardiac electrophysiology, Dr. Collins serves as our cardiac electrophysiologist. Special focus on heart rhythm problems, including devices that protect heart failure patients. Regularly teaches cardiology fellows and contributes to the heart program's quality-improvement work.",
+    "expertise": [
+      "Atrial fibrillation ablation",
+      "Pacemakers & ICDs",
+      "Cardiac resynchronization (CRT)",
+      "Remote device monitoring"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Duke University School of Medicine",
+        "year": 2002
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Cedars-Sinai Medical Center",
+        "year": 2005
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Cleveland Clinic",
+        "year": 2008
+      },
+      {
+        "degree": "Fellowship – Clinical Cardiac Electrophysiology",
+        "institution": "Stanford Health Care",
+        "year": 2009
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Internal Medicine – Clinical Cardiac Electrophysiology",
+      "Advanced Cardiovascular Life Support (ACLS)",
+      "Fellow, American College of Cardiology (FACC)"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1041",
+        "patient": "Wei Chen",
+        "gender": "male",
+        "age": 63,
+        "photo": "https://randomuser.me/api/portraits/med/men/13.jpg",
+        "date": "2026-10-22",
+        "time": "14:15",
+        "condition": "Atrial fibrillation",
+        "plan": "Rate control + anticoagulation",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1042",
+        "patient": "Mary Collins",
+        "gender": "female",
+        "age": 58,
+        "photo": "https://randomuser.me/api/portraits/med/women/89.jpg",
+        "date": "2026-10-21",
+        "time": "08:15",
+        "condition": "Heart failure with LBBB",
+        "plan": "CRT-D implant",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1043",
+        "patient": "James Carter",
+        "gender": "male",
+        "age": 51,
+        "photo": "https://randomuser.me/api/portraits/med/men/18.jpg",
+        "date": "2026-10-13",
+        "time": "15:15",
+        "condition": "Atrial fibrillation",
+        "plan": "Rate control + anticoagulation",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1048",
+        "patient": "Frank Patterson",
+        "gender": "male",
+        "age": 83,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-09-19",
+        "time": "15:45",
+        "condition": "Persistent atrial fibrillation",
+        "plan": "Catheter ablation",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1046",
+        "patient": "Michael Turner",
+        "gender": "male",
+        "age": 72,
+        "photo": "https://randomuser.me/api/portraits/med/men/31.jpg",
+        "date": "2026-09-15",
+        "time": "12:15",
+        "condition": "Complete heart block",
+        "plan": "Pacemaker implant",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1049",
+        "patient": "Luis Ortega",
+        "gender": "male",
+        "age": 58,
+        "photo": "https://randomuser.me/api/portraits/med/men/20.jpg",
+        "date": "2026-09-09",
+        "time": "16:30",
+        "condition": "Syncope",
+        "plan": "Implantable loop recorder",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1047",
+        "patient": "Harold Powell",
+        "gender": "male",
+        "age": 65,
+        "photo": "https://randomuser.me/api/portraits/med/men/82.jpg",
+        "date": "2026-08-24",
+        "time": "10:45",
+        "condition": "Heart failure with LBBB",
+        "plan": "CRT-D implant",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1045",
+        "patient": "Peter Myers",
+        "gender": "male",
+        "age": 89,
+        "photo": "https://randomuser.me/api/portraits/med/men/82.jpg",
+        "date": "2026-08-14",
+        "time": "08:15",
+        "condition": "Persistent atrial fibrillation",
+        "plan": "Catheter ablation",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1050",
+        "patient": "Karen Peterson",
+        "gender": "female",
+        "age": 84,
+        "photo": "https://randomuser.me/api/portraits/med/women/14.jpg",
+        "date": "2026-07-09",
+        "time": "09:45",
+        "condition": "Persistent atrial fibrillation",
+        "plan": "Catheter ablation",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1044",
+        "patient": "Daniel Foster",
+        "gender": "male",
+        "age": 88,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-07-03",
+        "time": "09:00",
+        "condition": "Heart failure with LBBB",
+        "plan": "CRT-D implant",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "grace-lin",
+    "name": "Dr. Grace Lin",
+    "gender": "female",
+    "image": "/assets/images/doctor1.png",
+    "specialty": "General Cardiology",
+    "department": "General Cardiology",
+    "title": "Consultant Cardiologist",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 2010,
+    "experienceYears": 15,
+    "avgResponseMinutes": 15,
+    "fee": 185,
+    "joined": "2018-09-02",
+    "phone": "(217) 555-0708",
+    "email": "grace.lin@priopulse.com",
+    "location": "PrioPulse Heart Institute · Lakeside Clinic, Chicago, IL",
+    "room": "Cardiology Clinic · Room 216",
+    "languages": [
+      "English",
+      "Mandarin"
+    ],
+    "bio": "With 15 years in cardiology, Dr. Lin serves as our consultant cardiologist. Special focus on catching heart disease early and keeping long-term conditions well controlled. Works closely with heart failure nurses and follow-up teams so nothing falls through the cracks between visits.",
+    "expertise": [
+      "Chest pain evaluation",
+      "Hypertension",
+      "Valve disease follow-up",
+      "Heart failure screening",
+      "Lipid management"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Duke University School of Medicine",
+        "year": 2005
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Stanford Health Care",
+        "year": 2008
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Cedars-Sinai Medical Center",
+        "year": 2011
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "Advanced Cardiovascular Life Support (ACLS)",
+      "Fellow, American College of Cardiology (FACC)"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1052",
+        "patient": "Peter Myers",
+        "gender": "male",
+        "age": 73,
+        "photo": "https://randomuser.me/api/portraits/med/men/31.jpg",
+        "date": "2026-10-21",
+        "time": "12:45",
+        "condition": "New heart murmur",
+        "plan": "Echocardiogram",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1051",
+        "patient": "Martha Hamilton",
+        "gender": "female",
+        "age": 58,
+        "photo": "https://randomuser.me/api/portraits/med/women/50.jpg",
+        "date": "2026-10-18",
+        "time": "15:00",
+        "condition": "Mitral regurgitation",
+        "plan": "Surveillance echocardiogram",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1053",
+        "patient": "Henry Coleman",
+        "gender": "male",
+        "age": 68,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-10-07",
+        "time": "10:45",
+        "condition": "New heart murmur",
+        "plan": "Echocardiogram",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1058",
+        "patient": "Mei Huang",
+        "gender": "female",
+        "age": 71,
+        "photo": "https://randomuser.me/api/portraits/med/women/53.jpg",
+        "date": "2026-10-02",
+        "time": "13:45",
+        "condition": "Hypertensive heart disease",
+        "plan": "Medication adjustment",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1060",
+        "patient": "Elizabeth Cooper",
+        "gender": "female",
+        "age": 79,
+        "photo": "https://randomuser.me/api/portraits/med/women/4.jpg",
+        "date": "2026-09-19",
+        "time": "13:45",
+        "condition": "Mitral regurgitation",
+        "plan": "Surveillance echocardiogram",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1059",
+        "patient": "Anil Kapoor",
+        "gender": "male",
+        "age": 54,
+        "photo": "https://randomuser.me/api/portraits/med/men/79.jpg",
+        "date": "2026-09-19",
+        "time": "08:45",
+        "condition": "Coronary artery disease",
+        "plan": "Secondary prevention review",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1056",
+        "patient": "Sandra James",
+        "gender": "female",
+        "age": 89,
+        "photo": "https://randomuser.me/api/portraits/med/women/61.jpg",
+        "date": "2026-09-15",
+        "time": "11:45",
+        "condition": "Palpitations",
+        "plan": "Holter monitor",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1054",
+        "patient": "Edward Sullivan",
+        "gender": "male",
+        "age": 58,
+        "photo": "https://randomuser.me/api/portraits/med/men/70.jpg",
+        "date": "2026-09-01",
+        "time": "11:30",
+        "condition": "Palpitations",
+        "plan": "Holter monitor",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1055",
+        "patient": "Luis Ortega",
+        "gender": "male",
+        "age": 84,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-07-24",
+        "time": "14:00",
+        "condition": "Coronary artery disease",
+        "plan": "Secondary prevention review",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1057",
+        "patient": "Samuel Ade",
+        "gender": "male",
+        "age": 78,
+        "photo": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "date": "2026-07-02",
+        "time": "12:45",
+        "condition": "Stable angina",
+        "plan": "Stress test + anti-anginal therapy",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "melissa-wong",
+    "name": "Dr. Melissa Wong",
+    "gender": "female",
+    "image": "/assets/images/doctor8.png",
+    "specialty": "Heart Failure",
+    "department": "Heart Failure",
+    "title": "Geriatric Cardiologist",
+    "status": "Active",
+    "employment": "Part Time",
+    "patients": 2350,
+    "experienceYears": 24,
+    "avgResponseMinutes": 27,
+    "fee": 230,
+    "joined": "2013-03-08",
+    "phone": "(217) 555-0870",
+    "email": "melissa.wong@priopulse.com",
+    "location": "PrioPulse Heart Institute · Lakeside Clinic, Chicago, IL",
+    "room": "Heart Failure Clinic · Room 413",
+    "languages": [
+      "English",
+      "Cantonese"
+    ],
+    "bio": "Dr. Wong has worked in heart failure care for 24 years and joined the PrioPulse Heart Institute in 2013. Special focus on heart failure in older adults, keeping treatment simple and patients independent at home. Works closely with heart failure nurses and follow-up teams so nothing falls through the cracks between visits.",
+    "expertise": [
+      "Heart failure in older adults",
+      "Polypharmacy review",
+      "Frailty assessment",
+      "Goals-of-care planning"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Johns Hopkins University School of Medicine",
+        "year": 1998
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Cedars-Sinai Medical Center",
+        "year": 2001
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Mount Sinai Hospital",
+        "year": 2004
+      },
+      {
+        "degree": "Fellowship – Advanced Heart Failure & Transplant Cardiology",
+        "institution": "Cedars-Sinai Medical Center",
+        "year": 2005
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Internal Medicine – Advanced Heart Failure & Transplant Cardiology",
+      "Advanced Cardiovascular Life Support (ACLS)",
+      "Fellow, American College of Cardiology (FACC)"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": null
+      },
+      {
+        "day": "Tue",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Wed",
+        "hours": null
+      },
+      {
+        "day": "Thu",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1061",
+        "patient": "William Brooks",
+        "gender": "male",
+        "age": 71,
+        "photo": "https://randomuser.me/api/portraits/med/men/31.jpg",
+        "date": "2026-10-16",
+        "time": "12:00",
+        "condition": "Hyperkalemia on heart failure therapy",
+        "plan": "Potassium binder + lab follow-up",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1062",
+        "patient": "Albert Russell",
+        "gender": "male",
+        "age": 60,
+        "photo": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "date": "2026-10-14",
+        "time": "08:15",
+        "condition": "Cardiorenal syndrome",
+        "plan": "Diuretic + kidney function plan",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1063",
+        "patient": "Harold Powell",
+        "gender": "male",
+        "age": 64,
+        "photo": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "date": "2026-10-06",
+        "time": "12:45",
+        "condition": "Acute decompensated heart failure",
+        "plan": "Post-discharge 7-day review",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1068",
+        "patient": "Margaret Cox",
+        "gender": "female",
+        "age": 52,
+        "photo": "https://randomuser.me/api/portraits/med/women/65.jpg",
+        "date": "2026-09-18",
+        "time": "14:00",
+        "condition": "Acute decompensated heart failure",
+        "plan": "Post-discharge 7-day review",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1064",
+        "patient": "Karen Peterson",
+        "gender": "female",
+        "age": 70,
+        "photo": "https://randomuser.me/api/portraits/med/women/83.jpg",
+        "date": "2026-08-21",
+        "time": "11:30",
+        "condition": "Heart failure (preserved EF)",
+        "plan": "Diuretic review + follow-up call",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1065",
+        "patient": "Dorothy Howard",
+        "gender": "female",
+        "age": 60,
+        "photo": "https://randomuser.me/api/portraits/med/women/4.jpg",
+        "date": "2026-07-28",
+        "time": "14:00",
+        "condition": "Heart failure (preserved EF)",
+        "plan": "Diuretic review + follow-up call",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1069",
+        "patient": "Gloria Alexander",
+        "gender": "female",
+        "age": 56,
+        "photo": "https://randomuser.me/api/portraits/med/women/28.jpg",
+        "date": "2026-07-25",
+        "time": "15:00",
+        "condition": "Acute decompensated heart failure",
+        "plan": "Post-discharge 7-day review",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1070",
+        "patient": "George Ramirez",
+        "gender": "male",
+        "age": 56,
+        "photo": "https://randomuser.me/api/portraits/med/men/51.jpg",
+        "date": "2026-07-16",
+        "time": "08:00",
+        "condition": "Hyperkalemia on heart failure therapy",
+        "plan": "Potassium binder + lab follow-up",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1067",
+        "patient": "Raymond Jenkins",
+        "gender": "male",
+        "age": 78,
+        "photo": "https://randomuser.me/api/portraits/med/men/13.jpg",
+        "date": "2026-07-15",
+        "time": "11:30",
+        "condition": "Heart failure (reduced EF)",
+        "plan": "GDMT titration + remote monitoring",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1066",
+        "patient": "Susan Richardson",
+        "gender": "female",
+        "age": 71,
+        "photo": "https://randomuser.me/api/portraits/med/women/14.jpg",
+        "date": "2026-07-11",
+        "time": "13:45",
+        "condition": "Hyperkalemia on heart failure therapy",
+        "plan": "Potassium binder + lab follow-up",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "benjamin-reed",
+    "name": "Dr. Benjamin Reed",
+    "gender": "male",
+    "image": "/assets/images/doctor4.png",
+    "specialty": "Heart Failure",
+    "department": "Heart Failure",
+    "title": "Pulmonary Hypertension Specialist",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 760,
+    "experienceYears": 8,
+    "avgResponseMinutes": 9,
+    "fee": 150,
+    "joined": "2018-09-19",
+    "phone": "(217) 555-0848",
+    "email": "benjamin.reed@priopulse.com",
+    "location": "PrioPulse Heart Institute · Lakeside Clinic, Chicago, IL",
+    "room": "Heart Failure Clinic · Room 325",
+    "languages": [
+      "English"
+    ],
+    "bio": "Dr. Reed has worked in heart failure care for 8 years and joined the PrioPulse Heart Institute in 2018. Special focus on right-sided heart failure and pulmonary hypertension. Regularly teaches cardiology fellows and contributes to the heart program's quality-improvement work.",
+    "expertise": [
+      "Pulmonary hypertension",
+      "Right heart failure",
+      "Right heart catheterization",
+      "Heart failure with preserved EF"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Baylor College of Medicine",
+        "year": 2013
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Cleveland Clinic",
+        "year": 2016
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Mount Sinai Hospital",
+        "year": 2019
+      },
+      {
+        "degree": "Fellowship – Advanced Heart Failure & Transplant Cardiology",
+        "institution": "Massachusetts General Hospital",
+        "year": 2020
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Internal Medicine – Advanced Heart Failure & Transplant Cardiology"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1073",
+        "patient": "Rosa Delgado",
+        "gender": "female",
+        "age": 69,
+        "photo": "https://randomuser.me/api/portraits/med/women/61.jpg",
+        "date": "2026-10-18",
+        "time": "14:45",
+        "condition": "Cardiorenal syndrome",
+        "plan": "Diuretic + kidney function plan",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1071",
+        "patient": "Walter Long",
+        "gender": "male",
+        "age": 68,
+        "photo": "https://randomuser.me/api/portraits/med/men/13.jpg",
+        "date": "2026-10-18",
+        "time": "12:45",
+        "condition": "Heart failure (reduced EF)",
+        "plan": "GDMT titration + remote monitoring",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1072",
+        "patient": "Michael Turner",
+        "gender": "male",
+        "age": 50,
+        "photo": "https://randomuser.me/api/portraits/med/men/1.jpg",
+        "date": "2026-10-14",
+        "time": "13:15",
+        "condition": "Acute decompensated heart failure",
+        "plan": "Post-discharge 7-day review",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1076",
+        "patient": "Wei Chen",
+        "gender": "male",
+        "age": 49,
+        "photo": "https://randomuser.me/api/portraits/med/men/70.jpg",
+        "date": "2026-09-19",
+        "time": "14:45",
+        "condition": "Fluid overload",
+        "plan": "Daily weights + diuretic adjustment",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1074",
+        "patient": "Albert Russell",
+        "gender": "male",
+        "age": 83,
+        "photo": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "date": "2026-08-27",
+        "time": "11:45",
+        "condition": "Fluid overload",
+        "plan": "Daily weights + diuretic adjustment",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1079",
+        "patient": "Joyce Sanders",
+        "gender": "female",
+        "age": 73,
+        "photo": "https://randomuser.me/api/portraits/med/women/4.jpg",
+        "date": "2026-08-26",
+        "time": "10:15",
+        "condition": "Acute decompensated heart failure",
+        "plan": "Post-discharge 7-day review",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1080",
+        "patient": "Carl Hayes",
+        "gender": "male",
+        "age": 88,
+        "photo": "https://randomuser.me/api/portraits/med/men/34.jpg",
+        "date": "2026-08-14",
+        "time": "13:30",
+        "condition": "Heart failure (reduced EF)",
+        "plan": "GDMT titration + remote monitoring",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1075",
+        "patient": "Peter Myers",
+        "gender": "male",
+        "age": 75,
+        "photo": "https://randomuser.me/api/portraits/med/men/34.jpg",
+        "date": "2026-07-22",
+        "time": "16:45",
+        "condition": "Cardiorenal syndrome",
+        "plan": "Diuretic + kidney function plan",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1077",
+        "patient": "Carol Kelly",
+        "gender": "female",
+        "age": 81,
+        "photo": "https://randomuser.me/api/portraits/med/women/14.jpg",
+        "date": "2026-07-14",
+        "time": "09:00",
+        "condition": "Heart failure (reduced EF)",
+        "plan": "GDMT titration + remote monitoring",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1078",
+        "patient": "Charles Bennett",
+        "gender": "male",
+        "age": 75,
+        "photo": "https://randomuser.me/api/portraits/med/men/72.jpg",
+        "date": "2026-07-04",
+        "time": "11:45",
+        "condition": "Hyperkalemia on heart failure therapy",
+        "plan": "Potassium binder + lab follow-up",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "emily-flores",
+    "name": "Dr. Emily Flores",
+    "gender": "female",
+    "image": "/assets/images/doctor2.png",
+    "specialty": "Cardiac Imaging",
+    "department": "Cardiac Imaging",
+    "title": "Cardiac Imaging Specialist",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 1030,
+    "experienceYears": 9,
+    "avgResponseMinutes": 22,
+    "fee": 155,
+    "joined": "2022-04-12",
+    "phone": "(217) 555-0707",
+    "email": "emily.flores@priopulse.com",
+    "location": "PrioPulse Heart Institute · North Clinic, Evanston, IL",
+    "room": "Cardiac Imaging Suite · Room 212",
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "bio": "With 9 years in cardiac imaging, Dr. Flores serves as our cardiac imaging specialist. Special focus on clear imaging results that show how well the heart is pumping and what to do next. Known for explaining results clearly and involving families in every decision.",
+    "expertise": [
+      "Echocardiography",
+      "Cardiac MRI",
+      "CT coronary angiography",
+      "Stress imaging"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Duke University School of Medicine",
+        "year": 2011
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Massachusetts General Hospital",
+        "year": 2014
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Cleveland Clinic",
+        "year": 2017
+      },
+      {
+        "degree": "Fellowship – Advanced Cardiovascular Imaging",
+        "institution": "Mayo Clinic",
+        "year": 2018
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "National Board of Echocardiography – Adult Comprehensive Echocardiography",
+      "Advanced Cardiovascular Life Support (ACLS)"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1082",
+        "patient": "Priya Shah",
+        "gender": "female",
+        "age": 46,
+        "photo": "https://randomuser.me/api/portraits/med/women/80.jpg",
+        "date": "2026-10-18",
+        "time": "09:00",
+        "condition": "Reduced ejection fraction",
+        "plan": "Follow-up echocardiogram",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1083",
+        "patient": "William Brooks",
+        "gender": "male",
+        "age": 61,
+        "photo": "https://randomuser.me/api/portraits/med/men/23.jpg",
+        "date": "2026-10-13",
+        "time": "11:30",
+        "condition": "Chest pain",
+        "plan": "CT coronary angiogram",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1081",
+        "patient": "Albert Russell",
+        "gender": "male",
+        "age": 67,
+        "photo": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "date": "2026-10-07",
+        "time": "14:15",
+        "condition": "Reduced ejection fraction",
+        "plan": "Follow-up echocardiogram",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1084",
+        "patient": "Robert Hughes",
+        "gender": "male",
+        "age": 88,
+        "photo": "https://randomuser.me/api/portraits/med/men/34.jpg",
+        "date": "2026-09-29",
+        "time": "15:45",
+        "condition": "Reduced ejection fraction",
+        "plan": "Follow-up echocardiogram",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1088",
+        "patient": "Edward Sullivan",
+        "gender": "male",
+        "age": 61,
+        "photo": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "date": "2026-09-10",
+        "time": "11:30",
+        "condition": "Pericardial effusion",
+        "plan": "Echocardiogram",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1085",
+        "patient": "Daniel Foster",
+        "gender": "male",
+        "age": 57,
+        "photo": "https://randomuser.me/api/portraits/med/men/10.jpg",
+        "date": "2026-08-18",
+        "time": "11:30",
+        "condition": "Reduced ejection fraction",
+        "plan": "Follow-up echocardiogram",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1090",
+        "patient": "Dorothy Howard",
+        "gender": "female",
+        "age": 80,
+        "photo": "https://randomuser.me/api/portraits/med/women/23.jpg",
+        "date": "2026-08-06",
+        "time": "10:00",
+        "condition": "Pericardial effusion",
+        "plan": "Echocardiogram",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1089",
+        "patient": "Karen Peterson",
+        "gender": "female",
+        "age": 84,
+        "photo": "https://randomuser.me/api/portraits/med/women/53.jpg",
+        "date": "2026-08-05",
+        "time": "14:15",
+        "condition": "Pericardial effusion",
+        "plan": "Echocardiogram",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1087",
+        "patient": "Samuel Ade",
+        "gender": "male",
+        "age": 84,
+        "photo": "https://randomuser.me/api/portraits/med/men/13.jpg",
+        "date": "2026-07-11",
+        "time": "11:45",
+        "condition": "Aortic stenosis",
+        "plan": "Surveillance echocardiogram",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1086",
+        "patient": "Anil Kapoor",
+        "gender": "male",
+        "age": 72,
+        "photo": "https://randomuser.me/api/portraits/med/men/13.jpg",
+        "date": "2026-07-02",
+        "time": "10:00",
+        "condition": "Chest pain",
+        "plan": "CT coronary angiogram",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "ryan-park",
+    "name": "Dr. Ryan Park",
+    "gender": "male",
+    "image": "/assets/images/doctor3.png",
+    "specialty": "Cardiac Surgery",
+    "department": "Cardiac Surgery",
+    "title": "Cardiothoracic Surgeon",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 1260,
+    "experienceYears": 10,
+    "avgResponseMinutes": 34,
+    "fee": 160,
+    "joined": "2016-12-20",
+    "phone": "(217) 555-0610",
+    "email": "ryan.park@priopulse.com",
+    "location": "PrioPulse Heart Institute · Main Campus, Springfield, IL",
+    "room": "Cardiothoracic Surgery Unit · Room 303",
+    "languages": [
+      "English",
+      "Korean"
+    ],
+    "bio": "Dr. Park is a cardiothoracic surgeon with 10 years of experience in cardiac surgery. Special focus on heart surgery with careful preparation and a smooth hand-over to recovery and rehab. Known for explaining results clearly and involving families in every decision.",
+    "expertise": [
+      "Coronary artery bypass (CABG)",
+      "Valve repair & replacement",
+      "LVAD implantation",
+      "Minimally invasive heart surgery"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Vanderbilt University School of Medicine",
+        "year": 2012
+      },
+      {
+        "degree": "Residency – General Surgery",
+        "institution": "Mount Sinai Hospital",
+        "year": 2017
+      },
+      {
+        "degree": "Fellowship – Cardiothoracic Surgery",
+        "institution": "Cedars-Sinai Medical Center",
+        "year": 2019
+      }
+    ],
+    "certifications": [
+      "American Board of Surgery",
+      "American Board of Thoracic Surgery"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Sat",
+        "hours": "09:00 – 13:00"
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1093",
+        "patient": "Mei Huang",
+        "gender": "female",
+        "age": 58,
+        "photo": "https://randomuser.me/api/portraits/med/women/42.jpg",
+        "date": "2026-10-13",
+        "time": "15:45",
+        "condition": "Aortic stenosis",
+        "plan": "Aortic valve replacement",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1091",
+        "patient": "Nancy Torres",
+        "gender": "female",
+        "age": 67,
+        "photo": "https://randomuser.me/api/portraits/med/women/4.jpg",
+        "date": "2026-10-08",
+        "time": "08:15",
+        "condition": "Three-vessel coronary disease",
+        "plan": "CABG",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1092",
+        "patient": "Susan Richardson",
+        "gender": "female",
+        "age": 74,
+        "photo": "https://randomuser.me/api/portraits/med/women/53.jpg",
+        "date": "2026-10-06",
+        "time": "13:45",
+        "condition": "Aortic stenosis",
+        "plan": "Aortic valve replacement",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1099",
+        "patient": "Evelyn Bryant",
+        "gender": "female",
+        "age": 66,
+        "photo": "https://randomuser.me/api/portraits/med/women/14.jpg",
+        "date": "2026-09-24",
+        "time": "12:45",
+        "condition": "Ascending aortic aneurysm",
+        "plan": "Surgical planning",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1094",
+        "patient": "James Carter",
+        "gender": "male",
+        "age": 51,
+        "photo": "https://randomuser.me/api/portraits/med/men/39.jpg",
+        "date": "2026-09-23",
+        "time": "13:00",
+        "condition": "Severe mitral regurgitation",
+        "plan": "Mitral valve repair",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1100",
+        "patient": "Margaret Cox",
+        "gender": "female",
+        "age": 73,
+        "photo": "https://randomuser.me/api/portraits/med/women/53.jpg",
+        "date": "2026-09-20",
+        "time": "11:45",
+        "condition": "Post-operative recovery",
+        "plan": "Wound + rhythm check",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1097",
+        "patient": "Helen Ward",
+        "gender": "female",
+        "age": 61,
+        "photo": "https://randomuser.me/api/portraits/med/women/83.jpg",
+        "date": "2026-08-30",
+        "time": "16:30",
+        "condition": "Aortic stenosis",
+        "plan": "Aortic valve replacement",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1095",
+        "patient": "Peter Myers",
+        "gender": "male",
+        "age": 81,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-08-09",
+        "time": "09:00",
+        "condition": "Three-vessel coronary disease",
+        "plan": "CABG",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1098",
+        "patient": "Daniel Foster",
+        "gender": "male",
+        "age": 84,
+        "photo": "https://randomuser.me/api/portraits/med/men/13.jpg",
+        "date": "2026-07-15",
+        "time": "15:15",
+        "condition": "Post-operative recovery",
+        "plan": "Wound + rhythm check",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1096",
+        "patient": "Rosa Delgado",
+        "gender": "female",
+        "age": 67,
+        "photo": "https://randomuser.me/api/portraits/med/women/53.jpg",
+        "date": "2026-07-06",
+        "time": "08:15",
+        "condition": "Three-vessel coronary disease",
+        "plan": "CABG",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "amanda-ward",
+    "name": "Dr. Amanda Ward",
+    "gender": "female",
+    "image": "/assets/images/doctor5.png",
+    "specialty": "Acute Cardiac Care",
+    "department": "Acute Cardiac Care",
+    "title": "CCU Cardiologist",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 790,
+    "experienceYears": 6,
+    "avgResponseMinutes": 23,
+    "fee": 140,
+    "joined": "2020-05-12",
+    "phone": "(217) 555-0354",
+    "email": "amanda.ward@priopulse.com",
+    "location": "PrioPulse Heart Institute · Lakeside Clinic, Chicago, IL",
+    "room": "Cardiac Intensive Care Unit · Room 222",
+    "languages": [
+      "English"
+    ],
+    "bio": "With 6 years in acute cardiac care, Dr. Ward serves as our ccu cardiologist. Special focus on stabilising critically ill heart patients and planning a safe discharge. Regularly teaches cardiology fellows and contributes to the heart program's quality-improvement work.",
+    "expertise": [
+      "Cardiogenic shock",
+      "Acute heart failure",
+      "Mechanical circulatory support",
+      "Critical care echocardiography"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Johns Hopkins University School of Medicine",
+        "year": 2015
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Cleveland Clinic",
+        "year": 2018
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Massachusetts General Hospital",
+        "year": 2021
+      },
+      {
+        "degree": "Fellowship – Critical Care Cardiology",
+        "institution": "Cleveland Clinic",
+        "year": 2022
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Internal Medicine – Critical Care Medicine"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1103",
+        "patient": "Joseph Price",
+        "gender": "male",
+        "age": 80,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-10-18",
+        "time": "16:30",
+        "condition": "Acute decompensated heart failure",
+        "plan": "IV diuretics + monitoring",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1102",
+        "patient": "Ruth Watson",
+        "gender": "female",
+        "age": 74,
+        "photo": "https://randomuser.me/api/portraits/med/women/53.jpg",
+        "date": "2026-10-14",
+        "time": "15:45",
+        "condition": "Unstable arrhythmia",
+        "plan": "Telemetry + rhythm control",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1101",
+        "patient": "Albert Russell",
+        "gender": "male",
+        "age": 73,
+        "photo": "https://randomuser.me/api/portraits/med/men/21.jpg",
+        "date": "2026-10-08",
+        "time": "16:15",
+        "condition": "Post-cardiac arrest care",
+        "plan": "Targeted temperature management",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1106",
+        "patient": "Grace Okafor",
+        "gender": "female",
+        "age": 84,
+        "photo": "https://randomuser.me/api/portraits/med/women/61.jpg",
+        "date": "2026-09-17",
+        "time": "14:15",
+        "condition": "Cardiogenic shock",
+        "plan": "Mechanical support",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1108",
+        "patient": "George Ramirez",
+        "gender": "male",
+        "age": 56,
+        "photo": "https://randomuser.me/api/portraits/med/men/50.jpg",
+        "date": "2026-09-17",
+        "time": "12:15",
+        "condition": "Cardiogenic shock",
+        "plan": "Mechanical support",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1105",
+        "patient": "Mary Collins",
+        "gender": "female",
+        "age": 61,
+        "photo": "https://randomuser.me/api/portraits/med/women/0.jpg",
+        "date": "2026-09-08",
+        "time": "12:00",
+        "condition": "Unstable arrhythmia",
+        "plan": "Telemetry + rhythm control",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1104",
+        "patient": "James Carter",
+        "gender": "male",
+        "age": 87,
+        "photo": "https://randomuser.me/api/portraits/med/men/82.jpg",
+        "date": "2026-08-19",
+        "time": "15:00",
+        "condition": "Heart failure readmission",
+        "plan": "Discharge planning + nurse follow-up",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1109",
+        "patient": "Joyce Sanders",
+        "gender": "female",
+        "age": 46,
+        "photo": "https://randomuser.me/api/portraits/med/women/94.jpg",
+        "date": "2026-08-14",
+        "time": "11:30",
+        "condition": "Post-cardiac arrest care",
+        "plan": "Targeted temperature management",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1107",
+        "patient": "Evelyn Bryant",
+        "gender": "female",
+        "age": 54,
+        "photo": "https://randomuser.me/api/portraits/med/women/24.jpg",
+        "date": "2026-07-24",
+        "time": "16:00",
+        "condition": "Post-cardiac arrest care",
+        "plan": "Targeted temperature management",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1110",
+        "patient": "Eugene Griffin",
+        "gender": "male",
+        "age": 82,
+        "photo": "https://randomuser.me/api/portraits/med/men/23.jpg",
+        "date": "2026-07-16",
+        "time": "15:45",
+        "condition": "Acute decompensated heart failure",
+        "plan": "IV diuretics + monitoring",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "brian-hughes",
+    "name": "Dr. Brian Hughes",
+    "gender": "male",
+    "image": "/assets/images/doctor7.png",
+    "specialty": "Cardiac Surgery",
+    "department": "Cardiac Surgery",
+    "title": "Cardiac Surgeon",
+    "status": "On Leave",
+    "employment": "Full Time",
+    "leaveUntil": "2026-11-09",
+    "patients": 750,
+    "experienceYears": 7,
+    "avgResponseMinutes": 11,
+    "fee": 145,
+    "joined": "2020-05-28",
+    "phone": "(217) 555-0105",
+    "email": "brian.hughes@priopulse.com",
+    "location": "PrioPulse Heart Institute · North Clinic, Evanston, IL",
+    "room": "Cardiothoracic Surgery Unit · Room 215",
+    "languages": [
+      "English"
+    ],
+    "bio": "Dr. Hughes has worked in cardiac surgery for 7 years and joined the PrioPulse Heart Institute in 2020. Special focus on heart surgery with careful preparation and a smooth hand-over to recovery and rehab. Known for explaining results clearly and involving families in every decision.",
+    "expertise": [
+      "Coronary artery bypass (CABG)",
+      "Valve repair & replacement",
+      "LVAD implantation",
+      "Minimally invasive heart surgery"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Northwestern University Feinberg School of Medicine",
+        "year": 2015
+      },
+      {
+        "degree": "Residency – General Surgery",
+        "institution": "Mount Sinai Hospital",
+        "year": 2020
+      },
+      {
+        "degree": "Fellowship – Cardiothoracic Surgery",
+        "institution": "UCLA Medical Center",
+        "year": 2022
+      }
+    ],
+    "certifications": [
+      "American Board of Surgery",
+      "American Board of Thoracic Surgery"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "12:00 – 20:00"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1113",
+        "patient": "Mei Huang",
+        "gender": "female",
+        "age": 86,
+        "photo": "https://randomuser.me/api/portraits/med/women/61.jpg",
+        "date": "2026-10-13",
+        "time": "09:45",
+        "condition": "End-stage heart failure",
+        "plan": "LVAD evaluation",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1111",
+        "patient": "Sandra James",
+        "gender": "female",
+        "age": 59,
+        "photo": "https://randomuser.me/api/portraits/med/women/47.jpg",
+        "date": "2026-10-09",
+        "time": "13:00",
+        "condition": "Post-operative recovery",
+        "plan": "Wound + rhythm check",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1112",
+        "patient": "William Brooks",
+        "gender": "male",
+        "age": 53,
+        "photo": "https://randomuser.me/api/portraits/med/men/15.jpg",
+        "date": "2026-10-06",
+        "time": "16:15",
+        "condition": "Severe mitral regurgitation",
+        "plan": "Mitral valve repair",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1119",
+        "patient": "Peter Myers",
+        "gender": "male",
+        "age": 51,
+        "photo": "https://randomuser.me/api/portraits/med/men/30.jpg",
+        "date": "2026-09-17",
+        "time": "12:15",
+        "condition": "Severe mitral regurgitation",
+        "plan": "Mitral valve repair",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1114",
+        "patient": "Frank Patterson",
+        "gender": "male",
+        "age": 61,
+        "photo": "https://randomuser.me/api/portraits/med/men/82.jpg",
+        "date": "2026-09-10",
+        "time": "13:15",
+        "condition": "End-stage heart failure",
+        "plan": "LVAD evaluation",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1120",
+        "patient": "Joseph Price",
+        "gender": "male",
+        "age": 70,
+        "photo": "https://randomuser.me/api/portraits/med/men/23.jpg",
+        "date": "2026-08-17",
+        "time": "13:00",
+        "condition": "Three-vessel coronary disease",
+        "plan": "CABG",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1118",
+        "patient": "Anil Kapoor",
+        "gender": "male",
+        "age": 87,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-08-11",
+        "time": "11:45",
+        "condition": "Severe mitral regurgitation",
+        "plan": "Mitral valve repair",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1117",
+        "patient": "James Carter",
+        "gender": "male",
+        "age": 83,
+        "photo": "https://randomuser.me/api/portraits/med/men/34.jpg",
+        "date": "2026-07-26",
+        "time": "08:15",
+        "condition": "Severe mitral regurgitation",
+        "plan": "Mitral valve repair",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1116",
+        "patient": "Joyce Sanders",
+        "gender": "female",
+        "age": 89,
+        "photo": "https://randomuser.me/api/portraits/med/women/53.jpg",
+        "date": "2026-07-17",
+        "time": "13:30",
+        "condition": "Post-operative recovery",
+        "plan": "Wound + rhythm check",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1115",
+        "patient": "Raymond Jenkins",
+        "gender": "male",
+        "age": 86,
+        "photo": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "date": "2026-07-07",
+        "time": "09:00",
+        "condition": "Three-vessel coronary disease",
+        "plan": "CABG",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "samuel-kim",
+    "name": "Dr. Samuel Kim",
+    "gender": "male",
+    "image": "/assets/images/doctor9.png",
+    "specialty": "Preventive Cardiology",
+    "department": "Preventive Cardiology",
+    "title": "Preventive Cardiologist",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 1410,
+    "experienceYears": 11,
+    "avgResponseMinutes": 12,
+    "fee": 165,
+    "joined": "2015-09-10",
+    "phone": "(217) 555-0241",
+    "email": "samuel.kim@priopulse.com",
+    "location": "PrioPulse Heart Institute · North Clinic, Evanston, IL",
+    "room": "Cardiac Rehabilitation Center · Room 328",
+    "languages": [
+      "English",
+      "Korean"
+    ],
+    "bio": "Dr. Kim has worked in preventive cardiology for 11 years and joined the PrioPulse Heart Institute in 2015. Special focus on lowering the chance of a first or repeat heart event through exercise, diet and medication. Regularly teaches cardiology fellows and contributes to the heart program's quality-improvement work.",
+    "expertise": [
+      "Cardiac rehabilitation",
+      "Lipid disorders",
+      "Blood pressure control",
+      "Lifestyle & exercise programs"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "University of Michigan Medical School",
+        "year": 2010
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Mount Sinai Hospital",
+        "year": 2013
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "UCLA Medical Center",
+        "year": 2016
+      },
+      {
+        "degree": "Fellowship – Preventive Cardiology",
+        "institution": "Cleveland Clinic",
+        "year": 2017
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Clinical Lipidology"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Sat",
+        "hours": "09:00 – 13:00"
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1123",
+        "patient": "Margaret Cox",
+        "gender": "female",
+        "age": 46,
+        "photo": "https://randomuser.me/api/portraits/med/women/40.jpg",
+        "date": "2026-10-18",
+        "time": "08:45",
+        "condition": "Smoking cessation after heart attack",
+        "plan": "Counselling + nicotine replacement",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1121",
+        "patient": "William Brooks",
+        "gender": "male",
+        "age": 63,
+        "photo": "https://randomuser.me/api/portraits/med/men/31.jpg",
+        "date": "2026-10-14",
+        "time": "15:30",
+        "condition": "Smoking cessation after heart attack",
+        "plan": "Counselling + nicotine replacement",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1122",
+        "patient": "Walter Long",
+        "gender": "male",
+        "age": 64,
+        "photo": "https://randomuser.me/api/portraits/med/men/72.jpg",
+        "date": "2026-10-13",
+        "time": "12:15",
+        "condition": "Heart failure (stable)",
+        "plan": "Supervised exercise program",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1125",
+        "patient": "Patricia Morgan",
+        "gender": "female",
+        "age": 72,
+        "photo": "https://randomuser.me/api/portraits/med/women/0.jpg",
+        "date": "2026-09-21",
+        "time": "08:15",
+        "condition": "Metabolic syndrome",
+        "plan": "Lifestyle program",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1124",
+        "patient": "Evelyn Bryant",
+        "gender": "female",
+        "age": 80,
+        "photo": "https://randomuser.me/api/portraits/med/women/61.jpg",
+        "date": "2026-09-13",
+        "time": "14:30",
+        "condition": "Metabolic syndrome",
+        "plan": "Lifestyle program",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1129",
+        "patient": "Ruth Watson",
+        "gender": "female",
+        "age": 54,
+        "photo": "https://randomuser.me/api/portraits/med/women/17.jpg",
+        "date": "2026-09-01",
+        "time": "08:45",
+        "condition": "Heart failure (stable)",
+        "plan": "Supervised exercise program",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1128",
+        "patient": "Gloria Alexander",
+        "gender": "female",
+        "age": 89,
+        "photo": "https://randomuser.me/api/portraits/med/women/0.jpg",
+        "date": "2026-08-28",
+        "time": "10:15",
+        "condition": "Heart failure (stable)",
+        "plan": "Supervised exercise program",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1127",
+        "patient": "Sharon Brooks",
+        "gender": "female",
+        "age": 67,
+        "photo": "https://randomuser.me/api/portraits/med/women/4.jpg",
+        "date": "2026-08-26",
+        "time": "08:45",
+        "condition": "Resistant hypertension",
+        "plan": "Medication + home BP plan",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1126",
+        "patient": "George Ramirez",
+        "gender": "male",
+        "age": 65,
+        "photo": "https://randomuser.me/api/portraits/med/men/21.jpg",
+        "date": "2026-07-27",
+        "time": "14:00",
+        "condition": "Resistant hypertension",
+        "plan": "Medication + home BP plan",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1130",
+        "patient": "Susan Richardson",
+        "gender": "female",
+        "age": 80,
+        "photo": "https://randomuser.me/api/portraits/med/women/14.jpg",
+        "date": "2026-07-06",
+        "time": "13:45",
+        "condition": "Smoking cessation after heart attack",
+        "plan": "Counselling + nicotine replacement",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "kimberly-morris",
+    "name": "Dr. Kimberly Morris",
+    "gender": "female",
+    "image": "/assets/images/doctor10.png",
+    "specialty": "Cardiac Imaging",
+    "department": "Cardiac Imaging",
+    "title": "Echocardiography Lead",
+    "status": "Active",
+    "employment": "Part Time",
+    "patients": 1230,
+    "experienceYears": 9,
+    "avgResponseMinutes": 10,
+    "fee": 155,
+    "joined": "2022-03-24",
+    "phone": "(217) 555-0977",
+    "email": "kimberly.morris@priopulse.com",
+    "location": "PrioPulse Heart Institute · North Clinic, Evanston, IL",
+    "room": "Cardiac Imaging Suite · Room 113",
+    "languages": [
+      "English"
+    ],
+    "bio": "Dr. Morris is a echocardiography lead with 9 years of experience in cardiac imaging. Special focus on clear imaging results that show how well the heart is pumping and what to do next. Regularly teaches cardiology fellows and contributes to the heart program's quality-improvement work.",
+    "expertise": [
+      "Echocardiography",
+      "Cardiac MRI",
+      "CT coronary angiography",
+      "Stress imaging"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Baylor College of Medicine",
+        "year": 2013
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Mayo Clinic",
+        "year": 2016
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Mount Sinai Hospital",
+        "year": 2019
+      },
+      {
+        "degree": "Fellowship – Advanced Cardiovascular Imaging",
+        "institution": "NYU Langone Health",
+        "year": 2020
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "National Board of Echocardiography – Adult Comprehensive Echocardiography"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Wed",
+        "hours": null
+      },
+      {
+        "day": "Thu",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Fri",
+        "hours": null
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1131",
+        "patient": "Thomas Reed",
+        "gender": "male",
+        "age": 89,
+        "photo": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "date": "2026-10-13",
+        "time": "10:30",
+        "condition": "Reduced ejection fraction",
+        "plan": "Follow-up echocardiogram",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1133",
+        "patient": "Nancy Torres",
+        "gender": "female",
+        "age": 66,
+        "photo": "https://randomuser.me/api/portraits/med/women/4.jpg",
+        "date": "2026-10-10",
+        "time": "16:30",
+        "condition": "Ischemia work-up",
+        "plan": "Stress echocardiogram",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1132",
+        "patient": "Samuel Ade",
+        "gender": "male",
+        "age": 67,
+        "photo": "https://randomuser.me/api/portraits/med/men/34.jpg",
+        "date": "2026-10-05",
+        "time": "14:00",
+        "condition": "Chest pain",
+        "plan": "CT coronary angiogram",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1139",
+        "patient": "Arthur Perry",
+        "gender": "male",
+        "age": 60,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-09-22",
+        "time": "10:30",
+        "condition": "Suspected cardiomyopathy",
+        "plan": "Cardiac MRI",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1140",
+        "patient": "Joseph Price",
+        "gender": "male",
+        "age": 67,
+        "photo": "https://randomuser.me/api/portraits/med/men/31.jpg",
+        "date": "2026-09-14",
+        "time": "12:30",
+        "condition": "Reduced ejection fraction",
+        "plan": "Follow-up echocardiogram",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1134",
+        "patient": "Gloria Alexander",
+        "gender": "female",
+        "age": 84,
+        "photo": "https://randomuser.me/api/portraits/med/women/4.jpg",
+        "date": "2026-09-11",
+        "time": "15:15",
+        "condition": "Ischemia work-up",
+        "plan": "Stress echocardiogram",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1138",
+        "patient": "Betty Gray",
+        "gender": "female",
+        "age": 46,
+        "photo": "https://randomuser.me/api/portraits/med/women/19.jpg",
+        "date": "2026-08-25",
+        "time": "08:30",
+        "condition": "Aortic stenosis",
+        "plan": "Surveillance echocardiogram",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1137",
+        "patient": "Anil Kapoor",
+        "gender": "male",
+        "age": 50,
+        "photo": "https://randomuser.me/api/portraits/med/men/78.jpg",
+        "date": "2026-08-25",
+        "time": "08:00",
+        "condition": "Pericardial effusion",
+        "plan": "Echocardiogram",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1135",
+        "patient": "Michael Turner",
+        "gender": "male",
+        "age": 69,
+        "photo": "https://randomuser.me/api/portraits/med/men/72.jpg",
+        "date": "2026-08-20",
+        "time": "12:30",
+        "condition": "Pericardial effusion",
+        "plan": "Echocardiogram",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1136",
+        "patient": "Mei Huang",
+        "gender": "female",
+        "age": 55,
+        "photo": "https://randomuser.me/api/portraits/med/women/51.jpg",
+        "date": "2026-08-03",
+        "time": "13:00",
+        "condition": "Aortic stenosis",
+        "plan": "Surveillance echocardiogram",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "stephanie-cho",
+    "name": "Dr. Stephanie Cho",
+    "gender": "female",
+    "image": "/assets/images/doctor11.png",
+    "specialty": "Electrophysiology",
+    "department": "Electrophysiology",
+    "title": "Electrophysiologist",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 640,
+    "experienceYears": 6,
+    "avgResponseMinutes": 17,
+    "fee": 140,
+    "joined": "2020-02-13",
+    "phone": "(217) 555-0209",
+    "email": "stephanie.cho@priopulse.com",
+    "location": "PrioPulse Heart Institute · Lakeside Clinic, Chicago, IL",
+    "room": "Heart Rhythm Center · Room 301",
+    "languages": [
+      "English",
+      "Korean"
+    ],
+    "bio": "Dr. Cho has worked in cardiac electrophysiology for 6 years and joined the PrioPulse Heart Institute in 2020. Special focus on heart rhythm problems, including devices that protect heart failure patients. Works closely with heart failure nurses and follow-up teams so nothing falls through the cracks between visits.",
+    "expertise": [
+      "Atrial fibrillation ablation",
+      "Pacemakers & ICDs",
+      "Cardiac resynchronization (CRT)",
+      "Remote device monitoring"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Duke University School of Medicine",
+        "year": 2015
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "UCLA Medical Center",
+        "year": 2018
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Mount Sinai Hospital",
+        "year": 2021
+      },
+      {
+        "degree": "Fellowship – Clinical Cardiac Electrophysiology",
+        "institution": "Cedars-Sinai Medical Center",
+        "year": 2022
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Internal Medicine – Clinical Cardiac Electrophysiology"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "07:30 – 15:30"
+      },
+      {
+        "day": "Tue",
+        "hours": "07:30 – 15:30"
+      },
+      {
+        "day": "Wed",
+        "hours": "07:30 – 15:30"
+      },
+      {
+        "day": "Thu",
+        "hours": "07:30 – 15:30"
+      },
+      {
+        "day": "Fri",
+        "hours": "07:30 – 15:30"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1141",
+        "patient": "Frank Patterson",
+        "gender": "male",
+        "age": 52,
+        "photo": "https://randomuser.me/api/portraits/med/men/93.jpg",
+        "date": "2026-10-20",
+        "time": "12:30",
+        "condition": "Heart failure with LBBB",
+        "plan": "CRT-D implant",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1143",
+        "patient": "Robert Hughes",
+        "gender": "male",
+        "age": 75,
+        "photo": "https://randomuser.me/api/portraits/med/men/21.jpg",
+        "date": "2026-10-17",
+        "time": "09:45",
+        "condition": "Ventricular tachycardia",
+        "plan": "ICD check + medication review",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1142",
+        "patient": "Thomas Reed",
+        "gender": "male",
+        "age": 75,
+        "photo": "https://randomuser.me/api/portraits/med/men/13.jpg",
+        "date": "2026-10-05",
+        "time": "12:30",
+        "condition": "Atrial fibrillation",
+        "plan": "Rate control + anticoagulation",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1145",
+        "patient": "Charles Bennett",
+        "gender": "male",
+        "age": 84,
+        "photo": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "date": "2026-09-06",
+        "time": "13:30",
+        "condition": "Complete heart block",
+        "plan": "Pacemaker implant",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1144",
+        "patient": "Patricia Morgan",
+        "gender": "female",
+        "age": 50,
+        "photo": "https://randomuser.me/api/portraits/med/women/55.jpg",
+        "date": "2026-09-01",
+        "time": "08:30",
+        "condition": "Ventricular tachycardia",
+        "plan": "ICD check + medication review",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1148",
+        "patient": "George Ramirez",
+        "gender": "male",
+        "age": 55,
+        "photo": "https://randomuser.me/api/portraits/med/men/43.jpg",
+        "date": "2026-08-30",
+        "time": "12:45",
+        "condition": "Syncope",
+        "plan": "Implantable loop recorder",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1146",
+        "patient": "Susan Richardson",
+        "gender": "female",
+        "age": 46,
+        "photo": "https://randomuser.me/api/portraits/med/women/76.jpg",
+        "date": "2026-08-27",
+        "time": "14:45",
+        "condition": "Persistent atrial fibrillation",
+        "plan": "Catheter ablation",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1150",
+        "patient": "Edward Sullivan",
+        "gender": "male",
+        "age": 80,
+        "photo": "https://randomuser.me/api/portraits/med/men/72.jpg",
+        "date": "2026-08-16",
+        "time": "11:30",
+        "condition": "Persistent atrial fibrillation",
+        "plan": "Catheter ablation",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1147",
+        "patient": "Helen Ward",
+        "gender": "female",
+        "age": 60,
+        "photo": "https://randomuser.me/api/portraits/med/women/83.jpg",
+        "date": "2026-07-28",
+        "time": "16:15",
+        "condition": "Ventricular tachycardia",
+        "plan": "ICD check + medication review",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1149",
+        "patient": "Henry Coleman",
+        "gender": "male",
+        "age": 59,
+        "photo": "https://randomuser.me/api/portraits/med/men/97.jpg",
+        "date": "2026-07-16",
+        "time": "11:00",
+        "condition": "Complete heart block",
+        "plan": "Pacemaker implant",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "hannah-reyes",
+    "name": "Dr. Hannah Reyes",
+    "gender": "female",
+    "image": "/assets/images/doctor12.png",
+    "specialty": "Interventional Cardiology",
+    "department": "Interventional Cardiology",
+    "title": "Structural Heart Specialist",
+    "status": "On Leave",
+    "employment": "Full Time",
+    "leaveUntil": "2026-11-13",
+    "patients": 1000,
+    "experienceYears": 8,
+    "avgResponseMinutes": 23,
+    "fee": 150,
+    "joined": "2018-05-07",
+    "phone": "(217) 555-0854",
+    "email": "hannah.reyes@priopulse.com",
+    "location": "PrioPulse Heart Institute · Main Campus, Springfield, IL",
+    "room": "Cardiac Catheterization Lab · Room 213",
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "bio": "With 8 years in interventional cardiology, Dr. Reyes serves as our structural heart specialist. Special focus on fast, minimally invasive treatment for blocked arteries and failing valves. Known for explaining results clearly and involving families in every decision.",
+    "expertise": [
+      "Coronary angioplasty & stenting",
+      "Acute MI (STEMI) care",
+      "Structural heart procedures",
+      "Radial-access catheterization"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Emory University School of Medicine",
+        "year": 2013
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Cleveland Clinic",
+        "year": 2016
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Stanford Health Care",
+        "year": 2019
+      },
+      {
+        "degree": "Fellowship – Interventional Cardiology",
+        "institution": "Cleveland Clinic",
+        "year": 2020
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Internal Medicine – Interventional Cardiology"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "08:00 – 16:00"
+      },
+      {
+        "day": "Sat",
+        "hours": "09:00 – 13:00"
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1152",
+        "patient": "Margaret Cox",
+        "gender": "female",
+        "age": 54,
+        "photo": "https://randomuser.me/api/portraits/med/women/18.jpg",
+        "date": "2026-10-19",
+        "time": "16:00",
+        "condition": "Post-PCI follow-up",
+        "plan": "Dual antiplatelet review",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1151",
+        "patient": "Susan Richardson",
+        "gender": "female",
+        "age": 69,
+        "photo": "https://randomuser.me/api/portraits/med/women/23.jpg",
+        "date": "2026-10-15",
+        "time": "13:15",
+        "condition": "Acute myocardial infarction",
+        "plan": "Primary PCI + stent",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1153",
+        "patient": "Raymond Jenkins",
+        "gender": "male",
+        "age": 56,
+        "photo": "https://randomuser.me/api/portraits/med/men/46.jpg",
+        "date": "2026-10-08",
+        "time": "15:15",
+        "condition": "Post-PCI follow-up",
+        "plan": "Dual antiplatelet review",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1160",
+        "patient": "Walter Long",
+        "gender": "male",
+        "age": 74,
+        "photo": "https://randomuser.me/api/portraits/med/men/82.jpg",
+        "date": "2026-10-01",
+        "time": "12:15",
+        "condition": "In-stent restenosis",
+        "plan": "Repeat angioplasty",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1156",
+        "patient": "Thomas Reed",
+        "gender": "male",
+        "age": 50,
+        "photo": "https://randomuser.me/api/portraits/med/men/62.jpg",
+        "date": "2026-09-25",
+        "time": "10:45",
+        "condition": "Severe aortic stenosis",
+        "plan": "TAVR work-up",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1157",
+        "patient": "William Brooks",
+        "gender": "male",
+        "age": 48,
+        "photo": "https://randomuser.me/api/portraits/med/men/44.jpg",
+        "date": "2026-09-17",
+        "time": "15:30",
+        "condition": "Severe aortic stenosis",
+        "plan": "TAVR work-up",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1154",
+        "patient": "Rosa Delgado",
+        "gender": "female",
+        "age": 84,
+        "photo": "https://randomuser.me/api/portraits/med/women/0.jpg",
+        "date": "2026-09-16",
+        "time": "12:30",
+        "condition": "Unstable angina",
+        "plan": "Coronary angiogram",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1158",
+        "patient": "Robert Hughes",
+        "gender": "male",
+        "age": 83,
+        "photo": "https://randomuser.me/api/portraits/med/men/82.jpg",
+        "date": "2026-09-11",
+        "time": "14:45",
+        "condition": "Multi-vessel coronary disease",
+        "plan": "Heart team review",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1155",
+        "patient": "Carl Hayes",
+        "gender": "male",
+        "age": 59,
+        "photo": "https://randomuser.me/api/portraits/med/men/78.jpg",
+        "date": "2026-09-09",
+        "time": "15:45",
+        "condition": "Post-PCI follow-up",
+        "plan": "Dual antiplatelet review",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1159",
+        "patient": "Frank Patterson",
+        "gender": "male",
+        "age": 75,
+        "photo": "https://randomuser.me/api/portraits/med/men/34.jpg",
+        "date": "2026-08-21",
+        "time": "12:45",
+        "condition": "Multi-vessel coronary disease",
+        "plan": "Heart team review",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "angela-foster",
+    "name": "Dr. Angela Foster",
+    "gender": "female",
+    "image": "/assets/images/doctor13.png",
+    "specialty": "Preventive Cardiology",
+    "department": "Preventive Cardiology",
+    "title": "Cardiac Rehabilitation Director",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 1440,
+    "experienceYears": 12,
+    "avgResponseMinutes": 22,
+    "fee": 170,
+    "joined": "2022-12-12",
+    "phone": "(217) 555-0470",
+    "email": "angela.foster@priopulse.com",
+    "location": "PrioPulse Heart Institute · Main Campus, Springfield, IL",
+    "room": "Cardiac Rehabilitation Center · Room 403",
+    "languages": [
+      "English"
+    ],
+    "bio": "With 12 years in preventive cardiology, Dr. Foster serves as our cardiac rehabilitation director. Special focus on lowering the chance of a first or repeat heart event through exercise, diet and medication. Known for explaining results clearly and involving families in every decision.",
+    "expertise": [
+      "Cardiac rehabilitation",
+      "Lipid disorders",
+      "Blood pressure control",
+      "Lifestyle & exercise programs"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Johns Hopkins University School of Medicine",
+        "year": 2009
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Mayo Clinic",
+        "year": 2012
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Cedars-Sinai Medical Center",
+        "year": 2015
+      },
+      {
+        "degree": "Fellowship – Preventive Cardiology",
+        "institution": "Mount Sinai Hospital",
+        "year": 2016
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Clinical Lipidology",
+      "Advanced Cardiovascular Life Support (ACLS)"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "10:00 – 18:00"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1162",
+        "patient": "Helen Ward",
+        "gender": "female",
+        "age": 78,
+        "photo": "https://randomuser.me/api/portraits/med/women/83.jpg",
+        "date": "2026-10-21",
+        "time": "11:30",
+        "condition": "Smoking cessation after heart attack",
+        "plan": "Counselling + nicotine replacement",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1161",
+        "patient": "Priya Shah",
+        "gender": "female",
+        "age": 63,
+        "photo": "https://randomuser.me/api/portraits/med/women/61.jpg",
+        "date": "2026-10-13",
+        "time": "14:15",
+        "condition": "Metabolic syndrome",
+        "plan": "Lifestyle program",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1163",
+        "patient": "Sandra James",
+        "gender": "female",
+        "age": 47,
+        "photo": "https://randomuser.me/api/portraits/med/women/1.jpg",
+        "date": "2026-10-07",
+        "time": "09:15",
+        "condition": "Metabolic syndrome",
+        "plan": "Lifestyle program",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1164",
+        "patient": "Barbara Rivera",
+        "gender": "female",
+        "age": 74,
+        "photo": "https://randomuser.me/api/portraits/med/women/53.jpg",
+        "date": "2026-09-25",
+        "time": "09:00",
+        "condition": "Metabolic syndrome",
+        "plan": "Lifestyle program",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1166",
+        "patient": "Peter Myers",
+        "gender": "male",
+        "age": 48,
+        "photo": "https://randomuser.me/api/portraits/med/men/52.jpg",
+        "date": "2026-09-07",
+        "time": "15:45",
+        "condition": "Metabolic syndrome",
+        "plan": "Lifestyle program",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1168",
+        "patient": "George Ramirez",
+        "gender": "male",
+        "age": 62,
+        "photo": "https://randomuser.me/api/portraits/med/men/72.jpg",
+        "date": "2026-09-03",
+        "time": "09:15",
+        "condition": "Heart failure (stable)",
+        "plan": "Supervised exercise program",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1170",
+        "patient": "Margaret Cox",
+        "gender": "female",
+        "age": 63,
+        "photo": "https://randomuser.me/api/portraits/med/women/53.jpg",
+        "date": "2026-07-27",
+        "time": "14:15",
+        "condition": "Smoking cessation after heart attack",
+        "plan": "Counselling + nicotine replacement",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1167",
+        "patient": "Luis Ortega",
+        "gender": "male",
+        "age": 85,
+        "photo": "https://randomuser.me/api/portraits/med/men/34.jpg",
+        "date": "2026-07-23",
+        "time": "14:15",
+        "condition": "Post-MI recovery",
+        "plan": "Cardiac rehab program",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1169",
+        "patient": "Wei Chen",
+        "gender": "male",
+        "age": 50,
+        "photo": "https://randomuser.me/api/portraits/med/men/75.jpg",
+        "date": "2026-07-19",
+        "time": "08:45",
+        "condition": "Smoking cessation after heart attack",
+        "plan": "Counselling + nicotine replacement",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1165",
+        "patient": "Betty Gray",
+        "gender": "female",
+        "age": 88,
+        "photo": "https://randomuser.me/api/portraits/med/women/14.jpg",
+        "date": "2026-07-09",
+        "time": "14:15",
+        "condition": "Heart failure (stable)",
+        "plan": "Supervised exercise program",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "sophia-nguyen",
+    "name": "Dr. Sophia Nguyen",
+    "gender": "female",
+    "image": "/assets/images/doctor14.png",
+    "specialty": "General Cardiology",
+    "department": "General Cardiology",
+    "title": "Cardio-Oncology Specialist",
+    "status": "Active",
+    "employment": "Part Time",
+    "patients": 510,
+    "experienceYears": 5,
+    "avgResponseMinutes": 33,
+    "fee": 135,
+    "joined": "2021-07-14",
+    "phone": "(217) 555-0924",
+    "email": "sophia.nguyen@priopulse.com",
+    "location": "PrioPulse Heart Institute · Main Campus, Springfield, IL",
+    "room": "Cardiology Clinic · Room 214",
+    "languages": [
+      "English",
+      "Vietnamese"
+    ],
+    "bio": "With 5 years in cardiology, Dr. Nguyen serves as our cardio-oncology specialist. Special focus on protecting the heart during and after cancer treatment. Patients value a calm, unhurried approach and plans that are easy to follow at home.",
+    "expertise": [
+      "Cardio-oncology",
+      "Chemotherapy heart monitoring",
+      "Heart failure prevention",
+      "Echocardiography"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "Northwestern University Feinberg School of Medicine",
+        "year": 2017
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "Cedars-Sinai Medical Center",
+        "year": 2020
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Mayo Clinic",
+        "year": 2023
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "Advanced Cardiovascular Life Support (ACLS)"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "07:30 – 15:30"
+      },
+      {
+        "day": "Tue",
+        "hours": null
+      },
+      {
+        "day": "Wed",
+        "hours": "07:30 – 15:30"
+      },
+      {
+        "day": "Thu",
+        "hours": null
+      },
+      {
+        "day": "Fri",
+        "hours": "07:30 – 15:30"
+      },
+      {
+        "day": "Sat",
+        "hours": null
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1173",
+        "patient": "William Brooks",
+        "gender": "male",
+        "age": 64,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-10-20",
+        "time": "08:30",
+        "condition": "Stable angina",
+        "plan": "Stress test + anti-anginal therapy",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1171",
+        "patient": "Charles Bennett",
+        "gender": "male",
+        "age": 47,
+        "photo": "https://randomuser.me/api/portraits/med/men/50.jpg",
+        "date": "2026-10-12",
+        "time": "13:30",
+        "condition": "Stable angina",
+        "plan": "Stress test + anti-anginal therapy",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1172",
+        "patient": "Henry Coleman",
+        "gender": "male",
+        "age": 76,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-10-11",
+        "time": "14:15",
+        "condition": "Mitral regurgitation",
+        "plan": "Surveillance echocardiogram",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1175",
+        "patient": "Walter Long",
+        "gender": "male",
+        "age": 75,
+        "photo": "https://randomuser.me/api/portraits/med/men/82.jpg",
+        "date": "2026-09-29",
+        "time": "09:15",
+        "condition": "Mitral regurgitation",
+        "plan": "Surveillance echocardiogram",
+        "status": "Follow-up"
+      },
+      {
+        "id": "PT-1174",
+        "patient": "Thomas Reed",
+        "gender": "male",
+        "age": 66,
+        "photo": "https://randomuser.me/api/portraits/med/men/23.jpg",
+        "date": "2026-09-17",
+        "time": "16:30",
+        "condition": "Stable angina",
+        "plan": "Stress test + anti-anginal therapy",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1180",
+        "patient": "Barbara Rivera",
+        "gender": "female",
+        "age": 49,
+        "photo": "https://randomuser.me/api/portraits/med/women/31.jpg",
+        "date": "2026-08-16",
+        "time": "15:00",
+        "condition": "Stable angina",
+        "plan": "Stress test + anti-anginal therapy",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1177",
+        "patient": "Margaret Cox",
+        "gender": "female",
+        "age": 54,
+        "photo": "https://randomuser.me/api/portraits/med/women/16.jpg",
+        "date": "2026-08-10",
+        "time": "09:15",
+        "condition": "Palpitations",
+        "plan": "Holter monitor",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1176",
+        "patient": "Frank Patterson",
+        "gender": "male",
+        "age": 47,
+        "photo": "https://randomuser.me/api/portraits/med/men/45.jpg",
+        "date": "2026-08-08",
+        "time": "15:15",
+        "condition": "Stable angina",
+        "plan": "Stress test + anti-anginal therapy",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1179",
+        "patient": "Harold Powell",
+        "gender": "male",
+        "age": 83,
+        "photo": "https://randomuser.me/api/portraits/med/men/31.jpg",
+        "date": "2026-08-03",
+        "time": "12:30",
+        "condition": "Palpitations",
+        "plan": "Holter monitor",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1178",
+        "patient": "Rosa Delgado",
+        "gender": "female",
+        "age": 79,
+        "photo": "https://randomuser.me/api/portraits/med/women/61.jpg",
+        "date": "2026-07-16",
+        "time": "13:30",
+        "condition": "Mitral regurgitation",
+        "plan": "Surveillance echocardiogram",
+        "status": "Completed"
+      }
+    ]
+  },
+  {
+    "id": "william-scott",
+    "name": "Dr. William Scott",
+    "gender": "male",
+    "image": "/assets/images/doctor16.png",
+    "specialty": "Acute Cardiac Care",
+    "department": "Acute Cardiac Care",
+    "title": "Cardiac Intensivist",
+    "status": "Active",
+    "employment": "Full Time",
+    "patients": 1440,
+    "experienceYears": 13,
+    "avgResponseMinutes": 16,
+    "fee": 175,
+    "joined": "2021-01-08",
+    "phone": "(217) 555-0648",
+    "email": "william.scott@priopulse.com",
+    "location": "PrioPulse Heart Institute · Main Campus, Springfield, IL",
+    "room": "Cardiac Intensive Care Unit · Room 113",
+    "languages": [
+      "English"
+    ],
+    "bio": "Dr. Scott is a cardiac intensivist with 13 years of experience in acute cardiac care. Special focus on stabilising critically ill heart patients and planning a safe discharge. Known for explaining results clearly and involving families in every decision.",
+    "expertise": [
+      "Cardiogenic shock",
+      "Acute heart failure",
+      "Mechanical circulatory support",
+      "Critical care echocardiography"
+    ],
+    "education": [
+      {
+        "degree": "Doctor of Medicine (MD)",
+        "institution": "University of Michigan Medical School",
+        "year": 2007
+      },
+      {
+        "degree": "Residency – Internal Medicine",
+        "institution": "UCLA Medical Center",
+        "year": 2010
+      },
+      {
+        "degree": "Fellowship – Cardiovascular Disease",
+        "institution": "Massachusetts General Hospital",
+        "year": 2013
+      },
+      {
+        "degree": "Fellowship – Critical Care Cardiology",
+        "institution": "Mayo Clinic",
+        "year": 2014
+      }
+    ],
+    "certifications": [
+      "American Board of Internal Medicine – Cardiovascular Disease",
+      "American Board of Internal Medicine – Critical Care Medicine",
+      "Fellow, American College of Cardiology (FACC)"
+    ],
+    "availability": [
+      {
+        "day": "Mon",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Tue",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Wed",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Thu",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Fri",
+        "hours": "09:00 – 17:00"
+      },
+      {
+        "day": "Sat",
+        "hours": "09:00 – 13:00"
+      },
+      {
+        "day": "Sun",
+        "hours": null
+      }
+    ],
+    "treatments": [
+      {
+        "id": "PT-1183",
+        "patient": "Luis Ortega",
+        "gender": "male",
+        "age": 48,
+        "photo": "https://randomuser.me/api/portraits/med/men/5.jpg",
+        "date": "2026-10-18",
+        "time": "08:00",
+        "condition": "Unstable arrhythmia",
+        "plan": "Telemetry + rhythm control",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1182",
+        "patient": "Anil Kapoor",
+        "gender": "male",
+        "age": 74,
+        "photo": "https://randomuser.me/api/portraits/med/men/82.jpg",
+        "date": "2026-10-16",
+        "time": "09:30",
+        "condition": "Acute decompensated heart failure",
+        "plan": "IV diuretics + monitoring",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1181",
+        "patient": "Evelyn Bryant",
+        "gender": "female",
+        "age": 58,
+        "photo": "https://randomuser.me/api/portraits/med/women/79.jpg",
+        "date": "2026-10-07",
+        "time": "11:15",
+        "condition": "Acute decompensated heart failure",
+        "plan": "IV diuretics + monitoring",
+        "status": "Scheduled"
+      },
+      {
+        "id": "PT-1184",
+        "patient": "George Ramirez",
+        "gender": "male",
+        "age": 85,
+        "photo": "https://randomuser.me/api/portraits/med/men/31.jpg",
+        "date": "2026-10-02",
+        "time": "15:15",
+        "condition": "Post-cardiac arrest care",
+        "plan": "Targeted temperature management",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1187",
+        "patient": "Mei Huang",
+        "gender": "female",
+        "age": 67,
+        "photo": "https://randomuser.me/api/portraits/med/women/4.jpg",
+        "date": "2026-09-29",
+        "time": "14:15",
+        "condition": "Cardiogenic shock",
+        "plan": "Mechanical support",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1185",
+        "patient": "Ruth Watson",
+        "gender": "female",
+        "age": 59,
+        "photo": "https://randomuser.me/api/portraits/med/women/98.jpg",
+        "date": "2026-09-01",
+        "time": "16:00",
+        "condition": "Post-cardiac arrest care",
+        "plan": "Targeted temperature management",
+        "status": "Ongoing"
+      },
+      {
+        "id": "PT-1186",
+        "patient": "Helen Ward",
+        "gender": "female",
+        "age": 75,
+        "photo": "https://randomuser.me/api/portraits/med/women/83.jpg",
+        "date": "2026-08-14",
+        "time": "11:00",
+        "condition": "Heart failure readmission",
+        "plan": "Discharge planning + nurse follow-up",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1188",
+        "patient": "Edward Sullivan",
+        "gender": "male",
+        "age": 46,
+        "photo": "https://randomuser.me/api/portraits/med/men/91.jpg",
+        "date": "2026-07-24",
+        "time": "13:15",
+        "condition": "Heart failure readmission",
+        "plan": "Discharge planning + nurse follow-up",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1189",
+        "patient": "Arthur Perry",
+        "gender": "male",
+        "age": 66,
+        "photo": "https://randomuser.me/api/portraits/med/men/83.jpg",
+        "date": "2026-07-24",
+        "time": "11:00",
+        "condition": "Acute pulmonary edema",
+        "plan": "Non-invasive ventilation + diuretics",
+        "status": "Completed"
+      },
+      {
+        "id": "PT-1190",
+        "patient": "Carol Kelly",
+        "gender": "female",
+        "age": 46,
+        "photo": "https://randomuser.me/api/portraits/med/women/40.jpg",
+        "date": "2026-07-07",
+        "time": "12:00",
+        "condition": "Cardiogenic shock",
+        "plan": "Mechanical support",
+        "status": "Completed"
+      }
+    ]
+  }
+]
