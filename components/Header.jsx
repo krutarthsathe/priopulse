@@ -1,5 +1,5 @@
 'use client';
-import {DEMO_USERS, ROLE_LABELS, setCurrentUser, useCurrentUser} from '../lib/current-user';
+import {DEMO_USERS, useCurrentUser} from '../lib/current-user';
 export default function Header({search, setSearch, setPage, searchLabel = "Global patient search", searchPlaceholder = "Search patients, doctors, records…"}) { const user = useCurrentUser() ?? DEMO_USERS[0]; return <>
 <header id="topbar" data-scrolled="false" className="fixed top-0 right-0 z-30 h-16 bg-white/60 dark:bg-w1/50 backdrop-blur-xl border-b border-border-subtle left-0 lg:left-64 transition-all duration-300 data-[scrolled=true]:shadow-sm">
 <div className="flex items-center justify-between h-full gap-2 px-4 lg:px-6">
@@ -102,29 +102,11 @@ export default function Header({search, setSearch, setPage, searchLabel = "Globa
 </div>
 </div>
 </div>
-<div className="p-2 border-b border-border">
-<p className="px-3 pt-1 pb-1.5 text-[11px] font-semibold text-faint uppercase tracking-wide">{"Switch demo user"}</p>
-{DEMO_USERS.map(demo => <button key={demo.id} type="button" data-demo-user={demo.id} aria-pressed={demo.id === user.id} onClick={() => setCurrentUser(demo.id)} className="flex items-center gap-3 w-full px-3 py-2 rounded-xl text-text hover:bg-primary/5 transition-colors text-left">
-<i className={"ph text-lg " + (demo.id === user.id ? "ph-check-circle text-primary" : "ph-circle text-faint")}></i>
-<span className="flex-1 text-sm">{demo.name}</span>
-<span className="text-[11px] text-muted">{ROLE_LABELS[demo.role]}</span>
-</button>)}
-</div>
+<div className="px-4 py-3 border-b border-border bg-primary/5"><span className="inline-flex items-center gap-2 text-xs font-medium text-primary"><i className="ph ph-first-aid" /> {user.title}</span><p className="text-xs text-muted mt-1">Patient follow-up workspace</p></div>
 <div className="p-2">
-<a className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-text hover:bg-primary/5 transition-colors" href="#">
-<i className="ph ph-user-circle text-lg"></i>
-<span className="text-sm">{"My Profile"}</span>
-</a>
-<a className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-text hover:bg-primary/5 transition-colors" href="#">
-<i className="ph ph-gear text-lg"></i>
-<span className="text-sm">{"Settings"}</span>
-</a>
-</div>
-<div className="p-2 border-t border-border">
-<button className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-danger hover:bg-danger-soft dark:hover:bg-danger-soft transition-colors">
-<i className="ph ph-sign-out text-lg"></i>
-<span className="text-sm">{"Logout"}</span>
-</button>
+<a className="flex items-center gap-3 px-3 py-3 rounded-xl text-text hover:bg-primary/5 transition-colors" href="/patients"><i className="ph ph-users text-lg text-primary" /><span className="text-sm">Patient call list</span><i className="ph ph-arrow-up-right ml-auto text-faint" /></a>
+<a className="flex items-center gap-3 px-3 py-3 rounded-xl text-text hover:bg-primary/5 transition-colors" href="/calls"><i className="ph ph-phone-call text-lg text-primary" /><span className="text-sm">Calls &amp; Review</span><i className="ph ph-arrow-up-right ml-auto text-faint" /></a>
+<a className="flex items-center gap-3 px-3 py-3 rounded-xl text-text hover:bg-primary/5 transition-colors" href="/audit-log"><i className="ph ph-clipboard-text text-lg text-primary" /><span className="text-sm">Audit Log</span><i className="ph ph-arrow-up-right ml-auto text-faint" /></a>
 </div>
 </div>
 </div>

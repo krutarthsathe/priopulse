@@ -23,7 +23,7 @@ export default function Navigation() { return <>
 <p className="nav-section">{"Overview"}</p>
 <a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="dashboard" href="/patients">
 <i className="ph ph-squares-four text-xl"></i>
-<span className="font-medium">{"Dashboard"}</span>
+<span className="font-medium">{"Priority Call List"}</span>
 </a>
 <p className="nav-section">{"Clinical"}</p>
 <a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="calls" href="/calls"><i className="ph ph-phone-call text-xl" /><span className="font-medium">Calls &amp; Review</span></a>
@@ -78,7 +78,7 @@ export default function Navigation() { return <>
 <p className="nav-section nav-text">{"Overview"}</p>
 <a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="dashboard" href="/patients">
 <i className="ph ph-squares-four text-2xl flex-shrink-0"></i>
-<span className="nav-text font-medium whitespace-nowrap">{"Dashboard"}</span>
+<span className="nav-text font-medium whitespace-nowrap">{"Priority Call List"}</span>
 </a>
 <p className="nav-section nav-text">{"Clinical"}</p>
 <a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="calls" href="/calls"><i className="ph ph-phone-call text-2xl flex-shrink-0" /><span className="nav-text font-medium whitespace-nowrap">Calls &amp; Review</span></a>
