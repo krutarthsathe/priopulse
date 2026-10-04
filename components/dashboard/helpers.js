@@ -1,9 +1,9 @@
 import { DEFAULT_SETTINGS } from '../../lib/heart-failure-ranking';
 
 export const OUTCOMES = [
-  { action: 'call_called', icon: 'ph-phone-call', tone: 'success', label: 'Called', status: 'Reached', done: true },
-  { action: 'call_no_answer', icon: 'ph-phone-x', tone: 'warning', label: 'No answer', status: 'Retry later', done: false },
-  { action: 'call_unreachable', icon: 'ph-phone-disconnect', tone: 'danger', label: 'Unreachable', status: 'Escalate', done: true },
+  { action: 'call_called', icon: 'ph-phone-call', tone: 'success', label: 'Called', status: 'Reached', group: 'done' },
+  { action: 'call_no_answer', icon: 'ph-phone-x', tone: 'warning', label: 'No answer', status: 'Call back later', group: 'callback' },
+  { action: 'call_unreachable', icon: 'ph-phone-disconnect', tone: 'danger', label: 'Unreachable', status: 'Escalate or call back', group: 'callback' },
 ];
 export const OUTCOME_BY_ACTION = Object.fromEntries(OUTCOMES.map(outcome => [outcome.action, outcome]));
 

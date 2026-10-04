@@ -5,6 +5,7 @@ import AgentFeed, { CheckLegend } from './AgentFeed';
 import RuleCard, { AgentFindings } from './RuleCard';
 import SafetyChecks from './SafetyChecks';
 import { versionName } from './helpers';
+import { Scoreboard, LoopDiagram, PatientStory } from './AgentStory';
 
 export const AGENT_TABS = [
   ['scoring', 'ph-list-numbers', 'How patients are scored'],
@@ -14,7 +15,7 @@ export const AGENT_TABS = [
 ];
 
 /** Scoring, and everything about how it was chosen, kept off the nurse's main page. */
-export default function AgentPanel({ tab, setTab, onClose, onCompare, agent, override, scoring, tests, safety, graded, droppedRows }) {
+export default function AgentPanel({ tab, setTab, onClose, onCompare, onOpenPatient, agent, override, scoring, tests, safety, graded, droppedRows }) {
   function replay() { setTab('tests'); agent.replay(); }
   const loaded = agent.allEvents.find(e => e.type === 'loaded');
   return <Drawer wide title="Scoring & agent tests" subtitle={override ? 'Your custom scoring is ordering the call list' : `${versionName(agent.current.version)} is ordering today’s call list`} onClose={onClose} labelledBy="pd-agent-title"
@@ -23,11 +24,14 @@ export default function AgentPanel({ tab, setTab, onClose, onCompare, agent, ove
     <div role="tabpanel" className="pd-panel-body">
       {tab === 'scoring' && <RuleCard {...scoring} graded={graded} />}
       {tab === 'tests' && <>
-        <KpiStrip {...tests.kpi} />
+        <Scoreboard allEvents={agent.allEvents} graded={graded} />
+        <LoopDiagram allEvents={agent.allEvents} patientCount={loaded?.graded ?? graded.length} />
         <div className="pd-two-col">
+          <PatientStory allEvents={agent.allEvents} graded={graded} onOpen={onOpenPatient} />
           <AgentFindings {...tests.findings} />
-          <CheckLegend groups={{ all: loaded?.graded ?? 0, learn: loaded?.learn ?? 0, heldOut: loaded?.heldOut ?? 0 }} />
         </div>
+        <CheckLegend groups={{ all: loaded?.graded ?? 0, learn: loaded?.learn ?? 0, heldOut: loaded?.heldOut ?? 0 }} />
+        <KpiStrip {...tests.kpi} />
         <AgentFeed agent={agent} droppedRows={droppedRows} />
       </>}
       {tab === 'checks' && <SafetyChecks {...safety} />}
