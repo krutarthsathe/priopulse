@@ -1,0 +1,47 @@
+{
+  "appointment": [
+    "22 Apr, 25 06:42 am Check-up Dr Guy Hawkins Ophthalmology It is a long established fact that a reader will be distracted Scheduled",
+    "12 Feb, 25 07:38 am Check-up Dr Darrell Steward Cardiologist The point of using Lorem Ipsum is that it has a more Completed",
+    "07 Dec, 24 01:34 pm Follow-up Dr Robert Fox Pulmonary There are many variations of passages of Lorem Ipsum Completed",
+    "22 Nov, 24 01:55 pm Follow-up Dr Jerome Bell Rhinology If you are going to use a passage of Lorem Ipsum Pending",
+    "17 Sep, 24 05:36 pm Follow-up Dr Ronald Richards Psychiatry It is a long established fact that a reader will be distracted Completed",
+    "13 Aug, 24 04:02 am Check-up Dr Wade Warren Psychiatry The point of using Lorem Ipsum is that it has a more Completed",
+    "01 Jun, 24 02:02 am Follow-up Dr Dianne Russell Dental If you are going to use a passage of Lorem Ipsum Completed"
+  ],
+  "prescriptions": [
+    "22 Apr, 25to 22 Apr, 25 Lisinopril 10mg, Once daily Dr Guy Hawkins Ophthalmology Active",
+    "12 Feb, 25to 22 Apr, 25 Metformin 20mg, Once daily at bedtime Dr Darrell Steward Cardiologist Completed",
+    "07 Dec, 24to 22 Apr, 25 Atorvastatin 500mg, Twice daily Dr Robert Fox Pulmonary Completed",
+    "22 Nov, 24to 22 Apr, 25 Atorvastatin 81mg, Once daily Dr Jerome Bell Rhinology Pending",
+    "17 Sep, 24to 22 Apr, 25 Aspirin 20mg, Once daily Dr Ronald Richards Psychiatry Completed",
+    "13 Aug, 24to 22 Apr, 25 Metformin 40mg, Once daily Dr Wade Warren Psychiatry Completed",
+    "01 Jun, 24to 22 Apr, 25 Lisinopril 15mg, Once daily Dr Dianne Russell Dental Completed"
+  ],
+  "lab-results": [
+    "Hemoglobin14.2 g/dL13.5\u201317.5 g/dLNormal",
+    "White Blood Cells7.5 \u00d710\u2079/L4.5\u201311.0 \u00d710\u2079/LNormal",
+    "Platelets250 \u00d710\u2079/L150\u2013450 \u00d710\u2079/LNormal",
+    "Glucose120 mg/dL70\u201399 mg/dLHigh",
+    "HbA1C6.8%4.0\u20135.6%High",
+    "Total Cholesterol218 mg/dL<200 mg/dLHigh",
+    "LDL130 mg/dL<100 mg/dLHigh",
+    "HDL45 mg/dL>40 mg/dLNormal",
+    "Triglycerides175 mg/dL<150 mg/dLHigh",
+    "Sodium140 mmol/L136\u2013145 mmol/LNormal",
+    "Potassium4.2 mmol/L3.5\u20135.0 mmol/LNormal",
+    "Chloride102 mmol/L98\u2013107 mmol/LNormal",
+    "CO\u208224 mmol/L22\u201329 mmol/LNormal",
+    "BUN18 mg/dL7\u201320 mg/dLNormal",
+    "Creatinine0.9 mg/dL0.6\u20131.2 mg/dLNormal",
+    "Glucose125 mg/dL70\u201399 mg/dLHigh"
+  ],
+  "billing": [
+    "22 Apr, 2506:42 amCo-Pay payment$102.00$0.79$104.29Pending",
+    "12 Feb, 2507:38 amTop-up Fee$90.00$0.46$45.83Paid",
+    "07 Dec, 2401:34 pmLab E-Lipid$3,082.71$9.32$132.31Paid",
+    "22 Nov, 2401:55 pmRegular Office/visit Top-up$808.00$0.44$285.85Paid",
+    "17 Sep, 2405:36 pmApply and check up$3,800.00$0.79$184.30Paid",
+    "13 Aug, 2404:02 amVice receipt$4,005.00$0.36$184.81Paid",
+    "01 Jun, 2402:02 amCheck out$150.00$0.04$27.83Paid"
+  ]
+}

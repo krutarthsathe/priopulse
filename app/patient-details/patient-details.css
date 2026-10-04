@@ -1,0 +1,19 @@
+/* Active state for Recent Patient cards */
+.pat-card.pat-active {
+  border-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 5%, transparent);
+}
+.dark .pat-card.pat-active {
+  border-color: color-mix(in srgb, var(--color-primary) 25%, transparent);
+  background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+.pat-card.pat-active .pat-role {
+  color: var(--color-primary);
+}
+.pat-card.pat-active .pat-icon-btn {
+  color: var(--color-primary);
+}
+.pat-card.pat-active .pat-arrow {
+  background-color: var(--color-primary);
+  color: white;
+}
