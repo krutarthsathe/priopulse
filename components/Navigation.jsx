@@ -1,6 +1,5 @@
 'use client';
-import {canViewAuditLog, useCurrentUser} from '../lib/current-user';
-export default function Navigation() { const showAudit = canViewAuditLog(useCurrentUser()); return <>
+export default function Navigation() { return <>
 <div id="mobile-sidebar-overlay" className="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300 lg:hidden"></div>
 
 <aside id="mobile-sidebar" className="fixed top-0 left-0 z-50 h-full w-[280px] bg-w1 shadow-2xl transform -translate-x-full transition-transform duration-300 lg:hidden flex flex-col">
@@ -37,8 +36,6 @@ export default function Navigation() { const showAudit = canViewAuditLog(useCurr
 </button>
 <div className="hidden mt-1 ml-9 space-y-0.5" data-nav-menu="">
 <a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="doctors" href="/doctors">{"All Doctors"}</a>
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="doctor-schedule" href="#">{"Doctor Schedule"}</a>
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="doctor-edit-profile" href="#">{"Edit Profile"}</a>
 </div>
 </div>
 
@@ -50,20 +47,15 @@ export default function Navigation() { const showAudit = canViewAuditLog(useCurr
 </button>
 <div className="hidden mt-1 ml-9 space-y-0.5" data-nav-menu="">
 <a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="patients" href="/patients">{"All Patients"}</a>
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="patient-details" href="/patient-details">{"Patient Details"}</a>
 </div>
 </div>
-<a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="appointments" href="#">
-<i className="ph ph-calendar-blank text-xl"></i>
-<span className="font-medium">{"Appointments"}</span>
-</a>
-{showAudit && <>
+<>
 <p className="nav-section">{"Compliance"}</p>
 <a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="audit-log" href="/audit-log">
 <i className="ph ph-clipboard-text text-xl"></i>
 <span className="font-medium">{"Audit Log"}</span>
 </a>
-</>}
+</>
 
 </nav>
 </aside>
@@ -98,8 +90,6 @@ export default function Navigation() { const showAudit = canViewAuditLog(useCurr
 </button>
 <div className="nav-text hidden mt-1 ml-9 flex flex-col gap-0.5" data-nav-menu="">
 <a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="doctors" href="/doctors">{"\n          All Doctors\n        "}</a>
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="doctor-schedule" href="#">{"\n          Doctor Schedule\n        "}</a>
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="doctor-edit-profile" href="#">{"\n          Edit Profile\n        "}</a>
 </div>
 </div>
 <div className="nav-group" data-nav-group="">
@@ -110,20 +100,15 @@ export default function Navigation() { const showAudit = canViewAuditLog(useCurr
 </button>
 <div className="nav-text hidden mt-1 ml-9 flex flex-col gap-0.5" data-nav-menu="">
 <a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="patients" href="/patients">{"\n          All Patients\n        "}</a>
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="patient-details" href="/patient-details">{"\n          Patient Details\n        "}</a>
 </div>
 </div>
-<a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="appointments" href="#">
-<i className="ph ph-calendar-blank text-2xl flex-shrink-0"></i>
-<span className="nav-text font-medium whitespace-nowrap">{"Appointments"}</span>
-</a>
-{showAudit && <>
+<>
 <p className="nav-section nav-text">{"Compliance"}</p>
 <a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="audit-log" href="/audit-log">
 <i className="ph ph-clipboard-text text-2xl flex-shrink-0"></i>
 <span className="nav-text font-medium whitespace-nowrap">{"Audit Log"}</span>
 </a>
-</>}
+</>
 
 </nav>
 
