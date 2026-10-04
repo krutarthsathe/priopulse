@@ -59,7 +59,7 @@ export default function HeartFailureDetails({ patient, weight, settings = weight
           {tab === 'measurements' && <section className="hf-card"><div className="hp-card-title"><i className="ph ph-flask" /><h2>Measurements from this record</h2></div><p>A single historical record, with no measurement dates or trends supplied.</p><div className="hf-table-wrap"><table className="hf-table"><thead><tr><th>Measurement</th><th>Recorded value</th><th>Use in ranking</th></tr></thead><tbody>{[
             ['Heart pumping (ejection fraction)', `${patient.ejection_fraction}%`, `Below ${heartThreshold}% adds ${weight} points`],
             ['Kidney measurement (serum creatinine)', `${patient.serum_creatinine} mg/dL`, `Above ${kidneyThreshold} adds ${kidneyWeight} points`],
-            ['Blood sodium', `${patient.serum_sodium} mEq/L`, 'Context only'],
+            ['Blood sodium', `${patient.serum_sodium} mEq/L`, settings?.sodiumPoints > 0 ? `Below ${settings.sodiumThreshold} adds ${settings.sodiumPoints} points` : 'Context only'],
             ['Platelets', `${patient.platelets.toLocaleString('en-US')} / µL`, 'Context only'],
             ['Creatinine phosphokinase (enzyme)', `${patient.creatinine_phosphokinase} mcg/L`, 'Context only'],
           ].filter(row => row.join(' ').toLowerCase().includes(search.toLowerCase())).map(([label, value, use]) => <tr key={label}><td>{label}</td><td><strong>{value}</strong></td><td>{use}</td></tr>)}</tbody></table></div><div className="hp-source-note"><i className="ph ph-info" /><p>Ejection fraction is the percentage of blood pumped out per heartbeat. Serum creatinine helps assess kidney function. Thresholds here are challenge scoring rules.</p></div></section>}

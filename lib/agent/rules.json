@@ -1,0 +1,18 @@
+{
+  "startVersion": "v1",
+  "startRule": { "heartWeight": 2, "kidneyWeight": 2, "heartThreshold": 35, "kidneyThreshold": 1.5, "anaemiaPoints": 1, "diabetesPoints": 1, "bloodPressurePoints": 1, "agePoints": 1, "seniorPoints": 0, "sodiumPoints": 0, "sodiumThreshold": 135 },
+  "listSize": 25,
+  "split": { "primarySeed": 42, "checkSeeds": [42, 1, 7, 2026], "heldOutShare": 0.3333 },
+  "limits": { "maxRounds": 12, "maxFailuresInRow": 3 },
+  "decision": "Adopt a change only if it finds more at-risk patients in the test group, finds no fewer in the learning group, and does so in all 4 random test groups. Otherwise keep the current scoring.",
+  "ideas": [
+    { "id": "heart-weight-3", "label": "Give a weak heart more points", "detail": "Heart pumping (ejection fraction) below 35%: 2 points → 3 points", "source": "Suggested change, tested first", "first": true, "change": { "heartWeight": 3 }, "trait": "weakHeart", "direction": "add" },
+    { "id": "senior-80", "label": "Add a point for patients 80 or older", "detail": "Age 80 or older: 1 extra point, on top of the point for 70 or older", "change": { "seniorPoints": 1 }, "trait": "senior", "direction": "add" },
+    { "id": "kidney-weight-3", "label": "Give weak kidneys more points", "detail": "Kidney function (serum creatinine) above 1.5 mg/dL: 2 points → 3 points", "change": { "kidneyWeight": 3 }, "trait": "weakKidney", "direction": "add" },
+    { "id": "low-sodium", "label": "Add a point for low blood sodium", "detail": "Blood sodium below 135 mEq/L: 0 points → 1 point", "change": { "sodiumPoints": 1 }, "trait": "lowSodium", "direction": "add" },
+    { "id": "heart-threshold-40", "label": "Count more hearts as weak", "detail": "Weak heart cut-off: pumping below 35% → below 40% (still 2 points)", "change": { "heartThreshold": 40 }, "trait": "borderHeart", "direction": "add" },
+    { "id": "heart-threshold-30", "label": "Count fewer hearts as weak", "detail": "Weak heart cut-off: pumping below 35% → below 30% (still 2 points)", "change": { "heartThreshold": 30 }, "trait": "mildHeart", "direction": "remove" },
+    { "id": "kidney-threshold-1.3", "label": "Count more kidneys as weak", "detail": "Weak kidney cut-off: creatinine above 1.5 → above 1.3 mg/dL (still 2 points)", "change": { "kidneyThreshold": 1.3 }, "trait": "borderKidney", "direction": "add" },
+    { "id": "kidney-threshold-1.8", "label": "Count fewer kidneys as weak", "detail": "Weak kidney cut-off: creatinine above 1.5 → above 1.8 mg/dL (still 2 points)", "change": { "kidneyThreshold": 1.8 }, "trait": "mildKidney", "direction": "remove" }
+  ]
+}

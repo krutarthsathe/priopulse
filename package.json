@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "node --experimental-default-type=module tests/heart-failure-ranking.mjs && node --experimental-default-type=module tests/phone-calls.mjs"
+    "test": "node --experimental-default-type=module tests/heart-failure-ranking.mjs && node --experimental-default-type=module tests/agent.mjs && node --experimental-default-type=module tests/phone-calls.mjs"
   },
   "dependencies": {
     "@phosphor-icons/web": "^2.1.2",

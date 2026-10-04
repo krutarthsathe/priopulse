@@ -242,3 +242,11 @@ No passcode is required to initiate calls. The browser automatically initializes
 ## All Patients directory
 
 Open **All Patients** in the sidebar or `/all-patients` to browse all 299 records in patient cards. Search by ID, age, or scoring reason; sort by ID, priority, or age; filter to the default top 25; and use pagination to browse the complete dataset. Every card opens its matching patient details. **Priority Call List** remains the ranking workspace, while **Doctors** links directly to the doctor directory.
+
+## Dashboard agent tests
+
+The dashboard adds a scoring-agent replay and a **Scoring & agent tests** panel. The agent proposes explainable rule changes and checks them against historical records. `tests/agent.mjs` verifies repeatable decisions, rule acceptance and rejection, stable rankings, and exclusion of historical outcomes from scoring. These are scoring-agent tests, not ElevenLabs conversation tests.
+
+Imported patients are temporary browser-only scoring examples and cannot start phone calls. Dashboard progress and outcome tabs are explicitly manual logs. Actual phone attempts, statuses, transcripts and reviewed notes remain in **Calls & Review** using the existing server-side call implementation.
+
+Run `npm test` for ranking, agent and phone-call checks, then `npm run build`.
