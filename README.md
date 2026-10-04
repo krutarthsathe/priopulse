@@ -70,7 +70,7 @@ The home and Patients pages load 299 anonymous records bundled in `data/heart-fa
 
 The queue scores weak heart measurements (ejection fraction below 35%) at 2 points, kidney measurements (serum creatinine above 1.5 mg/dL) at 2 points, and anaemia, diabetes, high blood pressure, and age 70 or older at 1 point each. Equal scores use age descending, then patient ID ascending. Outcomes and follow-up duration never affect ranking.
 
-Select a comparison card to view its top 25. Change weak-heart points to 3 to rescore the records while leaving kidney points and patient measurements fixed. The dashboard shows overlap, entering/leaving patients, and rank movements. Patient IDs link to the corresponding record details.
+The dashboard opens on today's call list (a **To call / Completed** toggle, with **Undo** for mistaken call outcomes) and the day's call progress, ranked by the follow-up agent's current scoring. **Scoring & agent tests** opens a panel with five tabs: **How patients are scored** (an editable points table: change any point value or cut-off and the call list re-ranks at once, with a plain-language summary of who joins or leaves the top 25 and how many at-risk patients the new list would have reached), **Tests the agent ran**, **Safety checks** and **What the terms mean**. Hand edits override the agent's scoring until you go back to it, and are logged as weight changes. **Compare with oldest first** (in the panel) shows the call list against oldest-first. Click a patient for a quick view and a link to the full profile.
 
 With these tie rules, the historical death counts are 18/25 for oldest-first, 20/25 for original scoring, and 18/25 for revised scoring. The original and revised lists share 20 patients. Increasing a weight does not necessarily improve the outcome measure.
 
@@ -82,6 +82,21 @@ Dataset: Chicco & Jurman, *Heart Failure Clinical Records* (2020), [UCI DOI 10.2
 
 ### Ranking experiments
 
-Challenge Demo changes only heart points from 2 to 3. Explore Settings adds heart/kidney weights and thresholds plus call capacity (10, 15, 25, or 50). Historical evaluation and before/after overlap always use 25 records, regardless of queue capacity. Reset restores the challenge defaults. Mode switching starts from defaults.
+Every point value and cut-off the scoring engine supports can be edited: weak-heart points and cut-off, weak-kidney points and cut-off, extra points for age 80 or older, and points and cut-off for low blood sodium. Anaemia, diabetes, high blood pressure and age 70 or older stay at 1 point each. The effect summary always compares the top 25 against the agent's scoring. **Start from standard scoring** loads the original points so you can, for example, give a weak heart 3 points instead of 2.
+
+### Follow-up agent
+
+The agent (`lib/agent/`) reviews its own scoring rule each time the dashboard loads; **Replay agent tests** (in the panel) shows the same run step by step, starting with a test of calling the oldest patients first, (Pause, Step, Skip, speed) for presenting. The loop:
+
+1. Grade the starting rule (v1, the challenge rule) against oldest-first.
+2. Round 1 always tests the clinic suggestion (weak-heart points 2 → 3).
+3. Each later idea comes from the current rule's own mistakes on the learning set: traits over-represented among at-risk patients just missing the list (or among survivors on it), plus at-risk patients the last rejected change pushed out. Ideas and the decision rule live in `lib/agent/rules.json`.
+4. The decision rule is fixed in advance: promote only if more at-risk patients are reached among held-back patients, the learning set is not worse, **and** the change wins on all 4 seeded learn/held-back splits (199 / 100). Stop after 3 failures in a row or 12 rounds.
+
+Result on the bundled data (locked by `npm test`): weak-heart 3 is **rejected** (18 vs 20 of 25; held-back 17 vs 19), kidney cut-off 1.8 is rejected, **+1 point for age 80 or older is promoted** (held-back 19 → 20, every split), and three further ideas are rejected, giving rule **v1.1**. It still reaches 20/25 on all records and 60 vs 48 for oldest-first with 100 calls.
+
+Trap safeguards, each re-checked live in the **Data safety checks** panel: outcomes (`DEATH_EVENT`) are read only by `lib/agent/evaluate.js` to grade rules and follow-up time is never read; ties use a fixed order (shuffled input gives the same list); changes are judged on held-back patients across 4 splits; the clinic suggestion is tested rather than assumed.
+
+**Add patient** (a single-patient form with validation) scores a new record, marks it NEW and re-runs the agent. New patients have no outcome, so they are ranked but never graded, have no full profile page, and exist only until the page reloads. Agent replays log each decision to the audit log as "Rule reviewed". Today's call outcomes are read back from the audit log, so they survive a reload.
 
 Patient links preserve the scoring settings. A patient profile includes a temporary what-if simulation for heart and kidney measurements, showing the simulated position against all 299 patients. Simulation never changes the source dataset, queue, or historical evaluation. Settings and simulations are temporary page state.
