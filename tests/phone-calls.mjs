@@ -82,6 +82,17 @@ const first = input();
 let response = await startCall(request('/api/calls', first), deps);
 assert.equal(response.status, 202);
 assert.equal((await startCall(request('/api/calls', first), deps)).status, 200);
+const publicHistory = await callHistory(request('/api/calls?view=public', undefined, { headers: {} }), deps);
+assert.equal(publicHistory.status, 200);
+const publicBody = await publicHistory.json();
+assert.equal(publicBody.calls.length, 1);
+assert.equal(publicBody.calls[0].destination_number, undefined);
+assert.equal(publicBody.calls[0].conversation_id, undefined);
+assert.deepEqual(publicBody.calls[0].transcript, []);
+assert.deepEqual(publicBody.destinations, []);
+assert.equal(publicBody.active, null);
+assert.equal((await startCall(request('/api/calls', input(), { headers: { origin } }), deps)).status, 401);
+
 assert.equal((await startCall(request('/api/calls', input('HF-002')), deps)).status, 409);
 assert.equal(dialCount, 1);
 assert.equal(dialBody.to_number, '+15555550100');
