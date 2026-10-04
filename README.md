@@ -238,3 +238,7 @@ Next steps are to verify the deployed call and webhook flow, add real staff auth
 ### Direct demo call access
 
 No passcode is required to initiate calls. The browser automatically initializes a demo session. Calls still require selecting a server-allowlisted receiving number and confirming participant consent. One active call is permitted, and automatic retries remain disabled. Anyone visiting the demo can access these actions and call details; this is not staff authentication. `VOICE_DEMO_PASSCODE` is no longer required.
+
+## All Patients directory
+
+Open **All Patients** in the sidebar or `/all-patients` to browse all 299 records in patient cards. Search by ID, age, or scoring reason; sort by ID, priority, or age; filter to the default top 25; and use pagination to browse the complete dataset. Every card opens its matching patient details. **Priority Call List** remains the ranking workspace, while **Doctors** links directly to the doctor directory.
