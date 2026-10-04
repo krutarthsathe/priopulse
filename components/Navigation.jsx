@@ -1,4 +1,6 @@
-export default function Navigation() { return <>
+'use client';
+import {canViewAuditLog, useCurrentUser} from '../lib/current-user';
+export default function Navigation() { const showAudit = canViewAuditLog(useCurrentUser()); return <>
 <div id="mobile-sidebar-overlay" className="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300 lg:hidden"></div>
 
 <aside id="mobile-sidebar" className="fixed top-0 left-0 z-50 h-full w-[280px] bg-w1 shadow-2xl transform -translate-x-full transition-transform duration-300 lg:hidden flex flex-col">
@@ -55,6 +57,13 @@ export default function Navigation() { return <>
 <i className="ph ph-calendar-blank text-xl"></i>
 <span className="font-medium">{"Appointments"}</span>
 </a>
+{showAudit && <>
+<p className="nav-section">{"Compliance"}</p>
+<a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="audit-log" href="/audit-log">
+<i className="ph ph-clipboard-text text-xl"></i>
+<span className="font-medium">{"Audit Log"}</span>
+</a>
+</>}
 
 </nav>
 </aside>
@@ -108,6 +117,13 @@ export default function Navigation() { return <>
 <i className="ph ph-calendar-blank text-2xl flex-shrink-0"></i>
 <span className="nav-text font-medium whitespace-nowrap">{"Appointments"}</span>
 </a>
+{showAudit && <>
+<p className="nav-section nav-text">{"Compliance"}</p>
+<a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="audit-log" href="/audit-log">
+<i className="ph ph-clipboard-text text-2xl flex-shrink-0"></i>
+<span className="nav-text font-medium whitespace-nowrap">{"Audit Log"}</span>
+</a>
+</>}
 
 </nav>
 

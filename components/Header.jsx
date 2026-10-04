@@ -1,4 +1,6 @@
-export default function Header({search, setSearch, setPage, searchLabel = "Global patient search", searchPlaceholder = "Search patients, doctors, records…"}) { return <>
+'use client';
+import {DEMO_USERS, ROLE_LABELS, setCurrentUser, useCurrentUser} from '../lib/current-user';
+export default function Header({search, setSearch, setPage, searchLabel = "Global patient search", searchPlaceholder = "Search patients, doctors, records…"}) { const user = useCurrentUser() ?? DEMO_USERS[0]; return <>
 <header id="topbar" data-scrolled="false" className="fixed top-0 right-0 z-30 h-16 bg-white/60 dark:bg-w1/50 backdrop-blur-xl border-b border-border-subtle left-0 lg:left-64 transition-all duration-300 data-[scrolled=true]:shadow-sm">
 <div className="flex items-center justify-between h-full gap-2 px-4 lg:px-6">
 
@@ -79,11 +81,11 @@ export default function Header({search, setSearch, setPage, searchLabel = "Globa
 <div className="relative">
 <button type="button" aria-label="Profile menu" id="profile-btn" className="flex items-center gap-2 sm:gap-2.5 h-11 pl-1 pr-2 sm:pr-2.5 rounded-xl hover:bg-primary/5 transition-colors cursor-pointer">
 <div className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-primary/20 ring-offset-1 ring-offset-transparent">
-<img src="/assets/images/author1.jpg" alt="Jenus Ana" className="w-full h-full object-cover" />
+<img src={user.image} alt={user.name} className="w-full h-full object-cover" />
 </div>
 <div className="hidden lg:block text-left leading-tight">
-<p className="text-sm font-semibold text-heading">{"Jenus Ana"}</p>
-<p className="text-[11px] text-muted">{"Administrator"}</p>
+<p className="text-sm font-semibold text-heading">{user.name}</p>
+<p className="text-[11px] text-muted">{user.title}</p>
 </div>
 <i className="ph ph-caret-down text-faint hidden sm:block text-sm"></i>
 </button>
@@ -92,13 +94,21 @@ export default function Header({search, setSearch, setPage, searchLabel = "Globa
 <div className="p-4 border-b border-border">
 <div className="flex items-center gap-2 md:gap-3">
 <div className="size-9 md:size-12 rounded-full overflow-hidden ring-2 ring-primary">
-<img src="/assets/images/author1.jpg" alt="Jenus Ana" className="w-full h-full object-cover" />
+<img src={user.image} alt={user.name} className="w-full h-full object-cover" />
 </div>
 <div>
-<p className="font-semibold text-heading">{"Jenus Ana"}</p>
-<p className="text-xs text-muted">{"admin@priopulse.com"}</p>
+<p className="font-semibold text-heading">{user.name}</p>
+<p className="text-xs text-muted">{user.email}</p>
 </div>
 </div>
+</div>
+<div className="p-2 border-b border-border">
+<p className="px-3 pt-1 pb-1.5 text-[11px] font-semibold text-faint uppercase tracking-wide">{"Switch demo user"}</p>
+{DEMO_USERS.map(demo => <button key={demo.id} type="button" data-demo-user={demo.id} aria-pressed={demo.id === user.id} onClick={() => setCurrentUser(demo.id)} className="flex items-center gap-3 w-full px-3 py-2 rounded-xl text-text hover:bg-primary/5 transition-colors text-left">
+<i className={"ph text-lg " + (demo.id === user.id ? "ph-check-circle text-primary" : "ph-circle text-faint")}></i>
+<span className="flex-1 text-sm">{demo.name}</span>
+<span className="text-[11px] text-muted">{ROLE_LABELS[demo.role]}</span>
+</button>)}
 </div>
 <div className="p-2">
 <a className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-text hover:bg-primary/5 transition-colors" href="#">
