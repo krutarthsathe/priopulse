@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "node --experimental-default-type=module tests/heart-failure-ranking.mjs"
   },
   "dependencies": {
     "next": "^16.3.8",
