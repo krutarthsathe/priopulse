@@ -4,6 +4,10 @@ import Navigation from './Navigation';
 import Header from './Header';
 import PatientRow from './PatientRow';
 import initialRows from './patients-data.json';
+import { AUDIT_ACTIONS, recordAuditEvent } from '../lib/audit-log';
+import { DEMO_USERS, useCurrentUser } from '../lib/current-user';
+
+const CALL_OUTCOMES = ['call_called', 'call_no_answer', 'call_unreachable'];
 
 export default function PatientsPage() {
   const [rows, setRows] = useState(initialRows);
@@ -12,6 +16,8 @@ export default function PatientsPage() {
   const [pageSize, setPageSize] = useState(6);
   const [page, setPage] = useState(0);
   const [notice, setNotice] = useState('');
+  const [callMenu, setCallMenu] = useState(null);
+  const user = useCurrentUser() ?? DEMO_USERS[0];
   const filteredRows = rows.filter(row => row.search.toLowerCase().replace(/\s+/g, ' ').includes(search.toLowerCase().trim()));
   const visibleRows = filteredRows.slice(page * pageSize, (page + 1) * pageSize);
 
@@ -19,7 +25,7 @@ export default function PatientsPage() {
     const root = document.documentElement;
     root.classList.toggle('dark', localStorage.getItem('priopulse-theme') === 'dark');
     root.classList.toggle('sidebar-collapsed', localStorage.getItem('priopulse-sidebar') !== 'expanded');
-    const close = e => { if (e.key === 'Escape') { closeModal(); closeMenus(); closeMobile(); }
+    const close = e => { if (e.key === 'Escape') { closeModal(); closeMenus(); closeMobile(); setCallMenu(null); }
       const modal = document.getElementById('add-patient-modal');
       if (e.key === 'Tab' && modal && !modal.classList.contains('hidden')) {
         const focusable = [...modal.querySelectorAll('button, input, select, textarea')].filter(el => !el.disabled);
@@ -63,6 +69,15 @@ export default function PatientsPage() {
   function handleClick(e) {
     const target = e.target;
     const button = target.closest('button');
+    if (button?.dataset.callOutcome) {
+      const action = button.dataset.callOutcome;
+      try {
+        recordAuditEvent({ actor: user, action, patient: callMenu.patient, detail: 'Call outcome logged from patient list' });
+        setNotice(`“${AUDIT_ACTIONS[action].label}” for ${callMenu.patient} recorded in the audit log.`);
+      } catch { setNotice('The call outcome could not be recorded.'); }
+      return setCallMenu(null);
+    }
+    if (!target.closest('[data-call-menu]')) setCallMenu(null);
     if (target.closest('[data-modal-close]')) return closeModal();
     if (target.closest('#mobile-sidebar-overlay, #mobile-sidebar-close')) return closeMobile();
     if (!button) {
@@ -111,12 +126,21 @@ export default function PatientsPage() {
       menu.textContent = button.closest('tr').innerText.trim().replace(/\s+/g, ' ');
       const rect = button.getBoundingClientRect(); menu.style.maxWidth = '300px'; menu.style.left = Math.max(8, Math.min(rect.right - 300, window.innerWidth - 308)) + 'px'; menu.style.top = Math.min(rect.bottom + 6, window.innerHeight - 100) + 'px';
       document.body.appendChild(menu);
+    } else if (button.getAttribute('aria-label') === 'Call') {
+      closeMenus();
+      const patient = button.closest('tr')?.querySelector('p')?.textContent.trim().replace(/\s+/g, ' ');
+      const rect = button.getBoundingClientRect();
+      if (patient) setCallMenu({ patient, left: Math.max(8, Math.min(rect.right - 240, window.innerWidth - 248)), top: Math.min(rect.bottom + 6, window.innerHeight - 190) });
     } else if (['Upload', 'Remove'].includes(button.textContent.trim())) {
       setNotice('Photo upload is not connected in this demo.');
     }
   }
   return <div onClick={handleClick}>
     {notice && <div role="status" className="fixed bottom-4 right-4 z-50 bg-w1 border border-border rounded-xl shadow-lg p-4 text-sm max-w-sm"><button aria-label="Dismiss message" onClick={() => setNotice('')} className="float-right ml-3">×</button>{notice}</div>}
+    {callMenu && <div data-call-menu="" role="menu" aria-label={`Log call outcome for ${callMenu.patient}`} className="fixed z-50 w-60 p-2 bg-w1 border border-border rounded-xl shadow-lg" style={{ left: callMenu.left, top: callMenu.top }}>
+      <p className="px-2 pt-1 pb-2 text-[11px] text-faint">Log call outcome · <span className="font-semibold text-heading">{callMenu.patient}</span></p>
+      {CALL_OUTCOMES.map(action => <button key={action} type="button" role="menuitem" data-call-outcome={action} className="flex items-center gap-2.5 w-full px-2 py-2 rounded-lg text-sm text-text hover:bg-primary/5 transition-colors text-left"><i className={`ph ${AUDIT_ACTIONS[action].icon} text-base text-muted`}></i>{AUDIT_ACTIONS[action].label}</button>)}
+    </div>}
 
 
 <Navigation /><Header search={search} setSearch={setSearch} setPage={setPage} />
