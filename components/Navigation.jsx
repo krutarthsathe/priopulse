@@ -28,27 +28,9 @@ export default function Navigation() { return <>
 <p className="nav-section">{"Clinical"}</p>
 <a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="calls" href="/calls"><i className="ph ph-phone-call text-xl" /><span className="font-medium">Calls &amp; Review</span></a>
 
-<div data-nav-group="">
-<button type="button" data-nav-trigger="" aria-expanded="false" className="mobile-nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="doctors">
-<i className="ph ph-stethoscope text-xl"></i>
-<span className="font-medium flex-1 text-left">{"Doctors"}</span>
-<i className="ph ph-caret-down text-xs flex-shrink-0 transition-transform"></i>
-</button>
-<div className="hidden mt-1 ml-9 space-y-0.5" data-nav-menu="">
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="doctors" href="/doctors">{"All Doctors"}</a>
-</div>
-</div>
+<a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="doctors" href="/doctors"><i className="ph ph-stethoscope text-xl" /><span className="font-medium">Doctors</span></a>
 
-<div data-nav-group="">
-<button type="button" data-nav-trigger="" aria-expanded="false" className="mobile-nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="patients">
-<i className="ph ph-users text-xl"></i>
-<span className="font-medium flex-1 text-left">{"Patients"}</span>
-<i className="ph ph-caret-down text-xs flex-shrink-0 transition-transform"></i>
-</button>
-<div className="hidden mt-1 ml-9 space-y-0.5" data-nav-menu="">
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="patients" href="/patients">{"All Patients"}</a>
-</div>
-</div>
+<a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="patients" href="/all-patients"><i className="ph ph-users text-xl" /><span className="font-medium">All Patients</span></a>
 <>
 <p className="nav-section">{"Compliance"}</p>
 <a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="audit-log" href="/audit-log">
@@ -82,26 +64,8 @@ export default function Navigation() { return <>
 </a>
 <p className="nav-section nav-text">{"Clinical"}</p>
 <a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="calls" href="/calls"><i className="ph ph-phone-call text-2xl flex-shrink-0" /><span className="nav-text font-medium whitespace-nowrap">Calls &amp; Review</span></a>
-<div className="nav-group" data-nav-group="">
-<button type="button" data-nav-trigger="" aria-expanded="false" className="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="doctors">
-<i className="ph ph-stethoscope text-2xl flex-shrink-0"></i>
-<span className="nav-text font-medium whitespace-nowrap flex-1 text-left">{"Doctors"}</span>
-<i className="ph ph-caret-down nav-text text-xs flex-shrink-0 transition-transform"></i>
-</button>
-<div className="nav-text hidden mt-1 ml-9 flex flex-col gap-0.5" data-nav-menu="">
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="doctors" href="/doctors">{"\n          All Doctors\n        "}</a>
-</div>
-</div>
-<div className="nav-group" data-nav-group="">
-<button type="button" data-nav-trigger="" aria-expanded="false" className="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="patients">
-<i className="ph ph-users text-2xl flex-shrink-0"></i>
-<span className="nav-text font-medium whitespace-nowrap flex-1 text-left">{"Patients"}</span>
-<i className="ph ph-caret-down nav-text text-xs flex-shrink-0 transition-transform"></i>
-</button>
-<div className="nav-text hidden mt-1 ml-9 flex flex-col gap-0.5" data-nav-menu="">
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="patients" href="/patients">{"\n          All Patients\n        "}</a>
-</div>
-</div>
+<a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="doctors" href="/doctors"><i className="ph ph-stethoscope text-2xl flex-shrink-0" /><span className="nav-text font-medium whitespace-nowrap">Doctors</span></a>
+<a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="patients" href="/all-patients"><i className="ph ph-users text-2xl flex-shrink-0" /><span className="nav-text font-medium whitespace-nowrap">All Patients</span></a>
 <>
 <p className="nav-section nav-text">{"Compliance"}</p>
 <a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="audit-log" href="/audit-log">
