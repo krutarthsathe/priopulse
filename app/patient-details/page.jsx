@@ -1,4 +1,9 @@
-import './patient-details.css';
-import PatientDetailsPage from '../../components/patient-details/PatientDetailsPage';
-export const metadata={title:'Patient Details – PrioPulse',description:'Patient profile, health summary, appointments, prescriptions, lab results and billing.'};
-export default function Page(){return <PatientDetailsPage/>;}
+import dataset from '../../data/heart-failure-patients.json';
+import { rankPatients } from '../../lib/heart-failure-ranking';
+import HeartFailureDetails from '../../components/patient-details/HeartFailureDetails';
+export const metadata = { title: 'Heart-Failure Patient – PrioPulse' };
+export default async function Page({ searchParams }) {
+  const params = await searchParams;
+  const patient = params.id ? dataset.patients.find(patient => patient.id === params.id) : rankPatients(dataset.patients, 2)[0];
+  return <HeartFailureDetails patient={patient || null} weight={params.weight === '3' ? 3 : 2} />;
+}
