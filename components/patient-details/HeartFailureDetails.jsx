@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import DashboardShell from '../DashboardShell';
-import { rankPatients, scorePatient } from '../../lib/heart-failure-ranking';
+import { rankPatients, scorePatient, simulatePatient } from '../../lib/heart-failure-ranking';
 import dataset from '../../data/heart-failure-patients.json';
 import { AUDIT_ACTIONS, recordAuditEvent, useAuditLog } from '../../lib/audit-log';
 import { DEMO_USERS, useCurrentUser } from '../../lib/current-user';
@@ -12,15 +12,20 @@ import './heart-failure-profile.css';
 const TABS = [['overview', 'ph-user-circle', 'Overview'], ['measurements', 'ph-flask', 'Measurements'], ['activity', 'ph-clock-counter-clockwise', 'Follow-up activity']];
 const CONDITIONS = [['Anaemia', 'anaemia', 'ph-drop'], ['Diabetes', 'diabetes', 'ph-drop-half'], ['High blood pressure', 'high_blood_pressure', 'ph-heartbeat'], ['Smoking', 'smoking', 'ph-cigarette']];
 
-export default function HeartFailureDetails({ patient, weight }) {
+export default function HeartFailureDetails({ patient, weight, settings = weight }) {
   const [search, setSearch] = useState('');
   const [tab, setTab] = useState('overview');
   const [note, setNote] = useState('');
   const [notice, setNotice] = useState('');
+  const [simulation, setSimulation] = useState(null);
+  const simulated = patient && simulation ? simulatePatient(dataset.patients, patient.id, simulation, settings) : null;
+  const kidneyWeight = typeof settings === 'object' ? settings.kidneyWeight : 2;
+  const heartThreshold = typeof settings === 'object' ? settings.heartThreshold : 35;
+  const kidneyThreshold = typeof settings === 'object' ? settings.kidneyThreshold : 1.5;
   const actor = useCurrentUser() ?? DEMO_USERS[0];
   const events = useAuditLog().filter(event => patient && event.patient === patient.id);
-  const scored = patient ? scorePatient(patient, weight) : null;
-  const rank = patient ? rankPatients(dataset.patients, weight).find(record => record.id === patient.id)?.rank : null;
+  const scored = patient ? scorePatient(patient, settings) : null;
+  const rank = patient ? rankPatients(dataset.patients, settings).find(record => record.id === patient.id)?.rank : null;
   const originalRank = patient ? rankPatients(dataset.patients, 2).find(record => record.id === patient.id)?.rank : null;
   const filteredEvents = events.filter(event => `${event.detail} ${event.actor.name} ${AUDIT_ACTIONS[event.action].label}`.toLowerCase().includes(search.toLowerCase())).toReversed();
   function saveEvent(action, detail) {
@@ -43,14 +48,15 @@ export default function HeartFailureDetails({ patient, weight }) {
           <div className="hp-tabs" role="tablist" aria-label="Patient profile sections">{TABS.map(([key, icon, label]) => <button key={key} id={`profile-tab-${key}`} role="tab" aria-selected={tab === key} aria-controls="profile-panel" onClick={() => setTab(key)}><i className={`ph ${icon}`} />{label}</button>)}</div>
           <div id="profile-panel" role="tabpanel" aria-labelledby={`profile-tab-${tab}`}>
           {tab === 'overview' && <div className="hp-stack">
-            <div className="hp-vitals"><Metric icon="ph-heartbeat" label="Heart pumping" value={patient.ejection_fraction} unit="%" detail="Ejection fraction" flag={patient.ejection_fraction < 35 ? `Below scoring threshold · +${weight}` : 'No heart points'} /><Metric icon="ph-drop" label="Kidney measurement" value={patient.serum_creatinine} unit="mg/dL" detail="Serum creatinine" flag={patient.serum_creatinine > 1.5 ? 'Above scoring threshold · +2' : 'No kidney points'} /><Metric icon="ph-chart-bar" label="Priority score" value={scored.score} unit="points" detail={`Heart weight ${weight} · Kidney weight 2`} flag="Explainable rule-based score" /></div>
+            <div className="hp-vitals"><Metric icon="ph-heartbeat" label="Heart pumping" value={patient.ejection_fraction} unit="%" detail="Ejection fraction" flag={patient.ejection_fraction < heartThreshold ? `Below scoring threshold · +${weight}` : 'No heart points'} /><Metric icon="ph-drop" label="Kidney measurement" value={patient.serum_creatinine} unit="mg/dL" detail="Serum creatinine" flag={patient.serum_creatinine > kidneyThreshold ? `Above scoring threshold · +${kidneyWeight}` : 'No kidney points'} /><Metric icon="ph-chart-bar" label="Priority score" value={scored.score} unit="points" detail={`Heart weight ${weight} · Kidney weight ${kidneyWeight}`} flag="Explainable rule-based score" /></div>
+            <section className="hf-card hf-simulation"><div className="hf-section-heading"><h2>What-if simulation</h2><span className="hf-badge">Experimental · Not saved</span></div><p>Change this patient’s measurements to explore their position among all 299 patients. Source records and historical evaluation stay unchanged.</p><div className="hf-setting-grid"><label>Simulated heart pumping (%)<input type="number" min="1" max="100" step="1" value={simulation?.ejection_fraction ?? patient.ejection_fraction} onChange={e => { const value = Number(e.target.value); if (e.target.value && value >= 1 && value <= 100) setSimulation(current => ({ ejection_fraction: patient.ejection_fraction, serum_creatinine: patient.serum_creatinine, ...current, ejection_fraction: value })); }} /></label><label>Simulated kidney measurement (mg/dL)<input type="number" min="0.1" max="20" step="0.1" value={simulation?.serum_creatinine ?? patient.serum_creatinine} onChange={e => { const value = Number(e.target.value); if (e.target.value && value >= .1 && value <= 20) setSimulation(current => ({ ejection_fraction: patient.ejection_fraction, serum_creatinine: patient.serum_creatinine, ...current, serum_creatinine: value })); }} /></label></div>{simulated && <div aria-live="polite"><p><strong>Rank #{rank} → #{simulated.rank}</strong> · {scored.score} → {simulated.score} points · {simulated.rank <= 25 ? 'Would be in the top 25' : 'Would be outside the top 25'}</p>{simulated.reasons.map(reason => <p key={reason.label}>{reason.label}: +{reason.points}</p>)}</div>}<button className="hf-action" disabled={!simulation} onClick={() => setSimulation(null)}>Reset simulation</button></section>
             <section className="hf-card hp-score-panel"><div className="hp-card-title"><i className="ph ph-sparkle" /><h2>Why this patient ranks #{rank}</h2><span className="hf-badge">{scored.score} points</span></div><p>Each contribution below comes directly from a recorded measurement or condition.</p><div className="hp-contributions">{scored.reasons.map(reason => <div className="hp-contribution" key={reason.label}><span>{reason.label}</span><div className="hp-point-track"><span style={{width: `${reason.points / 3 * 100}%`}} /></div><strong>+{reason.points}</strong></div>)}</div>{!scored.reasons.length && <p>No scoring conditions apply to this record.</p>}<div className="hp-score-footer"><span>Original rank <strong>#{originalRank}</strong></span><span>Current rank <strong>#{rank}</strong></span><span>Heart points <strong>{weight}</strong></span></div><p className="hf-caption">Equal scores use age descending, then patient ID ascending. Points are not a probability of death.</p></section>
             <section className="hf-card"><div className="hp-card-title"><i className="ph ph-first-aid-kit" /><h2>Recorded conditions</h2></div><div className="hp-conditions">{CONDITIONS.map(([label, field, icon]) => <div key={field}><i className={`ph ${icon}`} /><span>{label}</span><strong className={patient[field] ? 'hp-present' : 'hp-absent'}>{patient[field] ? 'Recorded' : 'Not recorded'}</strong></div>)}</div><p className="hf-caption">Smoking is shown for context and contributes no points in these challenge rules.</p></section>
             <section className="hf-card"><div className="hp-card-title"><i className="ph ph-note-pencil" /><h2>Follow-up note</h2></div><form onSubmit={e => {e.preventDefault(); if (note.trim()) saveEvent('note', note.trim());}}><label className="hp-note-label" htmlFor="patient-note">Add a demo note to this patient’s activity</label><textarea id="patient-note" value={note} onChange={e => setNote(e.target.value)} placeholder="What should the next team member know?" maxLength={1000} /><div className="hp-note-bottom"><span>{note.length}/1000 · Stored in this browser</span><button className="hp-primary" disabled={!note.trim()} type="submit">Save note <i className="ph ph-arrow-right" /></button></div></form></section>
           </div>}
           {tab === 'measurements' && <section className="hf-card"><div className="hp-card-title"><i className="ph ph-flask" /><h2>Measurements from this record</h2></div><p>A single historical record, with no measurement dates or trends supplied.</p><div className="hf-table-wrap"><table className="hf-table"><thead><tr><th>Measurement</th><th>Recorded value</th><th>Use in ranking</th></tr></thead><tbody>{[
-            ['Heart pumping (ejection fraction)', `${patient.ejection_fraction}%`, `Below 35% adds ${weight} points`],
-            ['Kidney measurement (serum creatinine)', `${patient.serum_creatinine} mg/dL`, 'Above 1.5 adds 2 points'],
+            ['Heart pumping (ejection fraction)', `${patient.ejection_fraction}%`, `Below ${heartThreshold}% adds ${weight} points`],
+            ['Kidney measurement (serum creatinine)', `${patient.serum_creatinine} mg/dL`, `Above ${kidneyThreshold} adds ${kidneyWeight} points`],
             ['Blood sodium', `${patient.serum_sodium} mEq/L`, 'Context only'],
             ['Platelets', `${patient.platelets.toLocaleString('en-US')} / µL`, 'Context only'],
             ['Creatinine phosphokinase (enzyme)', `${patient.creatinine_phosphokinase} mcg/L`, 'Context only'],

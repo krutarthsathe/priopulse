@@ -20,3 +20,13 @@ const boundary = { id: 'TEST', age: 69, ejection_fraction: 35, serum_creatinine:
 assert.equal(scorePatient(boundary).score, 0);
 assert.equal(scorePatient({ ...boundary, age: 70 }).score, 1);
 console.log('Ranking checks passed: boundaries, stable ties, outcome exclusion, isolated heart weight, and historical comparisons.');
+const custom = { heartWeight: 4, kidneyWeight: 5, heartThreshold: 40, kidneyThreshold: 1 };
+assert.equal(scorePatient(boundary, custom).score, 9);
+assert.equal(scorePatient({ ...boundary, ejection_fraction: 40, serum_creatinine: 1 }, custom).score, 0);
+const snapshot = JSON.stringify(patients);
+const { simulatePatient } = await import('../lib/heart-failure-ranking.js');
+const simulated = simulatePatient(patients, 'HF-138', { ejection_fraction: 50, serum_creatinine: 1 }, 3);
+assert.equal(simulated.score, 1);
+assert.equal(JSON.stringify(patients), snapshot);
+assert.equal(evaluateList(rankPatients(patients, 3).slice(0,25)).deaths, 18);
+console.log('Custom threshold, weight, and isolated simulation checks passed.');
