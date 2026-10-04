@@ -15,13 +15,13 @@ export default function QuickView({ patient, rule, versionLabel, history, status
   return <Drawer title={`Patient ${patient.id}`} subtitle={isImported(patient) ? 'Imported today · no outcome yet' : 'Anonymous dataset record'} onClose={onClose} labelledBy="pd-quickview-title">
     <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
       <PatientPhoto patient={patient} className="hf-patient-photo" alt={`Patient ${patient.id}`} />
-      <div><strong>Rank #{patient.rank}</strong> with {versionLabel}<p className="hf-caption">{status ? `${status.status} · ${status.label} at ${formatTime(status.at)} by ${status.by}` : 'Not called yet today'}</p></div>
+      <div><strong>Rank #{patient.rank}</strong> with {versionLabel}<p className="hf-caption">{status ? `Manual: ${status.status} · ${status.label} at ${formatTime(status.at)} by ${status.by}` : 'No manual outcome logged today'}</p></div>
     </div>
     <dl className="pd-facts">{facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
     <div><h3 className="pd-kpi-label">Why this patient</h3>
       <ul className="pd-list" style={{ marginTop: 8 }}>{patient.reasons.map(r => <li key={r.label}><span>{r.label}</span><strong>+{r.points}</strong></li>)}{!patient.reasons.length && <li>No scoring conditions</li>}</ul>
     </div>
-    <div><h3 className="pd-kpi-label">Log today’s call</h3>
+    <div><h3 className="pd-kpi-label">Log a manual follow-up outcome</h3>
       <div className="pd-outcomes" style={{ justifyContent: 'flex-start', marginTop: 8 }}>{OUTCOMES.map(o => <button key={o.action} type="button" className="pd-btn pd-btn-sm" aria-pressed={status?.action === o.action} onClick={() => onOutcome(patient, o.action)}><i className={`ph ${o.icon}`} />{o.label}</button>)}{status && <button type="button" className="pd-btn pd-btn-sm" onClick={() => onUndo(patient)}><i className="ph ph-arrow-counter-clockwise" />Undo “{status.label}”</button>}</div>
     </div>
     <div><h3 className="pd-kpi-label">Follow-up activity</h3>

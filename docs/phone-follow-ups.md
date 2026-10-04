@@ -93,7 +93,7 @@ the sending number into ElevenLabs. Testers must agree to the demonstration call
 ## 4. Configure Vercel and the webhook
 
 Copy `.env.example` to `.env.local` for local development, preserving your existing
-ElevenLabs key, agent ID, and passcode. Add the same variables in Vercel's project
+ElevenLabs key and agent ID. Add the same variables in Vercel's project
 **Settings → Environment Variables** for the environments where you want calls enabled:
 
 | Variable | Value |
@@ -105,7 +105,6 @@ ElevenLabs key, agent ID, and passcode. Add the same variables in Vercel's proje
 | `ELEVENLABS_PHONE_NUMBER_ID` | Imported sending phone number's `phnum_…` ID |
 | `ELEVENLABS_BRANCH_ID` | Optional agent branch ID; Main is the default |
 | `ELEVENLABS_WEBHOOK_SECRET` | HMAC secret supplied when creating the webhook |
-| `VOICE_DEMO_PASSCODE` | Shared demo access password |
 | `CALL_DEMO_DESTINATIONS` | JSON allowlist of verified demo recipients |
 
 Do **not** prefix any of these with `NEXT_PUBLIC_`. Redeploy after changing variables.
@@ -130,13 +129,12 @@ disabled in the outbound request; ElevenLabs retention follows your account sett
 
 ## 5. Use the app
 
-1. Open **Patients**, **Calls & Review**, or a patient profile.
-2. Enter the shared passcode. It creates an eight-hour HttpOnly access cookie; the
-   passcode is not saved to browser storage.
+1. Open **Calls & Review** directly to view activity without a passcode. Public activity omits phone numbers, transcripts, note content, and provider identifiers. Open **Patients** or a patient profile to choose a receiving demo number.
+2. Demo access initializes automatically using an eight-hour HttpOnly cookie. No passcode is required. Anyone visiting the demo can initiate calls to configured receiving numbers.
 3. Choose a patient from the ranked queue and select a receiving demo phone.
 4. Confirm that the participant agreed, then click **Start follow-up call** once.
 5. Answer on the phone and play the fictional patient. Browser microphone access
-   is unnecessary. Leaving the page or locking app access does **not** hang up.
+   is unnecessary. Leaving the page does **not** hang up.
 6. Open **Calls & Review**. Status refreshes every ten seconds while the page is visible.
    Refreshing only reads/reconciles provider state; it never redials.
 7. After completion, open **Review transcript**, edit the note, check the review box,
@@ -147,7 +145,7 @@ No reviewed note is saved automatically. Unsaved edits are kept in the current
 browser tab's session storage so page reloads preserve them. Reviewed notes are saved
 once in Supabase. A second save cannot overwrite another nurse's saved note.
 User names are existing fictional demo identities, not verified staff authentication.
-All passcode holders share demo access; do not use this version for actual patient care.
+All visitors share demo access; do not use this version for actual patient care.
 
 ## Status and recovery
 
@@ -182,7 +180,7 @@ No test initiates a real call.
 
 On deployed HTTPS, verify one participant-approved call: phone rings, conversation
 finishes, transcript appears under the correct patient, and an explicitly saved note
-survives a page refresh. Also check a wrong passcode, a declined/unanswered call,
+survives a page refresh. Also check a declined/unanswered call,
 two rapid clicks, and browser navigation during a call. There are no bulk calls,
 automatic retries, scheduling integrations, transfers, or automatic nurse notifications.
 

@@ -1,6 +1,9 @@
 'use client';
-import {canViewAuditLog, useCurrentUser} from '../lib/current-user';
-export default function Navigation() { const showAudit = canViewAuditLog(useCurrentUser()); return <>
+import { usePathname } from 'next/navigation';
+export default function Navigation() {
+ const pathname = usePathname();
+ const active = href => href === '/patients' ? pathname === '/patients' || pathname === '/' : pathname === href || (href === '/doctors' && pathname.startsWith('/doctors/'));
+ return <>
 <div id="mobile-sidebar-overlay" className="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity duration-300 lg:hidden"></div>
 
 <aside id="mobile-sidebar" className="fixed top-0 left-0 z-50 h-full w-[280px] bg-w1 shadow-2xl transform -translate-x-full transition-transform duration-300 lg:hidden flex flex-col">
@@ -22,48 +25,23 @@ export default function Navigation() { const showAudit = canViewAuditLog(useCurr
 
 <nav className="flex-1 overflow-y-auto p-4 space-y-1">
 <p className="nav-section">{"Overview"}</p>
-<a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="dashboard" href="/patients">
+<a className={"mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" + (active("/patients") ? " is-active" : "")} data-page="dashboard" href="/patients" aria-current={active("/patients") ? "page" : undefined}>
 <i className="ph ph-squares-four text-xl"></i>
 <span className="font-medium">{"Dashboard"}</span>
 </a>
 <p className="nav-section">{"Clinical"}</p>
-<a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="calls" href="/calls"><i className="ph ph-phone-call text-xl" /><span className="font-medium">Calls &amp; Review</span></a>
+<a className={"mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" + (active("/calls") ? " is-active" : "")} data-page="calls" href="/calls" aria-current={active("/calls") ? "page" : undefined}><i className="ph ph-phone-call text-xl" /><span className="font-medium">Calls &amp; Review</span></a>
 
-<div data-nav-group="">
-<button type="button" data-nav-trigger="" aria-expanded="false" className="mobile-nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="doctors">
-<i className="ph ph-stethoscope text-xl"></i>
-<span className="font-medium flex-1 text-left">{"Doctors"}</span>
-<i className="ph ph-caret-down text-xs flex-shrink-0 transition-transform"></i>
-</button>
-<div className="hidden mt-1 ml-9 space-y-0.5" data-nav-menu="">
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="doctors" href="/doctors">{"All Doctors"}</a>
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="doctor-schedule" href="#">{"Doctor Schedule"}</a>
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="doctor-edit-profile" href="#">{"Edit Profile"}</a>
-</div>
-</div>
+<a className={"mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" + (active("/doctors") ? " is-active" : "")} data-page="doctors" href="/doctors" aria-current={active("/doctors") ? "page" : undefined}><i className="ph ph-stethoscope text-xl" /><span className="font-medium">Doctors</span></a>
 
-<div data-nav-group="">
-<button type="button" data-nav-trigger="" aria-expanded="false" className="mobile-nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="patients">
-<i className="ph ph-users text-xl"></i>
-<span className="font-medium flex-1 text-left">{"Patients"}</span>
-<i className="ph ph-caret-down text-xs flex-shrink-0 transition-transform"></i>
-</button>
-<div className="hidden mt-1 ml-9 space-y-0.5" data-nav-menu="">
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="patients" href="/patients">{"All Patients"}</a>
-<a className="block px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary/5 transition-colors" data-page="patient-details" href="/patient-details">{"Patient Details"}</a>
-</div>
-</div>
-<a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="appointments" href="#">
-<i className="ph ph-calendar-blank text-xl"></i>
-<span className="font-medium">{"Appointments"}</span>
-</a>
-{showAudit && <>
+<a className={"mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" + (active("/all-patients") ? " is-active" : "")} data-page="patients" href="/all-patients" aria-current={active("/all-patients") ? "page" : undefined}><i className="ph ph-users text-xl" /><span className="font-medium">All Patients</span></a>
+<>
 <p className="nav-section">{"Compliance"}</p>
-<a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="audit-log" href="/audit-log">
+<a className={"mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" + (active("/audit-log") ? " is-active" : "")} data-page="audit-log" href="/audit-log" aria-current={active("/audit-log") ? "page" : undefined}>
 <i className="ph ph-clipboard-text text-xl"></i>
 <span className="font-medium">{"Audit Log"}</span>
 </a>
-</>}
+</>
 
 </nav>
 </aside>
@@ -84,46 +62,21 @@ export default function Navigation() { const showAudit = canViewAuditLog(useCurr
 
 <nav className="flex-1 overflow-y-auto py-3 px-3 space-y-1">
 <p className="nav-section nav-text">{"Overview"}</p>
-<a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="dashboard" href="/patients">
+<a className={"nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" + (active("/patients") ? " is-active" : "")} data-page="dashboard" href="/patients" aria-current={active("/patients") ? "page" : undefined}>
 <i className="ph ph-squares-four text-2xl flex-shrink-0"></i>
 <span className="nav-text font-medium whitespace-nowrap">{"Dashboard"}</span>
 </a>
 <p className="nav-section nav-text">{"Clinical"}</p>
-<a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="calls" href="/calls"><i className="ph ph-phone-call text-2xl flex-shrink-0" /><span className="nav-text font-medium whitespace-nowrap">Calls &amp; Review</span></a>
-<div className="nav-group" data-nav-group="">
-<button type="button" data-nav-trigger="" aria-expanded="false" className="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="doctors">
-<i className="ph ph-stethoscope text-2xl flex-shrink-0"></i>
-<span className="nav-text font-medium whitespace-nowrap flex-1 text-left">{"Doctors"}</span>
-<i className="ph ph-caret-down nav-text text-xs flex-shrink-0 transition-transform"></i>
-</button>
-<div className="nav-text hidden mt-1 ml-9 flex flex-col gap-0.5" data-nav-menu="">
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="doctors" href="/doctors">{"\n          All Doctors\n        "}</a>
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="doctor-schedule" href="#">{"\n          Doctor Schedule\n        "}</a>
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="doctor-edit-profile" href="#">{"\n          Edit Profile\n        "}</a>
-</div>
-</div>
-<div className="nav-group" data-nav-group="">
-<button type="button" data-nav-trigger="" aria-expanded="false" className="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="patients">
-<i className="ph ph-users text-2xl flex-shrink-0"></i>
-<span className="nav-text font-medium whitespace-nowrap flex-1 text-left">{"Patients"}</span>
-<i className="ph ph-caret-down nav-text text-xs flex-shrink-0 transition-transform"></i>
-</button>
-<div className="nav-text hidden mt-1 ml-9 flex flex-col gap-0.5" data-nav-menu="">
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="patients" href="/patients">{"\n          All Patients\n        "}</a>
-<a className="nav-sub px-3 py-1.5 rounded-lg text-xs text-muted hover:text-primary hover:bg-primary-soft transition-colors" data-page="patient-details" href="/patient-details">{"\n          Patient Details\n        "}</a>
-</div>
-</div>
-<a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="appointments" href="#">
-<i className="ph ph-calendar-blank text-2xl flex-shrink-0"></i>
-<span className="nav-text font-medium whitespace-nowrap">{"Appointments"}</span>
-</a>
-{showAudit && <>
+<a className={"nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" + (active("/calls") ? " is-active" : "")} data-page="calls" href="/calls" aria-current={active("/calls") ? "page" : undefined}><i className="ph ph-phone-call text-2xl flex-shrink-0" /><span className="nav-text font-medium whitespace-nowrap">Calls &amp; Review</span></a>
+<a className={"nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" + (active("/doctors") ? " is-active" : "")} data-page="doctors" href="/doctors" aria-current={active("/doctors") ? "page" : undefined}><i className="ph ph-stethoscope text-2xl flex-shrink-0" /><span className="nav-text font-medium whitespace-nowrap">Doctors</span></a>
+<a className={"nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" + (active("/all-patients") ? " is-active" : "")} data-page="patients" href="/all-patients" aria-current={active("/all-patients") ? "page" : undefined}><i className="ph ph-users text-2xl flex-shrink-0" /><span className="nav-text font-medium whitespace-nowrap">All Patients</span></a>
+<>
 <p className="nav-section nav-text">{"Compliance"}</p>
-<a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="audit-log" href="/audit-log">
+<a className={"nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" + (active("/audit-log") ? " is-active" : "")} data-page="audit-log" href="/audit-log" aria-current={active("/audit-log") ? "page" : undefined}>
 <i className="ph ph-clipboard-text text-2xl flex-shrink-0"></i>
 <span className="nav-text font-medium whitespace-nowrap">{"Audit Log"}</span>
 </a>
-</>}
+</>
 
 </nav>
 

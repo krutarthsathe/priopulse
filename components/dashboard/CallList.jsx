@@ -48,11 +48,11 @@ export default function CallList({ onStartCall, callBusy, rows, allRanked, baseR
   };
   const shown = lists[view].filter(matches);
   const slideRef = useRowSlide(view + '|' + shown.map(p => p.id).join());
-  const VIEWS = [['open', 'To call'], ['callback', 'Call back'], ['done', 'Completed'], ['all', 'All patients']];
+  const VIEWS = [['open', 'To call'], ['callback', 'Manual call back'], ['done', 'Manually reached'], ['all', 'All patients']];
   const subtitle = {
     open: `Top ${listSize} of ${totalPatients} patients, ranked by ${versionLabel}. Arrows compare with standard scoring.`,
-    callback: 'Patients who did not answer or could not be reached today. Try them again, or escalate anyone unreachable.',
-    done: 'Patients reached today.',
+    callback: 'Patients manually marked No answer or Unreachable today. Actual phone-call statuses are in Calls & Review.',
+    done: 'Patients manually marked as reached today. Actual phone-call statuses are in Calls & Review.',
     all: `Every patient, ranked by ${versionLabel}. Patients below #${listSize} are not on today’s call list.`,
   }[view];
   const empty = {
@@ -73,8 +73,8 @@ export default function CallList({ onStartCall, callBusy, rows, allRanked, baseR
       </button></td>
       <td><div className="pd-chips">{reasonChips(patient).map(chip => <span key={chip.key} className={`pd-chip ${chip.tone}`}>{chip.text} <strong>+{chip.points}</strong></span>)}{!reasonChips(patient).length && <span className="pd-chip">No scoring conditions</span>}</div></td>
       <td className="pd-hide-sm"><span className="pd-score">{patient.score}</span></td>
-      <td><div className="pd-outcomes"><button type="button" className="pd-outcome pd-call-start" disabled={callBusy} aria-label={`Start follow-up call for ${patient.id}`} title={callBusy ? 'Another call is in progress' : 'Start follow-up call'} onClick={() => onStartCall(patient)}><i className="ph ph-phone-outgoing" /></button><span className="pd-outcome-divider" aria-hidden="true" />{OUTCOMES.map(outcome => <button key={outcome.action} type="button" className={`pd-outcome ${outcome.tone}`} aria-pressed={status?.action === outcome.action} aria-label={`${outcome.label}: ${patient.id}`} title={`Log manual outcome: ${outcome.label}`} onClick={() => onOutcome(patient, outcome.action)}><i className={`ph ${outcome.icon}`} /></button>)}</div>
-        {status && <span className={`pd-status ${status.group === 'callback' ? 'is-callback' : ''}`}>{status.label} · {status.status} · {formatTime(status.at)} · <button type="button" className="pd-link" onClick={() => onUndo(patient)} aria-label={`Undo ${status.label} for ${patient.id}`}>Undo</button></span>}</td>
+      <td><div className="pd-outcomes"><button type="button" className="pd-outcome pd-call-start" disabled={callBusy || isImported(patient)} aria-label={`Start follow-up call for ${patient.id}`} title={isImported(patient) ? 'Imported records are local scoring examples; phone calls require a saved dataset patient.' : callBusy ? 'Another call is in progress' : 'Start follow-up call'} onClick={() => onStartCall(patient)}><i className="ph ph-phone-outgoing" /></button><span className="pd-outcome-divider" aria-hidden="true" />{OUTCOMES.map(outcome => <button key={outcome.action} type="button" className={`pd-outcome ${outcome.tone}`} aria-pressed={status?.action === outcome.action} aria-label={`${outcome.label}: ${patient.id}`} title={`Log manual outcome: ${outcome.label}`} onClick={() => onOutcome(patient, outcome.action)}><i className={`ph ${outcome.icon}`} /></button>)}</div>
+        {status && <span className={`pd-status ${status.group === 'callback' ? 'is-callback' : ''}`}>Manual: {status.label} · {status.status} · {formatTime(status.at)} · <button type="button" className="pd-link" onClick={() => onUndo(patient)} aria-label={`Undo ${status.label} for ${patient.id}`}>Undo</button></span>}</td>
     </tr>;
   };
 

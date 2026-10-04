@@ -15,7 +15,7 @@ import { DecisionLine } from './dashboard/AgentStory';
 import QuickView from './dashboard/QuickView';
 import CompareDrawer from './dashboard/CompareDrawer';
 import ImportDrawer from './dashboard/ImportDrawer';
-import { CallAccess, CallAlerts, CallLauncher, CallSetupHelp } from './calls/CallWorkspace';
+import { CallAccess, CallAlerts, CallLauncher } from './calls/CallWorkspace';
 import { useCalls } from './calls/CallProvider';
 import './heart-failure.css';
 import './patient-photo.css';
@@ -125,13 +125,10 @@ export default function PatientsPage() {
 
         <TodayStrip listSize={listSize} setListSize={setListSize} calls={calls} version={override ? 'manual' : agent.current.version} change={change} onDetails={() => openAgent()} />
 
-        <section className="hf-card call-queue-panel" aria-labelledby="phone-heading">
-          <div className="hf-section-heading"><h2 id="phone-heading">Nurse-controlled phone follow-ups</h2><a className="pd-btn pd-btn-sm" href="/calls"><i className="ph ph-phone-list" />Calls &amp; Review <i className="ph ph-arrow-up-right" /></a></div>
-          <p>Start a call from any patient with the <i className="ph ph-phone-outgoing" aria-label="Start follow-up call" /> button. Each call goes to a verified demo participant; no calls start automatically.</p>
-          <CallAccess /><CallAlerts /><CallSetupHelp />
-        </section>
+        <CallAlerts />
+        <p className="hf-caption">Phone-call attempts, transcripts and reviewed notes are shared in <a href="/calls">Calls &amp; Review</a>. The progress counters and outcome tabs here are manually logged follow-ups; they do not track automated calls.</p>
 
-        <CallList onStartCall={patient => setCallPatient(patient.id)} callBusy={!!activeCall || !!pendingCall} rows={rows} allRanked={ranked} baseRanks={baseRanks} baseTop={baseTop} statuses={statuses} onOutcome={logOutcome} onUndo={undoOutcome} onOpen={openPatient} search={search} setSearch={setSearch} listSize={listSize} versionLabel={versionLabel} totalPatients={patients.length} />
+        <CallList onStartCall={patient => { if (!patient.imported && dataset.patients.some(record => record.id === patient.id)) setCallPatient(patient.id); }} callBusy={!!activeCall || !!pendingCall} rows={rows} allRanked={ranked} baseRanks={baseRanks} baseTop={baseTop} statuses={statuses} onOutcome={logOutcome} onUndo={undoOutcome} onOpen={openPatient} search={search} setSearch={setSearch} listSize={listSize} versionLabel={versionLabel} totalPatients={patients.length} />
 
         <footer className="hf-caption">Ranks who to call first; it does not diagnose. Not a validated clinical tool. Confirmed phone calls and reviewed notes are shared through Supabase; manual outcome buttons and scoring changes stay in this browser. Dataset: Chicco &amp; Jurman, Heart Failure Clinical Records (2020), <a href="https://doi.org/10.24432/C5Z89R">UCI Machine Learning Repository</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</footer>
         {notice && <div className="hf-notice" role="status">{notice.text ?? notice}{notice.undo && statuses.has(notice.undo.id) && <button className="pd-link" onClick={() => undoOutcome(notice.undo)}>Undo</button>}<button aria-label="Dismiss message" onClick={() => setNotice('')}>×</button></div>}

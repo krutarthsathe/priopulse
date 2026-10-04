@@ -19,11 +19,11 @@ function Sparkline({ rounds }) {
 
 /** Main page: the nurse's progress today, how many calls, and which scoring orders the list. */
 export function TodayStrip({ listSize, setListSize, calls, version, change, onDetails }) {
-  return <section className="pd-today" aria-label="Today's progress">
+  return <section className="pd-today" aria-label="Today's manually logged progress">
     <div className="hf-card pd-kpi pd-today-progress">
-      <span className="pd-kpi-label">Today's calls <span className="hf-caption">{calls.attempted} attempted · {calls.retry + calls.escalate} to call back ({calls.retry} no answer, {calls.escalate} unreachable)</span></span>
-      <strong className="pd-kpi-value">{calls.reached}<small> of {calls.total} reached</small></strong>
-      <div className="pd-progress" role="progressbar" aria-label="Patients reached today" aria-valuemin={0} aria-valuemax={calls.total} aria-valuenow={calls.reached}><span style={{ width: `${calls.total ? calls.reached / calls.total * 100 : 0}%` }} /></div>
+      <span className="pd-kpi-label">Manual follow-up log <span className="hf-caption">{calls.attempted} attempted · {calls.retry + calls.escalate} to call back ({calls.retry} no answer, {calls.escalate} unreachable)</span></span>
+      <strong className="pd-kpi-value">{calls.reached}<small> of {calls.total} marked reached</small></strong>
+      <div className="pd-progress" role="progressbar" aria-label="Patients manually marked reached today" aria-valuemin={0} aria-valuemax={calls.total} aria-valuenow={calls.reached}><span style={{ width: `${calls.total ? calls.reached / calls.total * 100 : 0}%` }} /></div>
     </div>
     <div className="hf-card pd-kpi">
       <span className="pd-kpi-label">Number of calls
