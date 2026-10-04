@@ -1,0 +1,38 @@
+[
+  {
+    "id": "michael-patel-pulmonology",
+    "name": "Dr. Michael Patel",
+    "specialty": "Pulmonology",
+    "image": "/assets/images/doctor4.png"
+  },
+  {
+    "id": "olivia-martin",
+    "name": "Dr. Olivia Martin",
+    "specialty": "Cardiologist",
+    "image": "/assets/images/doctor.png"
+  },
+  {
+    "id": "david-wilson-internal-medicine",
+    "name": "Dr. David Wilson",
+    "specialty": "Internal Medicine",
+    "image": "/assets/images/doctor7.png"
+  },
+  {
+    "id": "kevin-lee-nephrology",
+    "name": "Dr. Kevin Lee",
+    "specialty": "Nephrology",
+    "image": "/assets/images/doctor9.png"
+  },
+  {
+    "id": "michael-patel-urology",
+    "name": "Dr. Michael Patel",
+    "specialty": "Urology",
+    "image": "/assets/images/doctor11.png"
+  },
+  {
+    "id": "samantha-taylor-surgery",
+    "name": "Dr. Samantha Taylor",
+    "specialty": "Surgery",
+    "image": "/assets/images/doctor13.png"
+  }
+]

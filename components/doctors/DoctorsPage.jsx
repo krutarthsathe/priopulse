@@ -1,10 +1,13 @@
 'use client';
 import {useEffect, useState} from 'react';
+import {useRouter} from 'next/navigation';
 import DashboardShell from '../DashboardShell';
 import DoctorCard from './DoctorCard';
 import initialDoctors from './doctors-data.json';
 export default function DoctorsPage() {
+ const router=useRouter();
  const [doctors,setDoctors]=useState(initialDoctors);
+ useEffect(()=>{try {const saved=JSON.parse(sessionStorage.getItem('priopulse-added-doctors')||'[]');if(Array.isArray(saved))setDoctors([...saved,...initialDoctors]);}catch{}},[]);
  const [search,setSearch]=useState('');
  const [filter,setFilter]=useState('all');
  const [sort,setSort]=useState('Name A–Z');
@@ -13,24 +16,23 @@ export default function DoctorsPage() {
  const [modalOpen,setModalOpen]=useState(false);
  const [avatar,setAvatar]=useState('');
  const [notice,setNotice]=useState('');
- const [selectedDoctor,setSelectedDoctor]=useState(null);
  const filteredDoctors=doctors.filter(doctor => (filter==='all'||doctor.specialty.toLowerCase().includes(filter)) && `${doctor.name} ${doctor.specialty}`.toLowerCase().includes(search.toLowerCase().trim())).sort((a,b)=>sort==='Rating'?(b.rating??-1)-(a.rating??-1):sort==='Newest'?doctors.indexOf(a)-doctors.indexOf(b):a.name.localeCompare(b.name));
  const visibleDoctors=filteredDoctors.slice(page*pageSize,(page+1)*pageSize);
  function closeModal(){setModalOpen(false);setAvatar('');document.getElementById('add-doctor-form')?.reset();}
  useEffect(()=>{
-  if(!modalOpen&&!selectedDoctor)return;
+  if(!modalOpen)return;
   const previous=document.activeElement;
   document.body.style.overflow='hidden';
-  const dialog=document.getElementById(modalOpen?'add-doctor-modal':'doctor-summary');
+  const dialog=document.getElementById('add-doctor-modal');
   const focusables=()=>[...dialog.querySelectorAll('button,input,select,textarea')].filter(el=>!el.disabled&&el.getClientRects().length);
   focusables()[0]?.focus();
   const keydown=e=>{
-   if(e.key==='Escape'){closeModal();setSelectedDoctor(null);}
+   if(e.key==='Escape'){closeModal();}
    if(e.key==='Tab'){const els=focusables(),first=els[0],last=els.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}
   };
   document.addEventListener('keydown',keydown);
   return ()=>{document.body.style.overflow='';document.removeEventListener('keydown',keydown);previous?.focus();};
- },[modalOpen,selectedDoctor]);
+ },[modalOpen]);
  function uploadAvatar(e){
   const file=e.target.files?.[0];if(!file)return;
   if(!['image/png','image/jpeg','image/gif'].includes(file.type)||file.size>2*1024*1024){setNotice('Choose a JPG, PNG or GIF image under 2MB.');e.target.value='';return;}
@@ -40,7 +42,7 @@ export default function DoctorsPage() {
   e.preventDefault();const data=Object.fromEntries(new FormData(e.currentTarget));
   const doctor={...data,id:crypto.randomUUID(),name:data.name.trim(),image:avatar||'/assets/images/doctor.png',rating:null,patients:'0',experience:'—',status:'Active',employment:'—'};
   if(!doctor.name){setNotice('Enter a doctor name.');return;}
-  setDoctors(current=>[doctor,...current]);setFilter('all');setSearch('');setSort('Newest');setPage(0);closeModal();setNotice(`${doctor.name} added for this session.`);
+  setDoctors(current=>[doctor,...current]);try {const saved=JSON.parse(sessionStorage.getItem('priopulse-added-doctors')||'[]');sessionStorage.setItem('priopulse-added-doctors',JSON.stringify([doctor,...saved]));}catch{setNotice('Doctor added, but session storage is unavailable.');}setFilter('all');setSearch('');setSort('Newest');setPage(0);closeModal();setNotice(`${doctor.name} added for this session.`);
  }
  return <DashboardShell search={search} setSearch={setSearch} setPage={setPage} searchLabel="Global doctor search" searchPlaceholder="Search doctors or specialties…">
 <main id="main-content" className="pt-16 min-h-dvh ml-0 lg:ml-64 transition-all duration-300">
@@ -217,7 +219,7 @@ export default function DoctorsPage() {
 </div>
 </div>
 
-<div id="doctors-grid" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-px bg-border-subtle">{visibleDoctors.map(doctor => <DoctorCard key={doctor.id} doctor={doctor} onSelect={setSelectedDoctor} onAction={setNotice} />)}{!visibleDoctors.length && <p className="col-span-full bg-w1 p-8 text-center text-muted">No doctors found.</p>}</div>
+<div id="doctors-grid" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-px bg-border-subtle">{visibleDoctors.map(doctor => <DoctorCard key={doctor.id} doctor={doctor} onSelect={doctor => router.push('/doctor-details?id=' + encodeURIComponent(doctor.id))} onAction={setNotice} />)}{!visibleDoctors.length && <p className="col-span-full bg-w1 p-8 text-center text-muted">No doctors found.</p>}</div>
 
 <div className="flex flex-wrap items-center justify-between gap-3 px-4 md:px-5 py-4 border-t border-border-subtle">
 <div className="flex items-center gap-2 text-xs text-muted">
@@ -375,7 +377,6 @@ export default function DoctorsPage() {
 </div>
 </form>
 </div>
-</div>{selectedDoctor && <div id="doctor-summary" role="dialog" aria-modal="true" aria-labelledby="doctor-summary-title" className="fixed inset-0 z-50 flex items-center justify-center p-4"><div className="absolute inset-0 bg-black/50" onClick={()=>setSelectedDoctor(null)}/><div className="relative w-full max-w-md bg-w1 border border-border rounded-2xl p-6 shadow-xl"><button aria-label="Close doctor summary" className="float-right text-muted" onClick={()=>setSelectedDoctor(null)}>×</button><img src={selectedDoctor.image} alt={selectedDoctor.name} className="w-20 h-20 rounded-full object-cover mb-4"/><h2 id="doctor-summary-title" className="text-lg font-semibold text-heading">{selectedDoctor.name}</h2><p className="text-muted mt-1">{selectedDoctor.specialty}</p><dl className="grid grid-cols-2 gap-3 mt-5 text-sm"><div><dt className="text-faint">Patients</dt><dd>{selectedDoctor.patients}</dd></div><div><dt className="text-faint">Experience</dt><dd>{selectedDoctor.experience}</dd></div><div><dt className="text-faint">Rating</dt><dd>{selectedDoctor.rating??'Unrated'}</dd></div><div><dt className="text-faint">Status</dt><dd>{selectedDoctor.status}</dd></div></dl></div></div>}
-{notice && <div role="status" className="fixed bottom-4 right-4 z-50 max-w-sm bg-w1 border border-border p-4 rounded-xl shadow-lg text-sm"><button aria-label="Dismiss message" onClick={()=>setNotice('')} className="float-right ml-3">×</button>{notice}</div>}
+</div>{notice && <div role="status" className="fixed bottom-4 right-4 z-50 max-w-sm bg-w1 border border-border p-4 rounded-xl shadow-lg text-sm"><button aria-label="Dismiss message" onClick={()=>setNotice('')} className="float-right ml-3">×</button>{notice}</div>}
 </DashboardShell>;
 }

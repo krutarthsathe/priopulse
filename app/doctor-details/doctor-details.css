@@ -1,0 +1,9 @@
+.doctor-details-page .doc-card[aria-current="page"] {
+  background: color-mix(in srgb, var(--color-primary) 5%, transparent);
+}
+.doctor-details-page .doc-card[aria-current="page"] p:first-child {
+  color: var(--color-primary);
+}
+.doctor-details-page .doc-card[aria-current="page"] .ph-arrow-up-right {
+  color: var(--color-primary);
+}
