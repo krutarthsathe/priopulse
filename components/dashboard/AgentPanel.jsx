@@ -42,7 +42,7 @@ export default function AgentPanel({ tab, setTab, onClose, onCompare, agent, ove
         <p><strong>Learning group:</strong> 199 of those patients that the agent studies to come up with ideas for better scoring.</p>
         <p><strong>Test group:</strong> the other 100 patients, kept aside and never studied, so the agent is checked on patients it has not seen, like an exam with new questions.</p>
         <p><strong>Random test groups (reshuffles):</strong> the agent splits patients into learning and test groups 4 different ways. A change must do better every time before it is adopted, so a lucky result cannot slip through.</p>
-        <p>This is not a validated clinical tool. Call buttons record outcomes for this demo; they do not place calls. Records are kept in this browser only.</p>
+        <p>This is not a validated clinical tool. The phone button starts a confirmed demo call to a verified participant; calls and reviewed notes are shared through Supabase. The other call buttons log manual outcomes, which stay in this browser.</p>
         <p className="hf-caption">Dataset: Chicco &amp; Jurman, Heart Failure Clinical Records (2020), <a href="https://doi.org/10.24432/C5Z89R">UCI Machine Learning Repository</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
       </section>}
     </div>

@@ -6,10 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "node --experimental-default-type=module tests/heart-failure-ranking.mjs && node --experimental-default-type=module tests/agent.mjs && node --experimental-default-type=module tests/voice-demo.mjs"
+    "test": "node --experimental-default-type=module tests/heart-failure-ranking.mjs && node --experimental-default-type=module tests/agent.mjs && node --experimental-default-type=module tests/phone-calls.mjs"
   },
   "dependencies": {
-    "@elevenlabs/react": "^1.16.0",
     "@phosphor-icons/web": "^2.1.2",
     "apexcharts": "^7.8.0",
     "d3": "^7.9.0",
@@ -18,5 +17,8 @@
     "react-dom": "^19.3.0",
     "topojson-client": "^3.1.0",
     "us-atlas": "^3.0.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8"
   }
 }

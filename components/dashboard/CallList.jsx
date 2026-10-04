@@ -34,7 +34,7 @@ function Movement({ patient, baseRank, entered }) {
   return <span className={`pd-move ${delta > 0 ? 'up' : 'down'}`}>{delta > 0 ? `▲ ${delta}` : `▼ ${-delta}`}</span>;
 }
 
-export default function CallList({ rows, baseRanks, baseTop, statuses, onOutcome, onUndo, onOpen, search, setSearch, listSize, versionLabel, totalPatients }) {
+export default function CallList({ onStartCall, callBusy, rows, baseRanks, baseTop, statuses, onOutcome, onUndo, onOpen, search, setSearch, listSize, versionLabel, totalPatients }) {
   const query = search.trim().toLowerCase();
   const matches = patient => !query || `${patient.id} ${patient.reasons.map(r => r.label).join(' ')}`.toLowerCase().includes(query);
   const visible = rows.filter(matches);
@@ -54,7 +54,7 @@ export default function CallList({ rows, baseRanks, baseTop, statuses, onOutcome
       </button></td>
       <td><div className="pd-chips">{reasonChips(patient).map(chip => <span key={chip.key} className={`pd-chip ${chip.tone}`}>{chip.text} <strong>+{chip.points}</strong></span>)}{!patient.reasons.length && <span className="pd-chip">No scoring conditions</span>}</div></td>
       <td className="pd-hide-sm"><span className="pd-score">{patient.score}</span></td>
-      <td><div className="pd-outcomes">{OUTCOMES.map(outcome => <button key={outcome.action} type="button" className={`pd-outcome ${outcome.tone}`} aria-pressed={status?.action === outcome.action} aria-label={`${outcome.label}: ${patient.id}`} title={outcome.label} onClick={() => onOutcome(patient, outcome.action)}><i className={`ph ${outcome.icon}`} /></button>)}</div>
+      <td><div className="pd-outcomes"><button type="button" className="pd-outcome pd-call-start" disabled={callBusy} aria-label={`Start follow-up call for ${patient.id}`} title={callBusy ? 'Another call is in progress' : 'Start follow-up call'} onClick={() => onStartCall(patient)}><i className="ph ph-phone-outgoing" /></button><span className="pd-outcome-divider" aria-hidden="true" />{OUTCOMES.map(outcome => <button key={outcome.action} type="button" className={`pd-outcome ${outcome.tone}`} aria-pressed={status?.action === outcome.action} aria-label={`${outcome.label}: ${patient.id}`} title={`Log manual outcome: ${outcome.label}`} onClick={() => onOutcome(patient, outcome.action)}><i className={`ph ${outcome.icon}`} /></button>)}</div>
         {status && <span className="pd-status">{status.status} · {formatTime(status.at)} · <button type="button" className="pd-link" onClick={() => onUndo(patient)} aria-label={`Undo ${status.label} for ${patient.id}`}>Undo</button></span>}</td>
     </tr>;
   };
@@ -69,7 +69,7 @@ export default function CallList({ rows, baseRanks, baseTop, statuses, onOutcome
       <input aria-label="Filter call list" placeholder="Search ID or reason…" value={search} onChange={e => setSearch(e.target.value)} />
     </div>
     <div className="hf-table-wrap"><table className="pd-table">
-      <thead><tr><th title="Arrows show the change compared with standard scoring">Rank</th><th>Patient</th><th>Why this patient (points)</th><th className="pd-hide-sm">Total</th><th style={{ textAlign: 'right' }}>Call outcome</th></tr></thead>
+      <thead><tr><th title="Arrows show the change compared with standard scoring">Rank</th><th>Patient</th><th>Why this patient (points)</th><th className="pd-hide-sm">Total</th><th style={{ textAlign: 'right' }} title="Phone button starts a call; the others log a manual outcome">Call · outcome</th></tr></thead>
       <tbody>
         {shown.map(row)}
       </tbody>
