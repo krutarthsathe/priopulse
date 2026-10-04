@@ -2,7 +2,7 @@
 import {useEffect, useState} from 'react';
 import Navigation from './Navigation';
 import Header from './Header';
-export default function DashboardShell({children, search, setSearch, setPage}) {
+export default function DashboardShell({children, search, setSearch, setPage, searchLabel, searchPlaceholder}) {
  const [notice, setNotice] = useState('');
  function closeMenus() {
   document.querySelectorAll('#profile-dropdown, #notifications-dropdown').forEach(el => el.classList.add('hidden'));
@@ -36,5 +36,5 @@ export default function DashboardShell({children, search, setSearch, setPage}) {
    const menu=document.getElementById(button.id.replace('-btn','-dropdown')), open=menu.classList.contains('hidden');closeMenus();menu.classList.toggle('hidden',!open);button.setAttribute('aria-expanded',String(open));
   }
  }
- return <div onClick={onClick}><Navigation/><Header search={search} setSearch={setSearch} setPage={setPage}/>{children}{notice && <div role="status" className="fixed bottom-4 right-4 z-50 p-4 bg-w1 border border-border rounded-xl shadow-lg text-sm"><button aria-label="Dismiss message" onClick={()=>setNotice('')} className="float-right ml-3">×</button>{notice}</div>}</div>;
+ return <div onClick={onClick}><Navigation/><Header search={search} setSearch={setSearch} setPage={setPage} searchLabel={searchLabel} searchPlaceholder={searchPlaceholder}/>{children}{notice && <div role="status" className="fixed bottom-4 right-4 z-50 p-4 bg-w1 border border-border rounded-xl shadow-lg text-sm"><button aria-label="Dismiss message" onClick={()=>setNotice('')} className="float-right ml-3">×</button>{notice}</div>}</div>;
 }

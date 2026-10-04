@@ -1,4 +1,4 @@
-export default function Header({search, setSearch, setPage}) { return <>
+export default function Header({search, setSearch, setPage, searchLabel = "Global patient search", searchPlaceholder = "Search patients, doctors, records…"}) { return <>
 <header id="topbar" data-scrolled="false" className="fixed top-0 right-0 z-30 h-16 bg-white/60 dark:bg-w1/50 backdrop-blur-xl border-b border-border-subtle left-0 lg:left-64 transition-all duration-300 data-[scrolled=true]:shadow-sm">
 <div className="flex items-center justify-between h-full gap-2 px-4 lg:px-6">
 
@@ -11,7 +11,7 @@ export default function Header({search, setSearch, setPage}) { return <>
 
 <div className="topbar-search relative hidden md:flex items-center w-64 xl:w-80 h-10 px-3 rounded-xl bg-subtle border border-transparent group">
 <i className="ph ph-magnifying-glass text-faint text-lg group-focus-within:text-primary transition-colors flex-shrink-0"></i>
-<input id="topbar-search" value={search} onChange={e => { setSearch(e.target.value); setPage(0); }} aria-label="Global patient search" type="text" placeholder="Search patients, doctors, records…" className="flex-1 min-w-0 h-full bg-transparent px-2.5 text-sm text-text placeholder:text-faint focus:outline-none" />
+<input id="topbar-search" value={search} onChange={e => { setSearch(e.target.value); setPage(0); }} aria-label={searchLabel} type="text" placeholder={searchPlaceholder} className="flex-1 min-w-0 h-full bg-transparent px-2.5 text-sm text-text placeholder:text-faint focus:outline-none" />
 <kbd className="kbd-hint hidden lg:inline-flex">{"/"}</kbd>
 </div>
 </div>
