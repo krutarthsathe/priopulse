@@ -121,10 +121,10 @@ export default function Header({search, setSearch, setPage, searchLabel = "Globa
 </a>
 </div>
 <div className="p-2 border-t border-border">
-<button className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-danger hover:bg-danger-soft dark:hover:bg-danger-soft transition-colors">
+<a href="/login" className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-danger hover:bg-danger-soft dark:hover:bg-danger-soft transition-colors">
 <i className="ph ph-sign-out text-lg"></i>
 <span className="text-sm">{"Logout"}</span>
-</button>
+</a>
 </div>
 </div>
 </div>
