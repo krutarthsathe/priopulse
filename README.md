@@ -74,7 +74,7 @@ Select a comparison card to view its top 25. Change weak-heart points to 3 to re
 
 With these tie rules, the historical death counts are 18/25 for oldest-first, 20/25 for original scoring, and 18/25 for revised scoring. The original and revised lists share 20 patients. Increasing a weight does not necessarily improve the outcome measure.
 
-Call controls record demo outcomes in the existing browser-local audit log. They do not place calls; the audit page also contains pre-existing fictional sample events. Logs are not shared across browsers. Vercel deployment requires no database configuration for this version.
+Nurse-confirmed phone follow-ups call allowlisted demo participants through ElevenLabs and Twilio. Call history, transcripts, and explicitly reviewed notes are shared in Supabase. Manual demo outcomes and ranking changes remain in the browser-local audit log, which also contains fictional sample events. Ranking works without configuring phone calls.
 
 Run `npm test` for scoring and comparison checks, and `npm run build` to verify the production build. These scores are hackathon rules, not a validated clinical tool.
 
@@ -85,3 +85,17 @@ Dataset: Chicco & Jurman, *Heart Failure Clinical Records* (2020), [UCI DOI 10.2
 Challenge Demo changes only heart points from 2 to 3. Explore Settings adds heart/kidney weights and thresholds plus call capacity (10, 15, 25, or 50). Historical evaluation and before/after overlap always use 25 records, regardless of queue capacity. Reset restores the challenge defaults. Mode switching starts from defaults.
 
 Patient links preserve the scoring settings. A patient profile includes a temporary what-if simulation for heart and kidney measurements, showing the simulated position against all 299 patients. Simulation never changes the source dataset, queue, or historical evaluation. Settings and simulations are temporary page state.
+
+## Phone follow-ups
+
+Start a confirmed follow-up call from the ranked queue or a patient profile. The
+**Calls & Review** page tracks attempts and transcripts and lets the nurse explicitly
+save a reviewed note. One active demo call is permitted; no bulk dialing or automatic
+retries. Browser navigation does not end a phone call. Dataset patients have no real
+contact details, so calls go only to configured, verified demo participants.
+
+Follow [the setup guide](docs/phone-follow-ups.md) to run [the Supabase schema](supabase/schema.sql),
+configure ElevenLabs webhooks, and add [.env.example](.env.example) variables to Vercel.
+All keys remain server-side. The browser voice SDK and signed-session endpoint have
+been replaced by phone-call endpoints. Passcode protection and demo staff names are
+for fictional testing, not actual patient care.

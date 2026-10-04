@@ -1,11 +1,13 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import DashboardShell from './DashboardShell';
 import dataset from '../data/heart-failure-patients.json';
 import { rankPatients, evaluateList, compareLists, DEFAULT_SETTINGS } from '../lib/heart-failure-ranking';
 import { recordAuditEvent, AUDIT_ACTIONS } from '../lib/audit-log';
 import { DEMO_USERS, useCurrentUser } from '../lib/current-user';
 import PatientPhoto from './PatientPhoto';
+import { CallAccess, CallAlerts, CallLauncher, CallSetupHelp } from './calls/CallWorkspace';
+import { useCalls } from './calls/CallProvider';
 import './heart-failure.css';
 import './patient-photo.css';
 
@@ -21,6 +23,10 @@ export default function PatientsPage() {
   const [method, setMethod] = useState('original');
   const [notice, setNotice] = useState('');
   const [outcomes, setOutcomes] = useState({});
+  const [callPatient, setCallPatient] = useState(null);
+  const dialog = useRef(null);
+  const { active, pending } = useCalls();
+  useEffect(() => { if (callPatient && !dialog.current?.open) dialog.current?.showModal(); }, [callPatient]);
   const user = useCurrentUser() ?? DEMO_USERS[0];
   const rankings = useMemo(() => ({
     oldest: rankPatients(dataset.patients, 2, true),
@@ -87,15 +93,17 @@ export default function PatientsPage() {
           <p className="hf-caption">Equal scores use age descending, then patient ID ascending.</p>
         </section>
 
+        <section className="hf-card call-queue-panel"><div className="hf-section-heading"><h2>Nurse-controlled phone follow-ups</h2><a className="hf-action" href="/calls">Calls &amp; Review <i className="ph ph-arrow-up-right" /></a></div><p>Choose who to call from the ranked queue. Each call goes to a verified demo participant; no calls start automatically.</p><CallAccess /><CallAlerts /><CallSetupHelp /></section>
         <section className="hf-card hf-queue" aria-labelledby="queue-heading"><div className="hf-queue-heading"><div><h2 id="queue-heading">{METHODS[method]} · Top {queueSize} call list</h2><p>{visible.length} of {queueSize} shown. Search filters this selected queue.</p></div><input aria-label="Filter call list" placeholder="Patient ID or reason" value={search} onChange={e => setSearch(e.target.value)} /></div>
-          <div className="hf-table-wrap"><table className="hf-table"><thead><tr><th>Rank</th><th>Patient</th><th>Age</th><th>Heart pumping</th><th>Kidney measurement</th><th>Points</th><th>Why this patient?</th><th>Demo call outcome</th></tr></thead><tbody>{visible.map(patient => {
+          <div className="hf-table-wrap"><table className="hf-table"><thead><tr><th>Rank</th><th>Patient</th><th>Age</th><th>Heart pumping</th><th>Kidney measurement</th><th>Points</th><th>Why this patient?</th><th>Follow-up call</th></tr></thead><tbody>{visible.map(patient => {
             const movement = originalRanks.get(patient.id) - patient.rank;
-            return <tr key={patient.id}><td><strong>#{patient.rank}</strong>{method === 'revised' && <span className="hf-movement">{movement > 0 ? `↑ ${movement}` : movement < 0 ? `↓ ${-movement}` : 'Unchanged'}</span>}</td><td><div className="hf-patient-cell"><PatientPhoto patient={patient} thumbnail className="hf-patient-photo" /><a href={patientLink(patient, method)}>{patient.id}</a>{method === 'revised' && changes.entered.some(p => p.id === patient.id) && <span className="hf-badge">Entered</span>}</div></td><td>{patient.age}</td><td>{patient.ejection_fraction}%</td><td>{patient.serum_creatinine} mg/dL</td><td><span className="hf-score">{patient.score}</span>{method === 'revised' && <span className="hf-movement">{originalScores.get(patient.id)} → {patient.score} points</span>}</td><td><ul>{patient.reasons.map(reason => <li key={reason.label}>{reason.label} <strong>+{reason.points}</strong></li>)}</ul>{patient.reasons.length === 0 && 'No scoring conditions'}</td><td><select aria-label={`Log call outcome for ${patient.id}`} value={outcomes[patient.id] || ''} onChange={e => logOutcome(patient, e.target.value)}><option value="">Log outcome…</option>{OUTCOMES.map(action => <option key={action} value={action}>{AUDIT_ACTIONS[action].label}</option>)}</select></td></tr>;
+            return <tr key={patient.id}><td><strong>#{patient.rank}</strong>{method === 'revised' && <span className="hf-movement">{movement > 0 ? `↑ ${movement}` : movement < 0 ? `↓ ${-movement}` : 'Unchanged'}</span>}</td><td><div className="hf-patient-cell"><PatientPhoto patient={patient} thumbnail className="hf-patient-photo" /><a href={patientLink(patient, method)}>{patient.id}</a>{method === 'revised' && changes.entered.some(p => p.id === patient.id) && <span className="hf-badge">Entered</span>}</div></td><td>{patient.age}</td><td>{patient.ejection_fraction}%</td><td>{patient.serum_creatinine} mg/dL</td><td><span className="hf-score">{patient.score}</span>{method === 'revised' && <span className="hf-movement">{originalScores.get(patient.id)} → {patient.score} points</span>}</td><td><ul>{patient.reasons.map(reason => <li key={reason.label}>{reason.label} <strong>+{reason.points}</strong></li>)}</ul>{patient.reasons.length === 0 && 'No scoring conditions'}</td><td><div className="call-queue-actions"><button className="hf-action call-primary" disabled={!!active || !!pending} aria-label={`Start follow-up call for ${patient.id}`} onClick={() => setCallPatient(patient.id)}><i className="ph ph-phone-call" />Start follow-up call</button><select aria-label={`Log manual demo outcome for ${patient.id}`} value={outcomes[patient.id] || ''} onChange={e => logOutcome(patient, e.target.value)}><option value="">Manual demo outcome…</option>{OUTCOMES.map(action => <option key={action} value={action}>{AUDIT_ACTIONS[action].label}</option>)}</select><span className="hf-caption">Manual outcomes stay in this browser.</span></div></td></tr>;
           })}</tbody></table>{visible.length === 0 && <p className="hf-empty">No matching patients in this top-25 list. Try another ID or reason.</p>}</div>
         </section>
-        <details className="hf-card hf-rules"><summary>How the score works</summary><p>2 points for heart pumping below 35% (3 when revised); 2 for kidney measurement above 1.5 mg/dL; 1 each for anaemia, diabetes, high blood pressure, and age 70 or older. Higher totals rank first.</p><p>Ejection fraction is the percentage of blood pumped out with each heartbeat. Serum creatinine is a blood measurement used to assess kidney function. Anaemia means too few healthy red blood cells.</p><p>These challenge rules are not a validated clinical decision tool. The app logs demo outcomes; it does not place phone calls. Logs are stored in this browser, not shared across users.</p></details>
+        <details className="hf-card hf-rules"><summary>How the score works</summary><p>2 points for heart pumping below 35% (3 when revised); 2 for kidney measurement above 1.5 mg/dL; 1 each for anaemia, diabetes, high blood pressure, and age 70 or older. Higher totals rank first.</p><p>Ejection fraction is the percentage of blood pumped out with each heartbeat. Serum creatinine is a blood measurement used to assess kidney function. Anaemia means too few healthy red blood cells.</p><p>These challenge rules are not a validated clinical decision tool. Confirmed phone calls and reviewed notes are shared through Supabase. Manual demo outcomes and ranking-change logs stay in this browser.</p></details>
         <footer className="hf-caption">Dataset: Chicco &amp; Jurman, Heart Failure Clinical Records (2020), <a href="https://doi.org/10.24432/C5Z89R">UCI Machine Learning Repository</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</footer>
         {notice && <div className="hf-notice" role="status">{notice}<button aria-label="Dismiss message" onClick={() => setNotice('')}>×</button></div>}
+        <dialog ref={dialog} className="call-modal" onClose={() => setCallPatient(null)}><div className="call-modal-close"><h2>Follow-up call · {callPatient}</h2><button className="hf-action" onClick={() => dialog.current.close()}>Close</button></div><CallAccess /><CallAlerts />{callPatient && <CallLauncher patientId={callPatient} />}<p><a href="/calls">View shared call history and review transcripts</a></p></dialog>
       </div>
     </main>
   </DashboardShell>;

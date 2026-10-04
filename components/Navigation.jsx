@@ -27,6 +27,7 @@ export default function Navigation() { const showAudit = canViewAuditLog(useCurr
 <span className="font-medium">{"Dashboard"}</span>
 </a>
 <p className="nav-section">{"Clinical"}</p>
+<a className="mobile-nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="calls" href="/calls"><i className="ph ph-phone-call text-xl" /><span className="font-medium">Calls &amp; Review</span></a>
 
 <div data-nav-group="">
 <button type="button" data-nav-trigger="" aria-expanded="false" className="mobile-nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-muted hover:bg-primary/5" data-page="doctors">
@@ -88,6 +89,7 @@ export default function Navigation() { const showAudit = canViewAuditLog(useCurr
 <span className="nav-text font-medium whitespace-nowrap">{"Dashboard"}</span>
 </a>
 <p className="nav-section nav-text">{"Clinical"}</p>
+<a className="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="calls" href="/calls"><i className="ph ph-phone-call text-2xl flex-shrink-0" /><span className="nav-text font-medium whitespace-nowrap">Calls &amp; Review</span></a>
 <div className="nav-group" data-nav-group="">
 <button type="button" data-nav-trigger="" aria-expanded="false" className="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all" data-page="doctors">
 <i className="ph ph-stethoscope text-2xl flex-shrink-0"></i>
