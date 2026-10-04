@@ -27,7 +27,12 @@ export default function CallProvider({ children }) {
     const epoch = accessEpoch.current;
     refreshing.current = token;
     try {
-      const response = await fetch('/api/calls', { cache: 'no-store' });
+      let response = await fetch('/api/calls', { cache: 'no-store' });
+      if (response.status === 401) {
+        const access = await fetch('/api/calls/access', { method: 'POST' });
+        if (!access.ok) { const failure = await access.json(); throw new Error(failure.error); }
+        response = await fetch('/api/calls', { cache: 'no-store' });
+      }
       const data = await response.json();
       if (!alive.current || epoch !== accessEpoch.current) return;
       if (response.status === 401) { setUnlocked(false); setCalls([]); setDestinations([]); setActive(null); return; }
@@ -44,22 +49,6 @@ export default function CallProvider({ children }) {
     return () => { alive.current = false; };
   }, [refresh]);
   useEffect(() => { if (!unlocked) return; const timer = setInterval(() => { if (document.visibilityState === 'visible') void refresh(); }, 10000); return () => clearInterval(timer); }, [unlocked, refresh]);
-  async function unlock(passcode) {
-    setError('');
-    try {
-      const response = await fetch('/api/calls/access', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ passcode }) });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
-      accessEpoch.current++; setUnlocked(true); await refresh(true); return true;
-    } catch (failure) { setError(failure.message || 'Unable to unlock phone follow-ups.'); return false; }
-  }
-  async function lock() {
-    try {
-      const response = await fetch('/api/calls/access', { method: 'DELETE' });
-      if (!response.ok) throw new Error('Unable to lock phone follow-ups.');
-      accessEpoch.current++; setUnlocked(false); setCalls([]); setDestinations([]); setActive(null); setError('');
-    } catch (failure) { setError(failure.message); }
-  }
   async function start(patientId, destinationId, actorId) {
     if (startLock.current || active || pendingRef.current) return null;
     startLock.current = true;
@@ -100,5 +89,5 @@ export default function CallProvider({ children }) {
     } catch { setError('Recovery was interrupted. Keep this request pending and refresh its status.'); }
     finally { startLock.current = false; }
   }
-  return <CallContext.Provider value={{ unlocked, calls, active, destinations, error, loading, pending, unlock, lock, refresh, start, recover }}>{children}</CallContext.Provider>;
+  return <CallContext.Provider value={{ unlocked, calls, active, destinations, error, loading, pending, refresh, start, recover }}>{children}</CallContext.Provider>;
 }

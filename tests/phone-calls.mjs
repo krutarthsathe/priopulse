@@ -10,7 +10,7 @@ import { callNoteDraft } from '../lib/call-transcript.js';
 
 const env = { SUPABASE_URL: 'https://test.supabase.co', SUPABASE_SECRET_KEY: 'sb_secret_private', ELEVENLABS_API_KEY: 'private-eleven-key', ELEVENLABS_AGENT_ID: 'agent_demo', ELEVENLABS_PHONE_NUMBER_ID: 'phnum_demo', ELEVENLABS_WEBHOOK_SECRET: 'webhook-secret', VOICE_DEMO_PASSCODE: 'demo-password', CALL_DEMO_DESTINATIONS: JSON.stringify([{ id: 'tester', label: 'Demo participant', number: '+15555550100' }]) };
 const origin = 'https://priopulse.test';
-const cookie = accessCookie(env.VOICE_DEMO_PASSCODE, true).split(';')[0];
+const cookie = accessCookie(env.ELEVENLABS_API_KEY, true).split(';')[0];
 function request(path, body, options = {}) {
   return new Request(`${origin}${path}`, { method: body === undefined ? 'GET' : 'POST', headers: { origin, cookie, 'Content-Type': 'application/json', ...options.headers }, ...(body !== undefined ? { body: JSON.stringify(body) } : {}), ...options });
 }
@@ -64,7 +64,8 @@ const input = (patientId = 'HF-001') => ({ callId: randomUUID(), patientId, dest
 const clear = async () => { await db.exec('truncate follow_up_call_events, follow_up_calls;'); providerMode = 'success'; recoveredId = null; dialCount = 0; };
 
 // Access protection, server configuration, and no-dial validation.
-assert.equal((await callAccess(request('/api/calls/access', { passcode: 'wrong' }), deps)).status, 401);
+assert.equal((await callAccess(request('/api/calls/access', {}), deps)).status, 200);
+assert.doesNotThrow(() => callConfig({ ...env, VOICE_DEMO_PASSCODE: undefined }));
 const access = await callAccess(request('/api/calls/access', { passcode: env.VOICE_DEMO_PASSCODE }), deps);
 assert.equal(access.status, 200); assert.match(access.headers.get('set-cookie'), /HttpOnly; SameSite=Strict/);
 assert.equal((await callHistory(request('/api/calls', undefined, { headers: {} }), deps)).status, 401);
