@@ -79,3 +79,9 @@ Call controls record demo outcomes in the existing browser-local audit log. They
 Run `npm test` for scoring and comparison checks, and `npm run build` to verify the production build. These scores are hackathon rules, not a validated clinical tool.
 
 Dataset: Chicco & Jurman, *Heart Failure Clinical Records* (2020), [UCI DOI 10.24432/C5Z89R](https://doi.org/10.24432/C5Z89R), licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+### Ranking experiments
+
+Challenge Demo changes only heart points from 2 to 3. Explore Settings adds heart/kidney weights and thresholds plus call capacity (10, 15, 25, or 50). Historical evaluation and before/after overlap always use 25 records, regardless of queue capacity. Reset restores the challenge defaults. Mode switching starts from defaults.
+
+Patient links preserve the scoring settings. A patient profile includes a temporary what-if simulation for heart and kidney measurements, showing the simulated position against all 299 patients. Simulation never changes the source dataset, queue, or historical evaluation. Settings and simulations are temporary page state.
