@@ -234,3 +234,7 @@ This is a hackathon prototype, not a clinical decision system. Historical record
 There is no bulk calling, automatic retry, appointment booking, call transfer, or automatic clinical escalation. Conversations are processed by ElevenLabs and may be retained according to its account settings. If an uncertain attempt cannot be reconciled, an administrator must inspect provider logs before releasing its reservation.
 
 Next steps are to verify the deployed call and webhook flow, add real staff authentication and access roles, and evaluate prioritization with clinicians and suitable prospective data before considering a real patient workflow.
+
+### Direct demo call access
+
+No passcode is required to initiate calls. The browser automatically initializes a demo session. Calls still require selecting a server-allowlisted receiving number and confirming participant consent. One active call is permitted, and automatic retries remain disabled. Anyone visiting the demo can access these actions and call details; this is not staff authentication. `VOICE_DEMO_PASSCODE` is no longer required.
